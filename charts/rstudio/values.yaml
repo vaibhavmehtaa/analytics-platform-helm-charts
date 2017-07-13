@@ -1,0 +1,49 @@
+Username: ""
+ToolsDomain: "tools.EXAMPLE.COM"
+CookieSecret: ""
+OAuth:
+  ClientSecret: ""
+  ClientId: ""
+  Domain: "AUTH0_USER.eu.auth0.com"
+AWS:
+  IAMRole: ""
+  DefaultRegion: "eu-west-1"
+Elasticsearch:
+  Host: "elasticsearch-server"
+  Port: 9200
+Fluentd:
+  Image:
+    Repository: quay.io/fluent/fluentd-kubernetes-daemonset
+    Tag: latest
+    PullPolicy: "IfNotPresent"
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 25m
+      memory: 64Mi
+AuthProxy:
+  Image:
+    Repository: quay.io/mojanalytics/rstudio-auth-proxy
+    Tag: "a750b612"
+    PullPolicy: "IfNotPresent"
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 25m
+      memory: 64Mi
+RStudio:
+  Image:
+    Repository: quay.io/mojanalytics/rstudio
+    Tag: "latest"
+    PullPolicy: "Always"
+  resources:
+    limits:
+      cpu: 1.5
+      memory: 6Gi
+    requests:
+      cpu: 200m
+      memory: 1Gi
