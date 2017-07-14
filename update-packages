@@ -1,17 +1,17 @@
 #!/bin/bash
 
-commit_time() {
+function commit_time {
     git log -1 --format=%ct "$1"
 }
 
 REPO_URL=https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/
 CHARTS=$(find charts/* -type d -maxdepth 0)
-LAST_UPDATED=commit_time charts/index.yaml
+LAST_UPDATED=$(commit_time charts/index.yaml)
 UPDATED=n
 
 for CHART in $CHARTS; do
 
-    if [ commit_time $CHART -gt $LAST_UPDATED ]; then
+    if [ $(commit_time $CHART) -gt $LAST_UPDATED ]; then
         echo "Packaging $CHART"
         helm package -d charts $CHART
         UPDATED=y
@@ -23,6 +23,8 @@ if [ $UPDATED == 'y' ]; then
 
     helm repo index --url $REPO_URL charts
 
+    git config user.email $USER_EMAIL
+    git config user.name $USER_NAME
     git add charts
     git commit -m "Updated packages and index (automated)"
     git push origin master
