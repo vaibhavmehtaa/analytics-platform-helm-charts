@@ -1,0 +1,11 @@
+#!/bin/bash
+
+REPO_URL=https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/
+CHARTS=$(find charts/* -type d -depth 0)
+
+for CHART in $CHARTS; do
+    echo "Packaging $CHART"
+    helm package -d charts $CHART
+done
+
+helm repo index --url $REPO_URL charts
