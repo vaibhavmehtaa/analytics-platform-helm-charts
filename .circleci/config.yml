@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    docker:
+        - image: devth/helm:2.4.2
+
+    working_directory: ~/
+
+    steps:
+      - checkout
+
+      - run:
+          name: update packages
+          command: ./update-packages
