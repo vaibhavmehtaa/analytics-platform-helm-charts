@@ -31,10 +31,12 @@ RUN if [ -f /tmp/${FILENAME} ]; then tar zxvf -C /tmp ${FILENAME}; fi \
     && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
     && rm -rf /tmp
 
+ENV HOME /home/helm
+ENV HELM_HOME /home/helm/.helm
+WORKDIR /home/helm
+
 RUN helm init --client-only
 
 # Add github to known hosts
 RUN ssh-keyscan github.com | tee /etc/ssh/ssh_known_hosts
 
-ENV HOME /home/helm
-WORKDIR /home/helm
