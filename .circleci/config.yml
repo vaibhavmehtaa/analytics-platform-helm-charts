@@ -4,7 +4,7 @@ jobs:
     docker:
         - image: quay.io/mojanalytics/helm-charts:0.1.3
 
-    working_directory: /home/helm
+    working_directory: /helm
 
     steps:
       - checkout
