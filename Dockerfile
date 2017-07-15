@@ -7,7 +7,15 @@ ARG helm_version=v2.4.2
 ADD https://storage.googleapis.com/kubernetes-release/release/${kubectl_version}/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 
 RUN set -x && \
-    apk add --no-cache curl ca-certificates wget python git bash && \
+    apk add --no-cache \
+        curl \
+        ca-certificates \
+        wget \
+        python \
+        git \
+        bash \
+        openssh-client && \
+    \
     chmod +x /usr/local/bin/kubectl && \
     \
     # Create non-root user (with a randomly chosen UID/GUI).
@@ -25,4 +33,5 @@ RUN if [ -f /tmp/${FILENAME} ]; then tar zxvf -C /tmp ${FILENAME}; fi \
 
 RUN helm init --client-only
 
+ENV HOME /home/helm
 WORKDIR /home/helm
