@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-        - image: devth/helm:2.4.2
+        - image: quay.io/mojanalytics/helm-charts:0.1.1
 
     working_directory: ~/
 
