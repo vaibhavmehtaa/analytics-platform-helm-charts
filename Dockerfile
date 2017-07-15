@@ -33,5 +33,8 @@ RUN if [ -f /tmp/${FILENAME} ]; then tar zxvf -C /tmp ${FILENAME}; fi \
 
 RUN helm init --client-only
 
+# Add github to known hosts
+RUN ssh-keyscan github.com | tee /etc/ssh/ssh_known_hosts
+
 ENV HOME /home/helm
 WORKDIR /home/helm
