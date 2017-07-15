@@ -19,7 +19,8 @@ RUN set -x && \
 ENV HELM_VERSION v2.4.2
 ENV FILENAME helm-${HELM_VERSION}-linux-amd64.tar.gz
 ADD https://kubernetes-helm.storage.googleapis.com/${FILENAME} /tmp
-RUN mv /tmp/linux-amd64/helm /usr/local/bin/helm \
+RUN if [ -f /tmp/${FILENAME} ]; then tar zxvf -C /tmp ${FILENAME}; fi \
+    && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
     && rm -rf /tmp
 
 RUN helm init --client-only
