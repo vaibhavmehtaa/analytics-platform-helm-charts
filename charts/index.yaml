@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   config-user:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.690802616Z
+    created: 2017-07-21T11:07:48.001534857Z
     description: Configure the user (e.g. git setup, etc...)
     digest: e484c230be1c06b39fe2b4e205abcb47e3d1344e551ddb8db1e6de19dae369a6
     name: config-user
@@ -11,7 +11,7 @@ entries:
     version: 0.1.0
   elasticsearch-curator:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.6910896Z
+    created: 2017-07-21T11:07:48.002171355Z
     description: A Helm chart for Kubernetes
     digest: 54e5490ccff6ce64369e0b74b9f7b7b8700ad88d3e8e22ac75b09253b13399f8
     name: elasticsearch-curator
@@ -20,7 +20,7 @@ entries:
     version: 0.1.0
   fluentd:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.691344241Z
+    created: 2017-07-21T11:07:48.002696325Z
     description: A Helm chart for Kubernetes
     digest: 8c57a52ac75981eaa80f386b5e7af378b0b04bb2d1d6591d24c05c16a113e18f
     name: fluentd
@@ -29,7 +29,7 @@ entries:
     version: 0.1.0
   init-platform:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.691812616Z
+    created: 2017-07-21T11:07:48.003147053Z
     description: A Helm chart for Kubernetes
     digest: af7f2b2e3d14474542b54782bdf6d013150900fcc4750bda9d20f890f19dcc92
     name: init-platform
@@ -38,7 +38,7 @@ entries:
     version: 0.1.0
   init-user:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.693677427Z
+    created: 2017-07-21T11:07:48.003643667Z
     description: A Helm chart for Kubernetes
     digest: ed07b6706f272ed5fbe72e33ca44921f7aecf30779b223d2da8aeac7678b128e
     name: init-user
@@ -47,7 +47,7 @@ entries:
     version: 0.1.0
   kibana-auth-proxy:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.694229722Z
+    created: 2017-07-21T11:07:48.004184504Z
     description: A Helm chart for Kubernetes
     digest: 20cf78f9638fb0f5bffa58304d55fa4cce02c7518349c50643ce88d62b89dc81
     name: kibana-auth-proxy
@@ -56,7 +56,7 @@ entries:
     version: 0.1.0
   kube-dashboard:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.694794846Z
+    created: 2017-07-21T11:07:48.004772948Z
     description: A Helm chart for Kubernetes
     digest: 2d82880a250c8088ab368e43e966c95533d6ac0839a1e9443f3756bb5893bd62
     name: kube-dashboard
@@ -65,7 +65,7 @@ entries:
     version: 0.1.0
   kube2iam:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.695204061Z
+    created: 2017-07-21T11:07:48.005274052Z
     description: Allows k8s pods to be started with AWS IAM roles attached
     digest: 389f30b188fdacedddad1868aa40eb444a359fbaec912db5c9a29c6445071bcd
     name: kube2iam
@@ -74,7 +74,7 @@ entries:
     version: 0.1.0
   nfs-migration:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.695712274Z
+    created: 2017-07-21T11:07:48.00581121Z
     description: A Helm chart for Kubernetes
     digest: 02f63fac4170197cbe64221de23c1f0c578057bcf0804f5cd9afc4ed8860772c
     name: nfs-migration
@@ -82,7 +82,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/nfs-migration-0.1.0.tgz
     version: 0.1.0
   nginx-ingress:
-  - created: 2017-07-15T18:03:52.697527457Z
+  - created: 2017-07-21T11:07:48.007577434Z
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: e3fb68576a309ef9d044de966fa8adaa0d9664f791d84bb1c3072360ad43d26b
@@ -104,7 +104,7 @@ entries:
     version: 0.3.0
   node-exporter:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.698130597Z
+    created: 2017-07-21T11:07:48.008081138Z
     description: A Helm chart for Kubernetes
     digest: 753964efaf9f3ac2e7bdb7c2065362ca38d685b8b9ff183a3ca8b0d9c14a9027
     name: node-exporter
@@ -113,20 +113,20 @@ entries:
     version: 0.1.0
   rstudio:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.698831684Z
+    created: 2017-07-21T11:07:48.009260735Z
     description: A Helm chart for RStudio
-    digest: 77744a5ab26deb668e5bf1d88a00c9a5f75b28186e81d9564b725b7abed0059b
+    digest: db0f9ad2a3ae78cf567c6cbff742a9139e3ab2a752bd56f7afc79931b93cbfb0
     name: rstudio
     urls:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/rstudio-0.2.2.tgz
     version: 0.2.2
   shiny-app:
   - apiVersion: v1
-    created: 2017-07-15T18:03:52.699533199Z
+    created: 2017-07-21T11:07:48.010059446Z
     description: Shiny app Helm chart for Kubernetes
     digest: f0d8293712dd5680b98bf586c8f1a02b56ffbfc859a60cbb93547ea9e97499f4
     name: shiny-app
     urls:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/shiny-app-0.1.0.tgz
     version: 0.1.0
-generated: 2017-07-15T18:03:52.690395743Z
+generated: 2017-07-21T11:07:48.000625692Z
