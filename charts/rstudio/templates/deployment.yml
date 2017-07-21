@@ -51,6 +51,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: cookie_secret
+            - name: SECURE_COOKIE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: secure_cookie_key
             - name: SHINY_HOST
               value: localhost
             - name: SHINY_PORT
@@ -102,6 +107,11 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: aws_default_region
+            - name: SECURE_COOKIE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: secure_cookie_key
             - name: TOOLS_DOMAIN
               value: {{ .Values.ToolsDomain }}
           readinessProbe:
