@@ -1,6 +1,7 @@
 Username: ""
 ToolsDomain: "tools.EXAMPLE.COM"
 CookieSecret: ""
+SecureCookieKey: ""
 OAuth:
   ClientSecret: ""
   ClientId: ""
