@@ -27,7 +27,7 @@ Fluentd:
 AuthProxy:
   Image:
     Repository: quay.io/mojanalytics/rstudio-auth-proxy
-    Tag: "a750b612"
+    Tag: "v1.0.0"
     PullPolicy: "IfNotPresent"
   resources:
     limits:
