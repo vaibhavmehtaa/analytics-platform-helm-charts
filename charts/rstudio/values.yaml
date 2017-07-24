@@ -15,7 +15,7 @@ Elasticsearch:
 Fluentd:
   Image:
     Repository: quay.io/fluent/fluentd-kubernetes-daemonset
-    Tag: latest
+    Tag: "stable-elasticsearch"
     PullPolicy: "IfNotPresent"
   resources:
     limits:
