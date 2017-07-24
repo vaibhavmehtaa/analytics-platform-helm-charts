@@ -57,6 +57,8 @@ spec:
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
+        - name: fluentdconf
+          mountPath: /fluentd/etc
         resources:
 {{ toYaml .Values.resources | indent 12 }}
       terminationGracePeriodSeconds: 30
@@ -67,3 +69,6 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
+      - name: fluentdconf
+        configMap:
+          name: {{ template "fullname" . }}
