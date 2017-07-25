@@ -14,7 +14,7 @@ Elasticsearch:
   Port: 9200
 Fluentd:
   Image:
-    Repository: quay.io/fluent/fluentd-kubernetes-daemonset
+    Repository: fluent/fluentd-kubernetes-daemonset
     Tag: "stable-elasticsearch"
     PullPolicy: "IfNotPresent"
   resources:
