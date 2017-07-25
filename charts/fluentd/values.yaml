@@ -1,6 +1,6 @@
 image:
   repository: fluent/fluentd-kubernetes-daemonset
-  tag: elasticsearch
+  tag: "stable-elasticsearch"
   pullPolicy: Always
 elasticsearch:
   host: elasticsearch-logging
@@ -8,6 +8,7 @@ elasticsearch:
   scheme: "http"
   username: ""
   password: ""
+  logstash_prefix: "logstash"
 resources:
   limits:
     cpu: 100m
