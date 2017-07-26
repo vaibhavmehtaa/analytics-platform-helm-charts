@@ -12,7 +12,7 @@ AuthProxy:
   IPRanges: ""
   Image:
     Repository: quay.io/mojanalytics/auth-proxy
-    Tag: "v0.2.0"
+    Tag: "latest"
     PullPolicy: "IfNotPresent"
 AWS:
   AccessKeyId: ""
