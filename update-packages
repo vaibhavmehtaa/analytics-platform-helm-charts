@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$CIRCLE_BRANCH" != "master" ]; then
+    echo "I only update packages on commits to master"
+    exit 0
+fi
+
 function commit_time {
     git log -1 --format=%ct "$1"
 }
