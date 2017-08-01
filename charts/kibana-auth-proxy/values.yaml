@@ -16,7 +16,11 @@ auth:
   cookieSecret: ""
 kibana:
   url: "http://localhost/"
-  username: ""
-  password: ""
+  admin:
+    username: ""
+    password: ""
+  user:
+    username: ""
+    password: ""
 ingress:
   host: "example.com"
