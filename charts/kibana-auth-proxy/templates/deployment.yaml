@@ -52,5 +52,15 @@ spec:
               secretKeyRef:
                 name: {{ template "fullname" . }}
                 key: kibana_url
+          - name: KIBANA_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "fullname" . }}
+                key: kibana_username
+          - name: KIBANA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "fullname" . }}
+                key: kibana_password
         resources:
 {{ toYaml .Values.resources | indent 12 }}

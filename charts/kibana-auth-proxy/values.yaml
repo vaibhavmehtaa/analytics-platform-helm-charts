@@ -14,8 +14,9 @@ auth:
   domain: ""
   callbackURL: ""
   cookieSecret: ""
-elasticsearch:
-  host: "es.example.com"
-  port: 9200
+kibana:
+  url: "http://localhost/"
+  username: ""
+  password: ""
 ingress:
   host: "example.com"
