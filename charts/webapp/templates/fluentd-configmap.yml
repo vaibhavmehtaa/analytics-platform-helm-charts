@@ -9,13 +9,20 @@ metadata:
   name: "{{ template "fullname" . }}-fluentd"
 data:
   source_tag: "{{ template "fullname" . }}"
+  logstash_prefix: "logstash-apps-{{ .Values.EnvName }}"
   fluent.conf: |
-    # shiny-server logs
+    <system>
+      log_level error
+    </system>
+
+    # shiny-server application logs
     <source>
       @type tail
+      path /var/log/shiny-server/*.log
+      pos_file /var/log/shiny-server/app.pos
       format none
-      path /var/log/shiny-server/*
-      tag "#{ENV['FLUENT_SOURCE_TAG']}"
+      read_from_head true
+      tag web_app
     </source>
 
     # NGINX's access logs
@@ -23,12 +30,14 @@ data:
         @type tail
         format /^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")? "(?<x_forwarded_for>[^ ]+)?"/
         time_format %d/%b/%Y:%H:%M:%S %z
-        tag nginx.access
+        read_from_head true
         path /var/log/nginx/access.log
+        pos_file /var/log/nginx/access.log.pos
+        tag web_app.nginx.access
     </source>
 
     # Ignore k8s healthcheck requests
-    <filter nginx.access>
+    <filter web_app.nginx.access>
       @type grep
       exclude1 agent ^Go-http-client\/.*$
     </filter>
@@ -36,14 +45,32 @@ data:
     # NGINX's error logs
     <source>
         @type tail
-        tag nginx.error
+        tag web_app.nginx.error
+        read_from_head true
         path /var/log/nginx/error.log
+        pos_file /var/log/nginx/error.log.pos
 
         format multiline
         format_firstline /^\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2} \[\w+\] (?<pid>\d+).(?<tid>\d+): /
         format1 /^(?<time>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[(?<log_level>\w+)\] (?<pid>\d+).(?<tid>\d+): (?<message>.*)/
         multiline_flush_interval 3s
     </source>
+
+    # Add app name and hostname to webapp logs
+    <filter web_app.**>
+      @type record_transformer
+      enable_ruby true
+      types time_nano:integer
+      <record>
+        app_name "#{ENV['FLUENT_SOURCE_TAG']}"
+      </record>
+      <record>
+        hostname "#{Socket.gethostname}"
+      </record>
+      <record>
+        time_nano ${t = Time.now; (t.to_i * 1000000000) + t.nsec}
+      </record>
+    </filter>
 
     <match **>
        @type elasticsearch
@@ -54,6 +81,7 @@ data:
        port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
        user "#{ENV['FLUENT_ELASTICSEARCH_USERNAME']}"
        password "#{ENV['FLUENT_ELASTICSEARCH_PASSWORD']}"
+       logstash_prefix "#{ENV['FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX'] || 'logstash'}"
        logstash_format true
        buffer_chunk_limit 2M
        buffer_queue_limit 32

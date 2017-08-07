@@ -122,6 +122,11 @@ spec:
                 configMapKeyRef:
                   name: {{ template "fullname" . }}-fluentd
                   key: source_tag
+            - name:  FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "fullname" . }}-fluentd
+                  key: logstash_prefix
           volumeMounts:
             - name: fluentd-config
               mountPath: /fluentd/etc

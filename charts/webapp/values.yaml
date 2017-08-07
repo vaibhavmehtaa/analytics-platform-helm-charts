@@ -1,4 +1,5 @@
 Username: ""
+EnvName: "test"
 ToolsDomain: "tools.EXAMPLE.COM"
 CookieSecret: ""
 app:
