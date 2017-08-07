@@ -9,25 +9,6 @@ OAuth:
 AWS:
   IAMRole: ""
   DefaultRegion: "eu-west-1"
-Elasticsearch:
-  Host: "elasticsearch"
-  Port: 9200
-  Scheme: "http"
-  Username: ""
-  Password: ""
-  LogstashPrefix: "logstash"
-Fluentd:
-  Image:
-    Repository: fluent/fluentd-kubernetes-daemonset
-    Tag: "stable-elasticsearch"
-    PullPolicy: "IfNotPresent"
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 25m
-      memory: 64Mi
 AuthProxy:
   Image:
     Repository: quay.io/mojanalytics/rstudio-auth-proxy
