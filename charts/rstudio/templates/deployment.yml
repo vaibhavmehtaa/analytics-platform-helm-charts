@@ -12,7 +12,6 @@ spec:
       labels:
         app: "{{ .Chart.Name }}"
       annotations:
-        checksum/fluentd-config: {{ include (print $.Template.BasePath "/fluentd-configmap.yaml") . | sha256sum }}
         iam.amazonaws.com/role: {{ .Values.AWS.IAMRole }}
     spec:
       containers:
@@ -71,55 +70,6 @@ spec:
           resources:
 {{ toYaml .Values.AuthProxy.resources | indent 12 }}
 
-        - name: fluentd
-          image: "{{ .Values.Fluentd.Image.Repository }}:{{ .Values.Fluentd.Image.Tag }}"
-          imagePullPolicy: {{ .Values.Fluentd.Image.PullPolicy }}
-          env:
-            - name: USER
-              value: {{ .Values.Username }}
-            - name:  FLUENT_ELASTICSEARCH_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: elasticsearch_host
-            - name:  FLUENT_ELASTICSEARCH_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: elasticsearch_port
-            - name:  FLUENT_ELASTICSEARCH_SCHEME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: elasticsearch_scheme
-            - name:  FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: elasticsearch_logstash_prefix
-            {{ if .Values.Elasticsearch.Username }}
-            - name: FLUENT_ELASTICSEARCH_USER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: elasticsearch_username
-            {{ end }}
-            {{ if .Values.Elasticsearch.Password }}
-            - name: FLUENT_ELASTICSEARCH_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: elasticsearch_password
-            {{ end }}
-
-          volumeMounts:
-            - name: fluentd-config
-              mountPath: /fluentd/etc
-            - name: varlogrstudioserver
-              mountPath: /var/log/rstudio-server
-          resources:
-{{ toYaml .Values.Fluentd.resources | indent 12 }}
-
         - name: r-studio-server
           image: "{{ .Values.RStudio.Image.Repository }}:{{ .Values.RStudio.Image.Tag }}"
           imagePullPolicy: {{ .Values.RStudio.Image.PullPolicy }}
@@ -150,8 +100,6 @@ spec:
           volumeMounts:
             - name: home
               mountPath: "/home/{{ .Values.Username }}"
-            - name: varlogrstudioserver
-              mountPath: /var/log/rstudio-server
           resources:
 {{ toYaml .Values.RStudio.resources | indent 12 }}
 
@@ -159,11 +107,3 @@ spec:
         - name: home
           persistentVolumeClaim:
             claimName: nfs-home
-        - name: varlogrstudioserver
-          emptyDir: {}
-        - name: fluentd-config
-          configMap:
-            name: {{ template "fullname" . }}-fluentd
-            items:
-            - key: fluent.conf
-              path: fluent.conf
