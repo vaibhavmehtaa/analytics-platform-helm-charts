@@ -21,7 +21,7 @@ spec:
             - "--iptables=true"
             - "--host-interface={{ .Values.host_interface }}"
             - "--host-ip=$(HOST_IP)"
-            - "--default-role={{ .Values.default-role }}"
+            - "--default-role={{ .Values.default_role }}"
           env:
             - name: HOST_IP
               valueFrom:
