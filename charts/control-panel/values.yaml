@@ -1,0 +1,12 @@
+ServicesDomain: ""
+API:
+  Image:
+    Repository: quay.io/mojanalytics/control-panel
+    Tag: 0.1.0
+    PullPolicy: IfNotPresent
+  Environment:
+    DB_HOST: ""
+    DB_NAME: ""
+    DB_USER: ""
+    DB_PASSWORD: ""
+    DEBUG: "False"

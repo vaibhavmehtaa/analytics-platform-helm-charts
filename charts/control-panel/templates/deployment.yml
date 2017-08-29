@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    app: {{ template "fullname" .}}
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      containers:
+        - name: api
+          image: "{{ .Values.API.Image.Repository }}:{{ .Values.API.Image.Tag }}"
+          imagePullPolicy: {{ .Values.API.Image.PullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: ALLOWED_HOSTS
+              value: "*"
+              #valueFrom:
+                #fieldRef:
+                  #fieldPath: status.podIP
+            - name: DB_HOST
+              value: "{{ .Values.API.Environment.DB_HOST }}"
+            - name: DB_NAME
+              value: "{{ .Values.API.Environment.DB_NAME }}"
+            - name: DB_USER
+              value: "{{ .Values.API.Environment.DB_USER }}"
+            - name: DB_PASSWORD
+              value: "{{ .Values.API.Environment.DB_PASSWORD }}"
+            - name: DEBUG
+              value: "{{ .Values.API.Environment.DEBUG }}"
+            - name: DJANGO_SETTINGS_MODULE
+              value: "control_panel_api.settings"
+          readinessProbe:
+            httpGet:
+              path: /auth/login
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
