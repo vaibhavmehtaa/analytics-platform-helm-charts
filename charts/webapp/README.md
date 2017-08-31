@@ -29,5 +29,6 @@ Listing only the required params here. See `/chart-env-config/` for more details
 | `AuthProxy.AuthenticationRequired` | Determine if the app requires authentication | `"true"` |
 | `AuthProxy.IPRanges` | Comma (,) separated list of CIDR IP ranges. When not provided the user IP is not checked. | `""` |
 | `app.name` (required) | Application name. This will be part of the app URL | |
+| `AWS.IAMRole` | IAM role assumed by the webapp. | `""` |
 | `webapp.docker.repository` (required) | Docker image for the app | |
 | `webapp.docker.tag` | Tag to use for the docker repository | `latest` |
