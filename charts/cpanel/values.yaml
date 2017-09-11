@@ -10,3 +10,5 @@ API:
     DB_USER: ""
     DB_PASSWORD: ""
     DEBUG: "False"
+AWS:
+  IAMRole: ""

@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         app: {{ template "fullname" . }}
+      annotations:
+        iam.amazonaws.com/role: {{ .Values.AWS.IAMRole }}
     spec:
       containers:
         - name: api
