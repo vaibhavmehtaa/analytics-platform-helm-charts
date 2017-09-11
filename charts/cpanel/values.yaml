@@ -5,10 +5,14 @@ API:
     Tag: 0.1.0
     PullPolicy: IfNotPresent
   Environment:
+    BUCKET_REGION: "eu-west-1"
     DB_HOST: ""
     DB_NAME: ""
-    DB_USER: ""
     DB_PASSWORD: ""
+    DB_USER: ""
     DEBUG: "False"
+    ENV: ""
+    IAM_ARN_BASE: ""
+    LOGS_BUCKET_NAME: ""
 AWS:
   IAMRole: ""

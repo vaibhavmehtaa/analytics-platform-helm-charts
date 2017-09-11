@@ -8,4 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.2.0] - 2017-09-11
 ### Added
 - Control Panel API can assume an IAM role passed via `AWS.IAMRole` value
+- Added `ENV` environment variable value
+- Added `BUCKET_REGION`, `IAM_ARN_BASE` and `LOGS_BUCKET_NAME`  environment variables values
 - `CHANGELOG.md`
