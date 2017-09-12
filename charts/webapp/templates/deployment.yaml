@@ -4,10 +4,10 @@ metadata:
   name: {{ template "fullname" . }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    repo: "{{ .Values.app.repo}}"
+    repo: "{{ .Values.WebApp.GithubRepo }}"
     app: {{ template "fullname" . }}
 spec:
-  replicas: {{ .Values.app.replicaCount }}
+  replicas: {{ .Values.WebApp.ReplicaCount }}
   template:
     metadata:
       labels:
@@ -52,7 +52,7 @@ spec:
                   name: {{ template "fullname" . }}
                   key: cookie_secret
             - name: TARGET_URL
-              value: "http://localhost:{{ .Values.webapp.port }}/"
+              value: "http://localhost:{{ .Values.WebApp.Port }}/"
             - name: AUTHENTICATION_REQUIRED
               value: "{{ .Values.AuthProxy.AuthenticationRequired }}"
             - name: IP_RANGES
@@ -69,14 +69,14 @@ spec:
             periodSeconds: 5
 
         - name: webapp
-          image: "{{ .Values.webapp.docker.repository }}:{{ .Values.webapp.docker.tag }}"
-          imagePullPolicy: {{ .Values.webapp.docker.pullPolicy }}
+          image: "{{ .Values.WebApp.Image.Repository }}:{{ .Values.WebApp.Image.Tag }}"
+          imagePullPolicy: {{ .Values.WebApp.Image.PullPolicy }}
           ports:
-            - containerPort: {{ .Values.webapp.port }}
+            - containerPort: {{ .Values.WebApp.Port }}
           livenessProbe:
             httpGet:
               path: /
-              port: {{ .Values.webapp.port }}
+              port: {{ .Values.WebApp.Port }}
             initialDelaySeconds: 15
             periodSeconds: 5
             timeoutSeconds: 5

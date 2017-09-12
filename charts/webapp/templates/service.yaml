@@ -4,12 +4,12 @@ metadata:
   name: {{ template "fullname" . }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    repo: "{{ .Values.app.repo }}"
+    repo: "{{ .Values.WebApp.GithubRepo }}"
     app: {{ template "fullname" . }}
 spec:
   sessionAffinity: ClientIP
   ports:
-  - port: {{ .Values.app.port }}
+  - port: {{ .Values.WebApp.Port }}
     targetPort: 3000
     protocol: TCP
   selector:

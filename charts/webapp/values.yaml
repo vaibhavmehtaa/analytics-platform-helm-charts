@@ -2,31 +2,32 @@ Username: ""
 EnvName: "test"
 ToolsDomain: "tools.EXAMPLE.COM"
 CookieSecret: ""
-app:
-  name: ""
-  baseHost: ""
-  replicaCount: 3
-  port: 80
-  repo: ""
+WebApp:
+  Name: ""
+  BaseHost: ""
+  ReplicaCount: 3
+  GithubRepo: ""
+  Port: 80
+  Image:
+    Repository: ""
+    Tag: latest
+    PullPolicy: Always
 AuthProxy:
   AuthenticationRequired: "true"
   IPRanges: ""
+  Auth0:
+    ClientSecret: ""
+    ClientId: ""
+    Domain: "AUTH0_USER.eu.auth0.com"
   Image:
     Repository: quay.io/mojanalytics/auth-proxy
     Tag: "latest"
     PullPolicy: "IfNotPresent"
 AWS:
   IAMRole: ""
-OAuth:
-  ClientSecret: ""
-  ClientId: ""
-  Domain: "AUTH0_USER.eu.auth0.com"
-webapp:
-  port: 80
-  docker:
-    repository: ""
-    tag: latest
-    pullPolicy: Always
+  AccessKeyId: ""
+  SecretAccessKey: ""
+  DefaultRegion: "eu-west-1"
 Fluentd:
   Image:
     Repository: fluent/fluentd-kubernetes-daemonset
