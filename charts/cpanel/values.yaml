@@ -14,6 +14,7 @@ API:
     DEBUG: "False"
     ENV: ""
     IAM_ARN_BASE: ""
+    K8S_WORKER_ROLE_ARN: ""
     LOGS_BUCKET_NAME: ""
 AWS:
   IAMRole: ""
