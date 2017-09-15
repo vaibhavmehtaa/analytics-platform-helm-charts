@@ -45,8 +45,8 @@ spec:
               value: "{{ .Values.API.Environment.ENV }}"
             - name: IAM_ARN_BASE
               value: "{{ .Values.API.Environment.IAM_ARN_BASE }}"
-            - name: K8S_WORKER_ROLE_ARN
-              value: "{{ .Values.API.Environment.K8S_WORKER_ROLE_ARN }}"
+            - name: K8S_WORKER_ROLE_NAME
+              value: "{{ .Values.API.Environment.K8S_WORKER_ROLE_NAME }}"
             - name: LOGS_BUCKET_NAME
               value: "{{ .Values.API.Environment.LOGS_BUCKET_NAME }}"
           readinessProbe:
