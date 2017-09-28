@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   calicoctl:
   - appVersion: v1
-    created: 2017-09-28T13:59:05.765758649Z
+    created: 2017-09-28T14:48:50.160257629Z
     description: calicoctl command line tool for configuring calico network provider
     digest: 13db458de9cad647ba0df9adeb1988e8ae8fcd974e69107eab58b96545f8ca6f
     name: calicoctl
@@ -11,7 +11,7 @@ entries:
     version: 0.1.0
   config-user:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.765985115Z
+    created: 2017-09-28T14:48:50.160472357Z
     description: Configure the user (e.g. git setup, etc...)
     digest: e484c230be1c06b39fe2b4e205abcb47e3d1344e551ddb8db1e6de19dae369a6
     name: config-user
@@ -20,7 +20,7 @@ entries:
     version: 0.1.0
   cpanel:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.767425276Z
+    created: 2017-09-28T14:48:50.161604267Z
     description: Analytics Platform Control Panel API webapp
     digest: c5ebe6a774e2049c253451b1e082a09348ae17a23e94057961ccda5b69333a07
     name: cpanel
@@ -28,7 +28,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/cpanel-0.3.1.tgz
     version: 0.3.1
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.76688891Z
+    created: 2017-09-28T14:48:50.161393488Z
     description: Analytics Platform Control Panel API webapp
     digest: a6cbfd60946b7e8976054bb2c503cc53aee2bb381a8f5d2a914f002931fbd8fc
     name: cpanel
@@ -36,7 +36,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/cpanel-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.766639231Z
+    created: 2017-09-28T14:48:50.161160565Z
     description: Analytics Platform Control Panel API webapp
     digest: 905cac89f0e49e551612662ce4b88361c6e8c79cb6efacf0df93fff41b22fc31
     name: cpanel
@@ -44,7 +44,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/cpanel-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.766419648Z
+    created: 2017-09-28T14:48:50.160907402Z
     description: Analytics Platform Control Panel API webapp
     digest: f0600ee80bfe61cc1f666e7d81d67a2e1861b6d392b6843c492998e7c0157f32
     name: cpanel
@@ -52,7 +52,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/cpanel-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.766186605Z
+    created: 2017-09-28T14:48:50.160676953Z
     description: Analytics Platform Control Panel API webapp
     digest: 7895fbd7b317551cd5f795346d1b7094a966e6f0f426843d6a52bc3ee203b4dc
     name: cpanel
@@ -61,16 +61,16 @@ entries:
     version: 0.1.0
   cpfrontend:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.768829232Z
+    created: 2017-09-28T14:48:50.162810519Z
     description: Analytics Platform Control Panel webapp
-    digest: 4ec3f002c7a162fe3fc20a4d2e855d71a09e1be2c7e16e7291908a50671579e0
+    digest: 30d04a056b3719332b425f8f049636d738dd412563ea6ccf8bd0b793c34ed701
     name: cpfrontend
     urls:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/cpfrontend-0.1.0.tgz
     version: 0.1.0
   elasticsearch-curator:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.76929662Z
+    created: 2017-09-28T14:48:50.163783659Z
     deprecated: true
     description: A Helm chart for Kubernetes
     digest: 5b6422aa20eb331e85c654b55d3f52660eb88e65d6c01bdb821067c5b6e22204
@@ -79,7 +79,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/elasticsearch-curator-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.769061209Z
+    created: 2017-09-28T14:48:50.16333799Z
     description: A Helm chart for Kubernetes
     digest: 54e5490ccff6ce64369e0b74b9f7b7b8700ad88d3e8e22ac75b09253b13399f8
     name: elasticsearch-curator
@@ -88,7 +88,7 @@ entries:
     version: 0.1.0
   fluentd:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.769543319Z
+    created: 2017-09-28T14:48:50.164244572Z
     description: A Helm chart for Kubernetes
     digest: 8e018e33fc86d97aa991098abe1fa97687c07646b43abb04d4d0dd545e528c21
     name: fluentd
@@ -97,7 +97,7 @@ entries:
     version: 0.1.0
   init-platform:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.769733185Z
+    created: 2017-09-28T14:48:50.164578058Z
     description: A Helm chart for Kubernetes
     digest: af7f2b2e3d14474542b54782bdf6d013150900fcc4750bda9d20f890f19dcc92
     name: init-platform
@@ -106,7 +106,7 @@ entries:
     version: 0.1.0
   init-user:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.769956463Z
+    created: 2017-09-28T14:48:50.164949978Z
     description: A Helm chart for Kubernetes
     digest: ed07b6706f272ed5fbe72e33ca44921f7aecf30779b223d2da8aeac7678b128e
     name: init-user
@@ -115,7 +115,7 @@ entries:
     version: 0.1.0
   kibana-auth-proxy:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.770400701Z
+    created: 2017-09-28T14:48:50.165699074Z
     description: A Helm chart for Kubernetes
     digest: dcdb6cff1d5208c81cbddf66c4a035b360876025484b984ec9d5a467551e695e
     name: kibana-auth-proxy
@@ -123,7 +123,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/kibana-auth-proxy-1.0.0.tgz
     version: 1.0.0
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.770176844Z
+    created: 2017-09-28T14:48:50.165314998Z
     description: A Helm chart for Kubernetes
     digest: 20cf78f9638fb0f5bffa58304d55fa4cce02c7518349c50643ce88d62b89dc81
     name: kibana-auth-proxy
@@ -132,7 +132,7 @@ entries:
     version: 0.1.0
   kube-dashboard:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.77066141Z
+    created: 2017-09-28T14:48:50.166161907Z
     description: A Helm chart for Kubernetes
     digest: 2d82880a250c8088ab368e43e966c95533d6ac0839a1e9443f3756bb5893bd62
     name: kube-dashboard
@@ -141,7 +141,7 @@ entries:
     version: 0.1.0
   kube2iam:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.77108634Z
+    created: 2017-09-28T14:48:50.16675537Z
     description: Allows k8s pods to be started with AWS IAM roles attached
     digest: e03e67fbf416b5f68c36267ee73c008f18e3f31d23b9cdf652807cc6bc49bf80
     name: kube2iam
@@ -149,7 +149,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/kube2iam-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.770902084Z
+    created: 2017-09-28T14:48:50.166466813Z
     description: Allows k8s pods to be started with AWS IAM roles attached
     digest: 389f30b188fdacedddad1868aa40eb444a359fbaec912db5c9a29c6445071bcd
     name: kube2iam
@@ -158,7 +158,7 @@ entries:
     version: 0.1.0
   nfs-migration:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.771528461Z
+    created: 2017-09-28T14:48:50.167435396Z
     deprecated: true
     description: A Helm chart for Kubernetes
     digest: 945a2d60d842080f7b91c9256e84a04738487d4fbb36d31b50e4b5263cfd9cb2
@@ -167,7 +167,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/nfs-migration-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.771296239Z
+    created: 2017-09-28T14:48:50.167082974Z
     description: A Helm chart for Kubernetes
     digest: 02f63fac4170197cbe64221de23c1f0c578057bcf0804f5cd9afc4ed8860772c
     name: nfs-migration
@@ -175,7 +175,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/nfs-migration-0.1.0.tgz
     version: 0.1.0
   nginx-ingress:
-  - created: 2017-09-28T13:59:05.772250355Z
+  - created: 2017-09-28T14:48:50.168614043Z
     description: An nginx Ingress controller that uses ConfigMap to store the nginx
       configuration.
     digest: e3fb68576a309ef9d044de966fa8adaa0d9664f791d84bb1c3072360ad43d26b
@@ -197,7 +197,7 @@ entries:
     version: 0.3.0
   node-exporter:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.772461026Z
+    created: 2017-09-28T14:48:50.168961252Z
     description: A Helm chart for Kubernetes
     digest: 753964efaf9f3ac2e7bdb7c2065362ca38d685b8b9ff183a3ca8b0d9c14a9027
     name: node-exporter
@@ -206,7 +206,7 @@ entries:
     version: 0.1.0
   rstudio:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.77397761Z
+    created: 2017-09-28T14:48:50.17142866Z
     description: A Helm chart for RStudio
     digest: 064a104466406eee87a8e0854dc4ea50aa2ad0d8c752ac8d1465d6eb7fff6d78
     name: rstudio
@@ -214,7 +214,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/rstudio-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.773723782Z
+    created: 2017-09-28T14:48:50.170985391Z
     description: A Helm chart for RStudio
     digest: 64a3ac54289a10bb0a3ee7773d5b9dfbb870f6034f341821f2753a17b6d9f04d
     name: rstudio
@@ -222,7 +222,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/rstudio-1.0.2.tgz
     version: 1.0.2
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.773387066Z
+    created: 2017-09-28T14:48:50.17048321Z
     description: A Helm chart for RStudio
     digest: a88b4e9241a012dd81062856dc27b78fa0fa107c80fdef2baedf7a635ea96233
     name: rstudio
@@ -230,7 +230,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/rstudio-1.0.1.tgz
     version: 1.0.1
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.773088333Z
+    created: 2017-09-28T14:48:50.169973651Z
     description: A Helm chart for RStudio
     digest: a2df2dfe7aa0d04a6d7de175b134cc2e1e3e1b930f8b2acfdbda52fb396a4329
     name: rstudio
@@ -238,7 +238,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/rstudio-1.0.0.tgz
     version: 1.0.0
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.772781842Z
+    created: 2017-09-28T14:48:50.169440951Z
     description: A Helm chart for RStudio
     digest: f55bd974609c8e7caded4af18170ebf7b8221effacec0a5724f593d4822f0f8b
     name: rstudio
@@ -247,7 +247,7 @@ entries:
     version: 0.2.2
   shiny-app:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.774590074Z
+    created: 2017-09-28T14:48:50.172483007Z
     deprecated: true
     description: Shiny app Helm chart for Kubernetes
     digest: 1ad76530ca1d5c2cbedb21880e3790fd11d6d9a7282c1beae206d2524e24375a
@@ -256,7 +256,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/shiny-app-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.774273575Z
+    created: 2017-09-28T14:48:50.171939993Z
     description: Shiny app Helm chart for Kubernetes
     digest: f0d8293712dd5680b98bf586c8f1a02b56ffbfc859a60cbb93547ea9e97499f4
     name: shiny-app
@@ -265,7 +265,7 @@ entries:
     version: 0.1.0
   webapp:
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.775954053Z
+    created: 2017-09-28T14:48:50.174818785Z
     description: webapp Helm chart for Kubernetes
     digest: 804df95811daa37aba59317da891435b823bbc6c7ac6457bac41f891aa0bc5e4
     name: webapp
@@ -273,7 +273,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/webapp-1.3.0.tgz
     version: 1.3.0
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.775618958Z
+    created: 2017-09-28T14:48:50.174268191Z
     description: webapp Helm chart for Kubernetes
     digest: a5b415fdcd9bb839367141304bb77f1d8c9da13b74782d328d93afb58688000f
     name: webapp
@@ -281,7 +281,7 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/webapp-1.2.0.tgz
     version: 1.2.0
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.775255317Z
+    created: 2017-09-28T14:48:50.173634971Z
     description: webapp Helm chart for Kubernetes
     digest: f7df53771cee6e33fdeed01b83a0f3ab8d7ad9aff906e3983ddd8728f4dd80aa
     name: webapp
@@ -289,11 +289,11 @@ entries:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/webapp-1.1.1.tgz
     version: 1.1.1
   - apiVersion: v1
-    created: 2017-09-28T13:59:05.774933524Z
+    created: 2017-09-28T14:48:50.173050187Z
     description: webapp Helm chart for Kubernetes
     digest: b67c59fb7afa3bb49124bbdc89e8554476c3e456ffd878b89a4091bc51041f4a
     name: webapp
     urls:
     - https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/webapp-1.0.0.tgz
     version: 1.0.0
-generated: 2017-09-28T13:59:05.765444566Z
+generated: 2017-09-28T14:48:50.159954973Z
