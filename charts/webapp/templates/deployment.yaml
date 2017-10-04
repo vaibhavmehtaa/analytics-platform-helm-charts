@@ -77,9 +77,9 @@ spec:
             httpGet:
               path: /
               port: {{ .Values.WebApp.Port }}
-            initialDelaySeconds: 15
-            periodSeconds: 5
-            timeoutSeconds: 5
+            initialDelaySeconds: 180
+            periodSeconds: 10
+            timeoutSeconds: 60
           resources:
             requests:
               cpu: 10m
