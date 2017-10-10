@@ -61,7 +61,10 @@ spec:
             - name: LOGS_BUCKET_NAME
               value: "{{ .Values.API.Environment.LOGS_BUCKET_NAME }}"
             - name: SENTRY_DSN
-              value: "{{ .Values.API.Environment.SENTRY_DSN }}"
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: SENTRY_DSN
           readinessProbe:
             httpGet:
               path: /auth/login
