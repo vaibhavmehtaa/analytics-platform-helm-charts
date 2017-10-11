@@ -60,6 +60,11 @@ spec:
               value: "{{ .Values.API.Environment.K8S_WORKER_ROLE_NAME }}"
             - name: LOGS_BUCKET_NAME
               value: "{{ .Values.API.Environment.LOGS_BUCKET_NAME }}"
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: SENTRY_DSN
           readinessProbe:
             httpGet:
               path: /auth/login

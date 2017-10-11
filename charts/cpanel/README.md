@@ -30,6 +30,7 @@ The instance will be available at https://cpanelapi-$BRANCH_NAME.<ServicesDomain
 | `API.Environment.IAM_ARN_BASE` | | |
 | `API.Environment.K8S_WORKER_ROLE_NAME` | | |
 | `API.Environment.LOGS_BUCKET_NAME` | | |
+| `API.Environment.SENTRY_DSN` | Sentry credentials | |
 | `AWS.DefaultRegion` | AWS region | `eu-west-1` |
 | `AWS.IAMRole` | IAM role assumed by the instance running the API | |
 | `postgresql.postgresDatabase` | The database name where API data will be stored | |
