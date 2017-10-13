@@ -13,4 +13,5 @@ data:
     \/.cache\/
     \/.Rproj.user\/
     \/id_rsa$
+    \/.bash_history$
   s3_backup_bucket_name: "{{ .Values.AWS.S3.BucketName }}"
