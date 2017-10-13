@@ -19,6 +19,8 @@ spec:
             args:
               - sync
               - --rexclude-from=/tmp/s3cmd/exclude_patterns
+              - --storage-class=STANDARD_IA
+              - --server-side-encryption
               - --delete-removed
               - -v
               - /homes/
