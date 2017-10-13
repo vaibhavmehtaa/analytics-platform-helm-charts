@@ -1,2 +1,4 @@
 AWS:
   IAMRole: ""
+  S3:
+    BucketName: ""
