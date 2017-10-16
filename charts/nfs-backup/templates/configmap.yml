@@ -3,7 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ template "fullname" . }}
   labels:
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: "{{ .Chart.Name }}"
 data:
   exclude_patterns: |
     \/\.rstudio\/

@@ -2,6 +2,9 @@ apiVersion: batch/v2alpha1
 kind: CronJob
 metadata:
   name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: "{{ .Chart.Name }}"
 spec:
   schedule: "{{ .Values.Schedule }}"
   jobTemplate:
