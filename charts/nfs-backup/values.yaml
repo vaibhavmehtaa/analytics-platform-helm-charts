@@ -6,4 +6,4 @@ Image:
   Repository: samepagelabs/s3cmd
   Tag: "1.6.1"
   PullPolicy: IfNotPresent
-Schedule: "0 * * * *"
+Schedule: "@hourly"
