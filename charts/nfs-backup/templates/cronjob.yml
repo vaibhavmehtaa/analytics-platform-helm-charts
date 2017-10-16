@@ -7,6 +7,7 @@ metadata:
     app: "{{ .Chart.Name }}"
 spec:
   schedule: "{{ .Values.Schedule }}"
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
