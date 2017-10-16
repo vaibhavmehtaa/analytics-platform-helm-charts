@@ -1,0 +1,51 @@
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: "{{ .Chart.Name }}"
+spec:
+  schedule: "{{ .Values.Schedule }}"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: nfs-backup
+          annotations:
+            iam.amazonaws.com/role: {{ .Values.AWS.IAMRole }}
+        spec:
+          containers:
+          - image: "{{ .Values.Image.Repository }}:{{ .Values.Image.Tag }}"
+            imagePullPolicy: {{ .Values.Image.PullPolicy }}
+            name: s3cmd
+            args:
+              - sync
+              - --rexclude-from=/tmp/s3cmd/exclude_patterns
+              - --storage-class=STANDARD_IA
+              - --server-side-encryption
+              - --delete-removed
+              - -v
+              - /homes/
+              - s3://$(S3_BACKUP_BUCKET_NAME)/
+            env:
+            - name: S3_BACKUP_BUCKET_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: s3_backup_bucket_name
+              value:
+            volumeMounts:
+              - name: nfs-homes
+                mountPath: "/homes"
+              - name: exclude-patterns
+                mountPath: /tmp/s3cmd
+          restartPolicy: OnFailure
+          volumes:
+          - name: nfs-homes
+            persistentVolumeClaim:
+              claimName: nfs-homes
+          - name: exclude-patterns
+            configMap:
+              name: {{ template "fullname" . }}

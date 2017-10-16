@@ -1,0 +1,9 @@
+AWS:
+  IAMRole: ""
+  S3:
+    BucketName: ""
+Image:
+  Repository: samepagelabs/s3cmd
+  Tag: "1.6.1"
+  PullPolicy: IfNotPresent
+Schedule: "@hourly"
