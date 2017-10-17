@@ -17,4 +17,5 @@ data:
     \/\.Rhistory$
     \/id_rsa$
     \/\.bash_history$
+    \/core$
   s3_backup_bucket_name: "{{ .Values.AWS.S3.BucketName }}"
