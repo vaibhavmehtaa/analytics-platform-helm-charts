@@ -69,7 +69,7 @@ spec:
             periodSeconds: 5
 
         - name: webapp
-          image: "{{ .Values.WebApp.Image.Repository }}:{{ .Values.WebApp.Image.Tag }}"
+          image: "{{ .Values.WebApp.Image.Repository }}:{{ .Values.WebApp.Image.Tag | replace ":" "" }}"
           imagePullPolicy: {{ .Values.WebApp.Image.PullPolicy }}
           ports:
             - containerPort: {{ .Values.WebApp.Port }}

@@ -10,7 +10,7 @@ WebApp:
   Port: 80
   Image:
     Repository: ""
-    Tag: latest
+    Tag: ":latest"
     PullPolicy: Always
 AuthProxy:
   AuthenticationRequired: "true"
