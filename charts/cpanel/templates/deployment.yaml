@@ -60,6 +60,21 @@ spec:
               value: "{{ .Values.API.Environment.K8S_WORKER_ROLE_NAME }}"
             - name: LOGS_BUCKET_NAME
               value: "{{ .Values.API.Environment.LOGS_BUCKET_NAME }}"
+            - name: OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: OIDC_CLIENT_ID
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: OIDC_CLIENT_SECRET
+            - name: OIDC_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: OIDC_DOMAIN
             - name: SAML_PROVIDER
               value: "{{ .Values.API.Environment.SAML_PROVIDER }}"
             - name: SENTRY_DSN
