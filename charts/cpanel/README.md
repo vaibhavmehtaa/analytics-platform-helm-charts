@@ -30,6 +30,9 @@ The instance will be available at https://cpanelapi-$BRANCH_NAME.<ServicesDomain
 | `API.Environment.IAM_ARN_BASE` | | |
 | `API.Environment.K8S_WORKER_ROLE_NAME` | | |
 | `API.Environment.LOGS_BUCKET_NAME` | | |
+| `API.Environment.OIDC_CLIENT_ID` | OIDC Client ID | `""` |
+| `API.Environment.OIDC_CLIENT_SECRET` | OIDC Client secret | `""` |
+| `API.Environment.OIDC_DOMAIN` | OIDC domain | `""` |
 | `API.Environment.SAML_PROVIDER` | Name of SAML provider. Concatenated
 with `IAM_ARN_BASE:saml-provider/` to make an ARN | |
 | `API.Environment.SENTRY_DSN` | Sentry credentials | |
