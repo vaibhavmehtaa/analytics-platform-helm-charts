@@ -17,6 +17,7 @@ API:
     OIDC_DOMAIN: ""
     SAML_PROVIDER: ""
     SENTRY_DSN: ""
+    NFS_HOSTNAME: ""
   RDSPassword: ""
 AWS:
   DefaultRegion: "eu-west-1"

@@ -82,6 +82,11 @@ spec:
                 secretKeyRef:
                   name: "{{ template "fullname" . }}"
                   key: SENTRY_DSN
+            - name: NFS_HOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: NFS_HOSTNAME
           readinessProbe:
             httpGet:
               path: /auth/login

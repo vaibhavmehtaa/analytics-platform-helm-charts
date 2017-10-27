@@ -36,6 +36,7 @@ The instance will be available at https://cpanelapi-$BRANCH_NAME.<ServicesDomain
 | `API.Environment.SAML_PROVIDER` | Name of SAML provider. Concatenated
 with `IAM_ARN_BASE:saml-provider/` to make an ARN | |
 | `API.Environment.SENTRY_DSN` | Sentry credentials | |
+| `API.Environment.NFS_HOSTNAME` | NFS hostname | |
 | `AWS.DefaultRegion` | AWS region | `eu-west-1` |
 | `AWS.IAMRole` | IAM role assumed by the instance running the API | |
 | `postgresql.postgresDatabase` | The database name where API data will be stored | |
