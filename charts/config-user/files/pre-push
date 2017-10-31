@@ -37,9 +37,10 @@ for i in "${allowed_orgs[@]}"; do
 done
 
 echo "
-You are attempting to push a repository to an unknown remote user or GitHub
-organisation \"${org}\". Only repositories owned by the following GitHub
-organisations are permitted as push targets:
+You are attempting to push to a remote owned by \"${org}\".
+
+Only repositories owned by the following GitHub organisations are permitted as
+push targets:
 
 $(printf '%s\n' "${allowed_orgs[@]}")
 
