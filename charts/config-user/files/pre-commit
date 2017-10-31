@@ -20,5 +20,3 @@ if [ "$HAS_ERROR" != "" ]; then
     echo "Can't commit due to oversize files, please unstage before committing." >&2
     exit 1
 fi
-
-exit 0
