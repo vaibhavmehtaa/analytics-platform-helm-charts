@@ -12,7 +12,11 @@ EMAIL=$3
 
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-USER_HOME=/home/${USERNAME}
+# Make sure username doesn't contain any "../otheruser" shenanigans
+USER_HOME=$( cd /home/${USERNAME} && pwd)
+if [[ "$USER_HOME" != "/home/${USERNAME}" ]]; then
+  exit 0
+fi
 
 apt-get update && apt-get install git -y
 
