@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Prevents large files from being committed
 
