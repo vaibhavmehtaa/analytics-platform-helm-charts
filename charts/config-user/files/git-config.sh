@@ -18,8 +18,6 @@ if [[ "$USER_HOME" != "/home/${USERNAME}" ]]; then
   exit 0
 fi
 
-apt-get update && apt-get install git -y
-
 
 # ~/.gitignore
 GIT_IGNORE=$USER_HOME/.gitignore
