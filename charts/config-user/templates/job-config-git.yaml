@@ -11,30 +11,41 @@ spec:
     spec:
       containers:
       - name: ubuntu
-        image: ubuntu:16.04
+        image: quay.io/mojanalytics/ubuntu-utility:v0.1.0
+        imagePullPolicy: IfNotPresent
         env:
-          - name: EMAIL
+          - name: USERNAME
             valueFrom:
               secretKeyRef:
                 name: user-secrets
-                key: email
+                key: username
           - name: FULLNAME
             valueFrom:
               secretKeyRef:
                 name: user-secrets
                 key: fullname
-        command: ["/bin/sh", "-c", "chmod a+x /tmp/git-config.sh && /tmp/git-config.sh"]
+          - name: EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: user-secrets
+                key: email
+        command:
+          - /gitconfig/git-config.sh
+        args:
+          - "$(USERNAME)"
+          - "$(FULLNAME)"
+          - "$(EMAIL)"
         volumeMounts:
           - name: home
             mountPath: "/home/{{ .Values.Username }}"
-          - name: git-config-script
-            mountPath: /tmp
+          - name: git-config
+            mountPath: /gitconfig
       restartPolicy: Never
       volumes:
       - name: home
         persistentVolumeClaim:
           claimName: nfs-home
-      - name: git-config-script
+      - name: git-config
         configMap:
-          name: git-config-configmap
-          # mode: 0500
+          name: git-config
+          defaultMode: 500
