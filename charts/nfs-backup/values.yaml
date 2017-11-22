@@ -7,3 +7,5 @@ Image:
   Tag: "1.6.1"
   PullPolicy: IfNotPresent
 Schedule: "@hourly"
+successfulJobsHistoryLimit: 5
+failedJobsHistoryLimit: 5

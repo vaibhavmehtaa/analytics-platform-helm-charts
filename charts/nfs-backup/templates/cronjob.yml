@@ -8,6 +8,8 @@ metadata:
 spec:
   schedule: "{{ .Values.Schedule }}"
   concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}
   jobTemplate:
     spec:
       template:
