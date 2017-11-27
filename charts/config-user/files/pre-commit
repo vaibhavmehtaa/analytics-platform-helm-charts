@@ -8,15 +8,25 @@ exec 1>&2
 FILE_SIZE_LIMIT=5  # In MB
 HAS_ERROR=""
 
+exec < /dev/tty
+
 for file in $(git diff --cached --name-only | sort | uniq); do
     file_size=$(du --apparent-size -m $(pwd)/$file | awk '{print $1}')
     if [ "$file_size" -ge $FILE_SIZE_LIMIT ]; then
-        echo "$file is larger than ${FILE_SIZE_LIMIT}MB."
-        HAS_ERROR="1"
+        while true; do
+            read -p "${file} is larger than ${FILE_SIZE_LIMIT}MB. Do you wish to commit anyway? (Y/n) " yn
+            if [ "$yn" = "" ]; then
+                yn='N'
+            fi
+            case $yn in
+              [Yy] )
+                break;;
+              [Nn] )
+                echo -e "Commit aborted. Please unstage oversize file with:\n\n\tgit reset ${file}\n";
+                exit 1;;
+              * )
+                echo -e "Please answer y or n for yes or no.";;
+            esac
+        done
     fi
 done
-
-if [ "$HAS_ERROR" != "" ]; then
-    echo "Can't commit due to oversize files, please unstage before committing." >&2
-    exit 1
-fi
