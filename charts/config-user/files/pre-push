@@ -13,6 +13,7 @@
 #   <local ref> <local sha1> <remote ref> <remote sha1>
 #
 # Checks that the remote URL belongs to an approved Github organisation
+exec 1>&2
 
 allowed_orgs=(moj-analytical-services ministryofjustice)
 
@@ -25,20 +26,37 @@ org=$(
     sed -E 's|^(git@\|https://)github.com([:/])([a-zA-Z0-9_-]+)/.+$|\3|g'
 )
 
+in_allowed_orgs=false
 for i in "${allowed_orgs[@]}"; do
     if [[ "$i" == "$org" ]]; then
-        exit 0;
+        in_allowed_orgs=true;
     fi
 done
 
-echo "
+if ! $in_allowed_orgs; then
+    echo "
 You are attempting to push to a remote owned by \"${org}\".
 
 Only repositories owned by the following GitHub organisations are permitted as
-push targets:
+push targets by default:
 
 $(printf '%s\n' "${allowed_orgs[@]}")
+    "
 
-Please update your .git/config file and modify your remote.
-"
-exit 1
+    exec < /dev/tty
+    while true; do
+        read -p "Do you wish to push to remote '${org}' anyway? (Y/n) " yn
+        if [ "$yn" = "" ]; then
+            yn='N'
+        fi
+        case $yn in
+          [Yy] )
+            exit 0;;
+          [Nn] )
+            echo -e "Push aborted.";
+            exit 1;;
+          * )
+            echo -e "Please answer y or n for yes or no.";;
+        esac
+    done
+fi
