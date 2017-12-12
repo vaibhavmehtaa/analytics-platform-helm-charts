@@ -6,4 +6,6 @@ Image:
   Repository: samepagelabs/s3cmd
   Tag: "1.6.1"
   PullPolicy: IfNotPresent
-Schedule: "@hourly"
+Schedule: "@daily"
+successfulJobsHistoryLimit: 5
+failedJobsHistoryLimit: 5
