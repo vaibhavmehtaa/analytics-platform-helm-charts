@@ -87,6 +87,26 @@ spec:
                 secretKeyRef:
                   name: "{{ template "fullname" . }}"
                   key: NFS_HOSTNAME
+            - name: TOOLS_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: TOOLS_DOMAIN
+            - name: RSTUDIO_AUTH_CLIENT_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: RSTUDIO_AUTH_CLIENT_DOMAIN
+            - name: RSTUDIO_AUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: RSTUDIO_AUTH_CLIENT_ID
+            - name: RSTUDIO_AUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: RSTUDIO_AUTH_CLIENT_SECRET
           readinessProbe:
             httpGet:
               path: /auth/login

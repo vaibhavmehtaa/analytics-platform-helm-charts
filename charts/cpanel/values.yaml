@@ -18,6 +18,10 @@ API:
     SAML_PROVIDER: ""
     SENTRY_DSN: ""
     NFS_HOSTNAME: ""
+    RSTUDIO_AUTH_CLIENT_DOMAIN: ""
+    RSTUDIO_AUTH_CLIENT_ID: ""
+    RSTUDIO_AUTH_CLIENT_SECRET: ""
+    TOOLS_DOMAIN: ""
   RDSPassword: ""
 AWS:
   DefaultRegion: "eu-west-1"

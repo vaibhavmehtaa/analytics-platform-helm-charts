@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.9.0] - 2017-12-12
+### Added
+Added environment variables needed to deploy RStudio
+- Added `TOOLS_DOMAIN` variable
+- Added `RSTUDIO_AUTH_CLIENT_DOMAIN` variable
+- Added `RSTUDIO_AUTH_CLIENT_ID` variable
+- Added `RSTUDIO_AUTH_CLIENT_SECRET` variable
+
+
 ## [0.7.0] - 2017-10-27
 ### Added
 - Added `NFS_HOSTNAME` variable
