@@ -12,6 +12,7 @@ Frontend:
     AUTH0_DOMAIN: ""
     ENV: ""
     SENTRY_DSN: ""
+    TOOLS_DOMAIN: ""
 
 redis:
   persistence:
