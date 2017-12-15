@@ -50,6 +50,11 @@ spec:
                 secretKeyRef:
                   name: "{{ printf "%s-%s" .Release.Name "redis" | trunc 63 | trimSuffix "-" }}"
                   key: redis-password
+            - name: TOOLS_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: tools-domain
           readinessProbe:
             httpGet:
               path: /login?healthz
