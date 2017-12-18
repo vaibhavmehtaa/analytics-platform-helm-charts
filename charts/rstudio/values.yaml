@@ -14,8 +14,8 @@ authProxy:
     port: 3000
   image:
     repository: quay.io/mojanalytics/rstudio-auth-proxy
-    tag: "latest"
-    pullPolicy: "Always"
+    tag: "v1.2.0"
+    pullPolicy: "IfNotPresent"
   resources:
     limits:
       cpu: 100m
