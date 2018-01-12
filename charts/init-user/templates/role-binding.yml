@@ -5,7 +5,7 @@ metadata:
   namespace: user-{{ .Values.Username }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
   name: admin # Does not allow user to modify resource quotas or the namespace itself
 subjects:
   - apiGroup: rbac.authorization.k8s.io
