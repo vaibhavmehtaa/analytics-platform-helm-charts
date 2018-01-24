@@ -47,6 +47,17 @@ $ helm install charts/kube-dashboard -f chart-env-config/dev/kube-dashboard.yml 
 ```
 
 
+## kube2iam
+
+Responsible for attaching IAM roles to pods with the `iam.amazonaws.com/role`
+annotation.
+
+
+```bash
+$ helm install charts/kube2iam -f chart-env-config/dev/kube2iam.yml --namespace default --name kube2iam
+```
+
+
 ## fluentd
 
 Reads the logs and sends them to ElasticSearch/Kibana.
