@@ -83,9 +83,12 @@ $ helm install charts/kibana-auth-proxy -f chart-env-config/dev/kibana.yml --nam
 Collects metrics, monitor systems and can send alerts.
 
 ```bash
-$ helm install stable/prometheus -f chart-env-config/dev/prometheus.yml --namespace kube-system --name cluster-metrics
+$ helm repo add coreos https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/
+$ helm install coreos/prometheus-operator --name prometheus-operator --namespace monitoring
+$ helm install coreos/kube-prometheus --name kube-prometheus --set rbacEnable=true --namespace monitoring -f chart-env-config/{env}/prometheus.yml
 ```
-
+#### Note
+`prometheus.yml` file can be found [here](https://github.com/ministryofjustice/analytics-platform-config/tree/master/chart-env-config)
 
 ## grafana
 
