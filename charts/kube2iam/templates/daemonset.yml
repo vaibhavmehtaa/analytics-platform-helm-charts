@@ -11,6 +11,7 @@ spec:
       labels:
         name: {{ template "fullname" . }}
     spec:
+      serviceAccountName: kube2iam
       hostNetwork: true
       containers:
         - name: {{ .Chart.Name }}
