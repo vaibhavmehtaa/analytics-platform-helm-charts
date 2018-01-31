@@ -42,8 +42,20 @@ Kubernetes dashboard.
 
 Available at http://dashboard.services.dev.mojanalytics.xyz
 
+#### Read Only
+
+At __login__ screen select __Skip__ to view dashboard in Read-Only mode.  
+
+#### Admin 
+
+At __login__ screen select idToken and paste the appropriate idToken from your `KUBECONFIG` file. 
+
+Alternatively 
+
+Get an idToken with the [Auth0-Kube-App](https://quay.io/repository/mojanalytics/auth0-golang-kube-app)
+
 ```bash
-$ helm install charts/kube-dashboard -f chart-env-config/dev/kube-dashboard.yml --namespace default --name cluster-dashboard
+$ kubectl apply -f chart-env-config/dev/kube-dashboard.yml
 ```
 
 
