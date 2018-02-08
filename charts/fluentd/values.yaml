@@ -19,11 +19,11 @@ resources:
 fluentdconffiles:
   kubernetes.conf: |
     <match fluent.**>
-      type null
+      @type null
     </match>
 
     <source>
-      type tail
+      @type tail
       path /var/log/containers/*.log
       pos_file /var/log/fluentd-containers.log.pos
       time_format %Y-%m-%dT%H:%M:%S.%NZ
@@ -33,7 +33,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format /^(?<time>[^ ]* [^ ,]*)[^\[]*\[[^\]]*\]\[(?<severity>[^ \]]*) *\] (?<message>.*)$/
       time_format %Y-%m-%d %H:%M:%S
       path /var/log/salt/minion
@@ -42,7 +42,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format syslog
       path /var/log/startupscript.log
       pos_file /var/log/fluentd-startupscript.log.pos
@@ -50,7 +50,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format /^time="(?<time>[^)]*)" level=(?<severity>[^ ]*) msg="(?<message>[^"]*)"( err="(?<error>[^"]*)")?( statusCode=($<status_code>\d+))?/
       path /var/log/docker.log
       pos_file /var/log/fluentd-docker.log.pos
@@ -58,7 +58,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format none
       path /var/log/etcd.log
       pos_file /var/log/fluentd-etcd.log.pos
@@ -66,7 +66,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format kubernetes
       multiline_flush_interval 5s
       path /var/log/kubelet.log
@@ -75,7 +75,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format kubernetes
       multiline_flush_interval 5s
       path /var/log/kube-proxy.log
@@ -84,7 +84,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format kubernetes
       multiline_flush_interval 5s
       path /var/log/kube-apiserver.log
@@ -93,7 +93,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format kubernetes
       multiline_flush_interval 5s
       path /var/log/kube-controller-manager.log
@@ -102,7 +102,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format kubernetes
       multiline_flush_interval 5s
       path /var/log/kube-scheduler.log
@@ -111,7 +111,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format kubernetes
       multiline_flush_interval 5s
       path /var/log/rescheduler.log
@@ -120,7 +120,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format kubernetes
       multiline_flush_interval 5s
       path /var/log/glbc.log
@@ -129,7 +129,7 @@ fluentdconffiles:
     </source>
 
     <source>
-      type tail
+      @type tail
       format kubernetes
       multiline_flush_interval 5s
       path /var/log/cluster-autoscaler.log
@@ -140,18 +140,21 @@ fluentdconffiles:
     # Attempt to filter out access log entries from k8s healthchecks
     <filter kubernetes.**>
       @type grep
-      exclude1 log \?healthz
+      <exclude>
+        key log
+        pattern \?healthz
+      </exclude>
     </filter>
 
     <filter kubernetes.**>
-      type kubernetes_metadata
+      @type kubernetes_metadata
     </filter>
   fluent.conf: |
     @include kubernetes.conf
 
     <match **>
-       type elasticsearch
-       log_level info
+       @type elasticsearch
+       @log_level info
        include_tag_key true
        host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
        port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
