@@ -146,7 +146,7 @@ fluentdconffiles:
       </exclude>
     </filter>
 
-    <filter kubernetes.**>
+    <filter kubernetes.var.log.pods.**.log>
       @type kubernetes_metadata
     </filter>
   fluent.conf: |
