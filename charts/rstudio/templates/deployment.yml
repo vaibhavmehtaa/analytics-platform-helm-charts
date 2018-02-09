@@ -19,6 +19,7 @@ spec:
       annotations:
         iam.amazonaws.com/role: {{ .Values.aws.iamRole }}
     spec:
+      serviceAccountName: {{ .Values.Username }}-rstudio
       containers:
 
         - name: rstudio-auth-proxy
