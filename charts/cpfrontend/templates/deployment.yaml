@@ -26,8 +26,6 @@ spec:
               value: {{ .Values.Frontend.Protocol }}
             - name: APP_HOST
               value: "cpanel{{- if .Values.Frontend.Branch -}}-{{ .Values.Frontend.Branch }}{{- end -}}.{{ .Values.ServicesDomain }}"
-            - name: APP_PORT
-              value: "{{ .Values.Frontend.ServicePort }}"
             - name: AUTH0_CLIENT_ID
               valueFrom:
                 secretKeyRef:
