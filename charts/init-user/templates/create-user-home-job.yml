@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: create-user-home-{{ .Values.Username }}
+  namespace: default
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
 spec:
