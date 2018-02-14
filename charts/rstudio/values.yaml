@@ -4,6 +4,7 @@ aws:
   iamRole: ""
   defaultRegion: "eu-west-1"
 authProxy:
+  appProtocol: "https"
   auth0:
     clientSecret: ""
     clientId: ""

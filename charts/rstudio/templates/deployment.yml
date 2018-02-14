@@ -31,6 +31,13 @@ spec:
           env:
             - name: USER
               value: {{ .Values.username }}
+            - name: APP_PROTOCOL
+              value: {{ .Values.authProxy.appProtocol }}
+            - name: APP_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: app_host
             - name: AUTH0_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
