@@ -14,6 +14,7 @@ spec:
       annotations:
         iam.amazonaws.com/role: {{ .Values.AWS.IAMRole }}
     spec:
+      serviceAccountName: {{ template "fullname" . }}
       containers:
         - name: api
           image: "{{ .Values.API.Image.Repository }}:{{ .Values.API.Image.Tag }}"
