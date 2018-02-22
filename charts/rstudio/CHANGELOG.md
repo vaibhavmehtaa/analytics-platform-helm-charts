@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [1.4.0] - 2018-02-22
+### Changed
+- Bumped rstudio-auth-proxy docker image used to v1.4.1.
+  This version enable silent SSO for RStudio
+- Use newly added rstudio-auth-proxy's `GET /healthz` endpoint as
+  readiness probe
+
+
 ## [1.3.3] - 2018-02-16
 ### Changed
 - Bumped rstudio-auth-proxy docker image used to v1.3.0.
