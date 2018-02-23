@@ -87,7 +87,7 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
           volumeMounts:
-            - name: workspace
+            - name: nfs-home
               mountPath: /home/jovyan
           resources:
 {{ toYaml .Values.jupyter.resources | indent 12 }}
