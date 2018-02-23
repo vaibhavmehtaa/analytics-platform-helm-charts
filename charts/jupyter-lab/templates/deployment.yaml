@@ -1,0 +1,97 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ .Chart.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+      annotations:
+        iam.amazonaws.com/role: {{ .Values.aws.iamRole }}
+    spec:
+      serviceAccountName: {{ .Values.Username }}-jupyter
+      containers:
+        - name: {{ .Chart.Name }}-auth-proxy
+          image: {{ .Values.authProxy.image }}:{{ .Values.authProxy.tag }}
+          imagePullPolicy: {{ .Values.authProxy.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.authProxy.containerPort }}
+          env:
+            - name: TARGET_URL
+              value: http://localhost:{{ .Values.jupyter.containerPort }}
+            - name: AUTH0_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: auth0_domain
+            - name: AUTH0_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: auth0_client_id
+            - name: AUTH0_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: auth0_callback_url
+            - name: AUTH0_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: auth0_client_secret
+            - name: COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: cookie_secret
+            - name: NICKNAME_RE
+              value: {{ .Values.Username }}
+          readinessProbe:
+            httpGet:
+              path: /login?healthz
+              port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          resources:
+{{ toYaml .Values.authProxy.resources | indent 12 }}
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.jupyter.image }}:{{ .Values.jupyter.tag }}
+          imagePullPolicy: {{ .Values.jupyter.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.jupyter.containerPort }}
+          command:
+            - "start.sh"
+          args:
+            - "jupyter lab"
+            - "--NotebookApp.token=''"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+            - name: workspace
+              mountPath: /home/jovyan
+          resources:
+{{ toYaml .Values.jupyter.resources | indent 12 }}
+      volumes:
+        - name: nfs-home
+          persistentVolumeClaim:
+            claimName: nfs-home

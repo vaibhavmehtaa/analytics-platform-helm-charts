@@ -1,0 +1,38 @@
+Username: ""
+
+aws:
+  iamRole: ""
+  defaultRegion: "eu-west-1"
+
+service:
+  port: 80
+
+authProxy:
+  image: quay.io/mojanalytics/auth-proxy
+  tag: v0.0.2
+  imagePullPolicy: IfNotPresent
+  containerPort: 3000
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 25m
+      memory: 64Mi
+  auth0_domain: ""
+  auth0_client_id: ""
+
+jupyter:
+  image: quay.io/mojanalytics/jupyter
+  tag: latest
+  imagePullPolicy: IfNotPresent
+  containerPort: 8888
+  resources:
+    limits:
+      cpu: 1.5
+      memory: 12Gi
+    requests:
+      cpu: 200m
+      memory: 1Gi
+
+cookie_secret: ""
