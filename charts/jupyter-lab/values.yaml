@@ -24,7 +24,7 @@ authProxy:
 
 jupyter:
   image: quay.io/mojanalytics/jupyter
-  tag: latest
+  tag: v0.1.0
   imagePullPolicy: IfNotPresent
   containerPort: 8888
   resources:
