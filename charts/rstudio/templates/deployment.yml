@@ -68,6 +68,8 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: secure_cookie_key
+            - name: COOKIE_MAXAGE
+              value: "{{ .Values.authProxy.cookieMaxAge }}"
             - name: PROXY_TARGET_HOST
               value: localhost
             - name: PROXY_TARGET_PORT

@@ -30,4 +30,5 @@ details.
 
 | Parameter  | Description     | Default |
 | ---------- | --------------- | ------- |
-| `username` | Github username | ``      |
+| `username` | Github username | `""`    |
+| `authProxy.cookieMaxAge` | Seconds after which session cookies will expire | `3600` (1 hour) |
