@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [1.4.1] - 2018-02-28
+### Added
+- sets `COOKIE_MAXAGE` variable in auth proxy to expire session cookies after
+  1 hour (can be configured via `authProxy.cookieMaxAge` value which by default
+  is `3600` seconds)
+
+### Changed
+- Bumped `rstudio-auth-proxy` docker image used to `v1.4.2`.
+  This version expires session cookies (after 1 hour by default).
+
+
 ## [1.4.0] - 2018-02-22
 ### Changed
 - Bumped rstudio-auth-proxy docker image used to v1.4.1.
