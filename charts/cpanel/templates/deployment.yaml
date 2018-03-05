@@ -78,6 +78,11 @@ spec:
                 secretKeyRef:
                   name: "{{ template "fullname" . }}"
                   key: OIDC_DOMAIN
+            - name: OIDC_AUTH_EXTENSION_URL
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: OIDC_AUTH_EXTENSION_URL
             - name: SAML_PROVIDER
               value: "{{ .Values.API.Environment.SAML_PROVIDER }}"
             - name: SENTRY_DSN
