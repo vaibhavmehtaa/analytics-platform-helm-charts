@@ -34,6 +34,7 @@ The instance will be available at https://cpanelapi-$BRANCH_NAME.<ServicesDomain
 | `API.Environment.OIDC_CLIENT_ID` | OIDC Client ID | `""` |
 | `API.Environment.OIDC_CLIENT_SECRET` | OIDC Client secret | `""` |
 | `API.Environment.OIDC_DOMAIN` | OIDC domain | `""` |
+| `API.Environment.OIDC_AUTH_EXTENSION_URL` | OIDC Auth extension url | `""` |
 | `API.Environment.SAML_PROVIDER` | Name of SAML provider. Concatenated
 with `IAM_ARN_BASE:saml-provider/` to make an ARN | |
 | `API.Environment.SENTRY_DSN` | Sentry credentials | |
