@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [1.3.5] - 2018-02-14
+### Changed
+Using newly added `/healthz` endpoint instead of the `/login`.
+Since we enabled Silent SSO the `/login` endpoint is not suitable
+as a healtcheck endpoint anymore.
+
+
 ## [1.3.4] - 2018-02-14
 ### Removed
 Removed `APP_PORT` environment variable, it's causing problems with the
