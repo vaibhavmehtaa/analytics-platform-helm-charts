@@ -19,9 +19,17 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - name: {{ .Values.service.name }}
+        - name: http
           containerPort: {{ .Values.service.internalPort }}
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
         env:
+          - name: APP_HOST
+            value: {{ .Values.ingress.host }}
           - name: AUTH0_CLIENT_SECRET
             valueFrom:
               secretKeyRef:

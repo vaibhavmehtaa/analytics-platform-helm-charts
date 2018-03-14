@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: quay.io/mojanalytics/kibana-auth-proxy
-  tag: latest
+  tag: "v1.1.0"
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
@@ -12,7 +12,6 @@ auth:
   clientSecret: ""
   clientID: ""
   domain: ""
-  callbackURL: ""
   cookieSecret: ""
 kibana:
   url: "http://localhost/"
