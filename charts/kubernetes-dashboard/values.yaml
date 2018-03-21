@@ -1,0 +1,4 @@
+image: k8s.gcr.io/kubernetes-dashboard-amd64
+tag: v1.8.3
+port: 8443
+servicesDomain: ""

@@ -1,0 +1,49 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: {{ .Chart.Name }}
+  name: {{ .Chart.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        k8s-app: {{ .Chart.Name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image }}:{{ .Values.tag }}
+        ports:
+        - containerPort: {{ .Values.port }}
+          protocol: TCP
+        args:
+          - --auto-generate-certificates
+        volumeMounts:
+        - name: {{ .Chart.Name }}-certs
+          mountPath: /certs
+        - mountPath: /tmp
+          name: tmp-volume
+        livenessProbe:
+          httpGet:
+            scheme: HTTPS
+            path: /
+            port: {{ .Values.port }}
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+      volumes:
+      - name: {{ .Chart.Name }}-certs
+        secret:
+          secretName: {{ .Chart.Name }}-certs
+          defaultMode: 0600
+      - name: tmp-volume
+        emptyDir: {}
+      serviceAccountName: {{ .Chart.Name }}
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
