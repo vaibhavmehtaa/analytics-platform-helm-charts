@@ -30,8 +30,8 @@ AWS:
   DefaultRegion: "eu-west-1"
 Fluentd:
   Image:
-    Repository: fluent/fluentd-kubernetes-daemonset
-    Tag: stable-elasticsearch
+    Repository: quay.io/mojanalytics/fluentd
+    Tag: tempFork
     PullPolicy: "IfNotPresent"
 Elasticsearch:
   Scheme: "http"
