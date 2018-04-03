@@ -1,6 +1,6 @@
 image:
-  repository: fluent/fluentd-kubernetes-daemonset
-  tag: "stable-elasticsearch"
+  repository: quay.io/mojanalytics/fluentd # Temporary until we can get upstream working again See: https://github.com/ministryofjustice/analytics-platform-helm-charts/pull/127
+  tag: tempFork
   pullPolicy: Always
 elasticsearch:
   host: elasticsearch-logging
@@ -12,10 +12,10 @@ elasticsearch:
 resources:
   limits:
     cpu: 100m
-    memory: 256Mi
+    memory: 1Gi
   requests:
     cpu: 100m
-    memory: 256Mi
+    memory: 512Mi
 fluentdconffiles:
   kubernetes.conf: |
     <match fluent.**>
