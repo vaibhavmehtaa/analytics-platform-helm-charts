@@ -8,6 +8,19 @@ by running these commands from the root of the project (change `dev` to your env
 1. Install helm (see link for instructions)
 2. Run `$ helm init`
 
+# How to contribue?
+
+1. Create a branch off master
+2. Make	 the changes in the helm charts
+3. Bump the version in Chart.yaml for each modified chart
+4. [Test in dev](#how-to-test)
+5. Push the changes
+
+
+# How to test?
+
+1. Set the `kubectl` context to the dev cluster
+2. Read the Chart's README or see below for specific installation instructions
 
 ## nginx-ingress
 
