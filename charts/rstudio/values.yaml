@@ -9,7 +9,7 @@ authProxy:
     clientSecret: ""
     clientId: ""
     domain: "AUTH0_USER.eu.auth0.com"
-  cookieMaxAge: "3600" # 1 Hour in seconds
+  cookieMaxAge: "28800" # 8 hours in seconds
   cookieSecret: ""
   express:
     host: "0.0.0.0"
