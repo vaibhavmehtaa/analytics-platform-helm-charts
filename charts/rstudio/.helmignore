@@ -19,3 +19,5 @@
 .project
 .idea/
 *.tmproj
+# Don't add migrations to tarballs
+migrations/
