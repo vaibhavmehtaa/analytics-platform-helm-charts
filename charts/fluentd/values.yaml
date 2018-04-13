@@ -1,6 +1,6 @@
 image:
-  repository: quay.io/mojanalytics/fluentd # Temporary until we can get upstream working again See: https://github.com/ministryofjustice/analytics-platform-helm-charts/pull/127
-  tag: tempFork
+  repository: gcr.io/google-containers/fluentd-elasticsearch
+  tag: v2.0.4
   pullPolicy: Always
 elasticsearch:
   host: elasticsearch-logging
