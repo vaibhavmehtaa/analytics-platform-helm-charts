@@ -16,13 +16,19 @@ spec:
         kubernetes.io/cluster-service: "true"
       annotations:
         checksum/secrets: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
+        scheduler.alpha.kubernetes.io/critical-pod: ''
     spec:
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
       serviceAccountName: {{ template "fullname" . }}
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
+          - name: FLUENTD_ARGS
+            value: --no-supervisor -q
           - name:  FLUENT_ELASTICSEARCH_HOST
             valueFrom:
               secretKeyRef:
@@ -65,7 +71,10 @@ spec:
           mountPath: /var/lib/docker/containers
           readOnly: true
         - name: fluentdconf
-          mountPath: /fluentd/etc
+          mountPath: /etc/fluent/config.d
+        - name: libsystemddir
+          mountPath: /host/lib
+          readOnly: true
         resources:
 {{ toYaml .Values.resources | indent 12 }}
       terminationGracePeriodSeconds: 30
@@ -79,3 +88,7 @@ spec:
       - name: fluentdconf
         configMap:
           name: {{ template "fullname" . }}
+      - name: libsystemddir
+        hostPath:
+          path: /usr/lib64
+
