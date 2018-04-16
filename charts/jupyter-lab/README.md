@@ -9,7 +9,7 @@ To install an jupyter instance for the user specified in the Username variable (
 $ helm install charts/jupyter-lab -f chart-env-config/ENV/jupyter.yml --set Username=USERNAME --namespace user-USERNAME --name=USERNAME-jupyter
 ```
 
-The instance will be available in <https://USERNAME-jupyter.tools.ENV.mojanalytics.xyz>.
+The instance will be available at <https://USERNAME-jupyter-lab.tools.ENV.mojanalytics.xyz>.
 
 **NOTE**: Change the environment config file to deploy in a different environment
           (the URL will change accordingly)
