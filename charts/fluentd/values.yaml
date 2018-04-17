@@ -1,6 +1,6 @@
 image:
-  repository: quay.io/mojanalytics/fluentd # Temporary until we can get upstream working again See: https://github.com/ministryofjustice/analytics-platform-helm-charts/pull/127
-  tag: tempFork
+  repository: gcr.io/google-containers/fluentd-elasticsearch
+  tag: v2.0.4
   pullPolicy: Always
 elasticsearch:
   host: elasticsearch-logging
@@ -17,156 +17,215 @@ resources:
     cpu: 100m
     memory: 512Mi
 fluentdconffiles:
-  kubernetes.conf: |
-    <match fluent.**>
-      @type null
-    </match>
 
+  system.conf: |-
+    <system>
+      root_dir /tmp/fluentd-buffers/
+    </system>
+
+  containers.input.conf: |-
     <source>
+      @id fluentd-containers.log
       @type tail
       path /var/log/containers/*.log
       pos_file /var/log/fluentd-containers.log.pos
       time_format %Y-%m-%dT%H:%M:%S.%NZ
-      tag kubernetes.*
+      tag raw.kubernetes.*
       format json
       read_from_head true
     </source>
 
-    <source>
-      @type tail
-      format /^(?<time>[^ ]* [^ ,]*)[^\[]*\[[^\]]*\]\[(?<severity>[^ \]]*) *\] (?<message>.*)$/
-      time_format %Y-%m-%d %H:%M:%S
-      path /var/log/salt/minion
-      pos_file /var/log/fluentd-salt.pos
-      tag salt
-    </source>
+    <match raw.kubernetes.**>
+      @id raw.kubernetes
+      @type detect_exceptions
+      remove_tag_prefix raw
+      message log
+      stream stream
+      multiline_flush_interval 5
+      max_bytes 500000
+      max_lines 1000
+    </match>
+
+  system.input.conf: |-
 
     <source>
-      @type tail
-      format syslog
-      path /var/log/startupscript.log
-      pos_file /var/log/fluentd-startupscript.log.pos
-      tag startupscript
-    </source>
-
-    <source>
+      @id docker.log
       @type tail
       format /^time="(?<time>[^)]*)" level=(?<severity>[^ ]*) msg="(?<message>[^"]*)"( err="(?<error>[^"]*)")?( statusCode=($<status_code>\d+))?/
       path /var/log/docker.log
-      pos_file /var/log/fluentd-docker.log.pos
+      pos_file /var/log/docker.log.pos
       tag docker
     </source>
 
     <source>
+      @id etcd.log
       @type tail
+      # Not parsing this, because it doesn't have anything particularly useful to
+      # parse out of it (like severities).
       format none
       path /var/log/etcd.log
-      pos_file /var/log/fluentd-etcd.log.pos
+      pos_file /var/log/etcd.log.pos
       tag etcd
     </source>
 
     <source>
+      @id kube-proxy.log
       @type tail
-      format kubernetes
+      format multiline
       multiline_flush_interval 5s
-      path /var/log/kubelet.log
-      pos_file /var/log/fluentd-kubelet.log.pos
-      tag kubelet
-    </source>
-
-    <source>
-      @type tail
-      format kubernetes
-      multiline_flush_interval 5s
+      format_firstline /^\w\d{4}/
+      format1 /^(?<severity>\w)(?<time>\d{4} [^\s]*)\s+(?<pid>\d+)\s+(?<source>[^ \]]+)\] (?<message>.*)/
+      time_format %m%d %H:%M:%S.%N
       path /var/log/kube-proxy.log
-      pos_file /var/log/fluentd-kube-proxy.log.pos
+      pos_file /var/log/kube-proxy.log.pos
       tag kube-proxy
     </source>
 
     <source>
+      @id kube-apiserver.log
       @type tail
-      format kubernetes
+      format multiline
       multiline_flush_interval 5s
+      format_firstline /^\w\d{4}/
+      format1 /^(?<severity>\w)(?<time>\d{4} [^\s]*)\s+(?<pid>\d+)\s+(?<source>[^ \]]+)\] (?<message>.*)/
+      time_format %m%d %H:%M:%S.%N
       path /var/log/kube-apiserver.log
-      pos_file /var/log/fluentd-kube-apiserver.log.pos
+      pos_file /var/log/kube-apiserver.log.pos
       tag kube-apiserver
     </source>
 
     <source>
+      @id kube-controller-manager.log
       @type tail
-      format kubernetes
+      format multiline
       multiline_flush_interval 5s
+      format_firstline /^\w\d{4}/
+      format1 /^(?<severity>\w)(?<time>\d{4} [^\s]*)\s+(?<pid>\d+)\s+(?<source>[^ \]]+)\] (?<message>.*)/
+      time_format %m%d %H:%M:%S.%N
       path /var/log/kube-controller-manager.log
-      pos_file /var/log/fluentd-kube-controller-manager.log.pos
+      pos_file /var/log/kube-controller-manager.log.pos
       tag kube-controller-manager
     </source>
 
     <source>
+      @id kube-scheduler.log
       @type tail
-      format kubernetes
+      format multiline
       multiline_flush_interval 5s
+      format_firstline /^\w\d{4}/
+      format1 /^(?<severity>\w)(?<time>\d{4} [^\s]*)\s+(?<pid>\d+)\s+(?<source>[^ \]]+)\] (?<message>.*)/
+      time_format %m%d %H:%M:%S.%N
       path /var/log/kube-scheduler.log
-      pos_file /var/log/fluentd-kube-scheduler.log.pos
+      pos_file /var/log/kube-scheduler.log.pos
       tag kube-scheduler
     </source>
 
+    # Logs from systemd-journal for interesting services.
     <source>
-      @type tail
-      format kubernetes
-      multiline_flush_interval 5s
-      path /var/log/rescheduler.log
-      pos_file /var/log/fluentd-rescheduler.log.pos
-      tag rescheduler
+      @id journald-docker
+      @type systemd
+      filters [{ "_SYSTEMD_UNIT": "docker.service" }]
+      #pos_file /var/log/journald-docker.pos
+      <storage>
+        @type local
+        persistent true
+      </storage>
+      read_from_head true
+      tag docker
     </source>
 
     <source>
-      @type tail
-      format kubernetes
-      multiline_flush_interval 5s
-      path /var/log/glbc.log
-      pos_file /var/log/fluentd-glbc.log.pos
-      tag glbc
+      @id journald-kubelet
+      @type systemd
+      filters [{ "_SYSTEMD_UNIT": "kubelet.service" }]
+      <storage>
+        @type local
+        persistent true
+      </storage>
+      read_from_head true
+      tag kubelet
     </source>
 
     <source>
-      @type tail
-      format kubernetes
-      multiline_flush_interval 5s
-      path /var/log/cluster-autoscaler.log
-      pos_file /var/log/fluentd-cluster-autoscaler.log.pos
-      tag cluster-autoscaler
+      @id journald-node-problem-detector
+      @type systemd
+      filters [{ "_SYSTEMD_UNIT": "node-problem-detector.service" }]
+      <storage>
+        @type local
+        persistent true
+      </storage>
+      read_from_head true
+      tag node-problem-detector
     </source>
 
-    # Attempt to filter out access log entries from k8s healthchecks
+
+  forward.input.conf: |-
+    # Takes the messages sent over TCP
+    <source>
+      @type forward
+    </source>
+
+  monitoring.conf: |-
+    # Prometheus Exporter Plugin
+    # input plugin that exports metrics
+    <source>
+      @type prometheus
+    </source>
+
+    <source>
+      @type monitor_agent
+    </source>
+
+    # input plugin that collects metrics from MonitorAgent
+    <source>
+      @type prometheus_monitor
+      <labels>
+        host ${hostname}
+      </labels>
+    </source>
+
+    # input plugin that collects metrics for output plugin
+    <source>
+      @type prometheus_output_monitor
+      <labels>
+        host ${hostname}
+      </labels>
+    </source>
+
+    # input plugin that collects metrics for in_tail plugin
+    <source>
+      @type prometheus_tail_monitor
+      <labels>
+        host ${hostname}
+      </labels>
+    </source>
+
+  output.conf: |-
+    # Enriches records with Kubernetes metadata
     <filter kubernetes.**>
-      @type grep
-      <exclude>
-        key log
-        pattern \?healthz
-      </exclude>
-    </filter>
-
-    <filter kubernetes.var.log.pods.**.log>
       @type kubernetes_metadata
     </filter>
-  fluent.conf: |
-    @include kubernetes.conf
+
+    # Everything to Elasticsearch
 
     <match **>
+       @id elasticsearch
        @type elasticsearch
        @log_level info
        include_tag_key true
        host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
        port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
-       scheme "#{ENV['FLUENT_ELASTICSEARCH_SCHEME'] || 'http'}"
+       scheme "#{ENV['FLUENT_ELASTICSEARCH_SCHEME']}"
        user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
        password "#{ENV['FLUENT_ELASTICSEARCH_PASSWORD']}"
-       reload_connections "#{ENV['FLUENT_ELASTICSEARCH_RELOAD_CONNECTIONS'] || 'true'}"
-       logstash_prefix "#{ENV['FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX'] || 'logstash'}"
+       reload_connections false
+       logstash_prefix "#{ENV['FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX']}"
        logstash_format true
-       buffer_chunk_limit 2M
-       buffer_queue_limit 32
-       flush_interval 5s
+       buffer_chunk_limit 32M
+       buffer_queue_limit 4096
+       reload_on_failure true
+       request_timeout 60
+       slow_flush_log_threshold 120s
        max_retry_wait 30
        disable_retry_limit
        num_threads 8
