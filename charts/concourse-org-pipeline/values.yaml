@@ -1,0 +1,37 @@
+appDomain: ""
+
+# Auth0 client credentials for accessing the Auth0 Management API
+auth0:
+  authzAudience: ""
+  authzUrl: ""
+  clientId: ""
+  clientSecret: ""
+  domain: ""
+
+aws:
+  ecrAccessKeyId: ""
+  ecrSecretAccessKey: ""
+  region: "eu-west-1"
+
+concourse:
+  # externalURL is the same value as for the concourse helm chart
+  externalURL: ""
+  password: ""
+  team: main
+  username: ""
+
+cookieSecret: ""
+
+github:
+  org: moj-analytical-services
+  accessToken: ""
+  webhookToken: ""
+
+githubOrgResource:
+  image: quay.io/mojanalytics/github-org-resource
+  tag: v0.3.4
+
+kubernetes:
+  apiUrl: ""
+  caCert: ""
+  token: ""
