@@ -11,17 +11,16 @@ function commit_time {
 
 REPO_URL=https://ministryofjustice.github.io/analytics-platform-helm-charts/charts/
 CHARTS=$(find charts/* -type d -maxdepth 0)
-LAST_UPDATED=$(commit_time charts/index.yaml)
 UPDATED=n
 
 for CHART in $CHARTS; do
-
-    if [ $(commit_time $CHART) -gt $LAST_UPDATED ]; then
+    LAST_UPDATED_CHART_CODE=$(commit_time $CHART)
+    LAST_UPDATED_CHART_PACKAGE=$(commit_time "$CHART-*")
+    if [ $LAST_UPDATED_CHART_CODE -gt $LAST_UPDATED_CHART_PACKAGE ]; then
         echo "Packaging $CHART"
         helm package -d charts $CHART
         UPDATED=y
     fi
-
 done
 
 if [ $UPDATED == 'y' ]; then
@@ -36,5 +35,4 @@ if [ $UPDATED == 'y' ]; then
 
 else
     echo "No updates"
-
 fi
