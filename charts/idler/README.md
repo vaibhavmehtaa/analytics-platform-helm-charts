@@ -12,6 +12,14 @@ over the last minute (ie: it is active).
 ```bash
 helm install mojanalytics/idler \
   --name idler \
+  --namespace default
+```
+
+You can optionally override some of the values, e.g.
+
+```bash
+helm install mojanalytics/idler \
+  --name idler \
   --namespace default \
   --set schedule=$SCHEDULE \
   --set labelSelector=$LABEL_SELECTOR \
