@@ -9,10 +9,14 @@ rules:
     resources: ["deployments"]
     verbs: ["list", "patch"]
 
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["list"]
+
   - apiGroups: ["extensions"]
     resources: ["ingresses"]
     verbs: ["list", "patch"]
 
-  - apiGroups: ["metrics"]
+  - apiGroups: ["metrics.k8s.io"]
     resources: ["pods"]
     verbs: ["list"]
