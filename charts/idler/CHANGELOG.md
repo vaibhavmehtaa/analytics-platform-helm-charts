@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.2.4] - 2018-04-27
+### Changed
+- Using a new version of idler (`v0.2.4`) with more debug logging: https://github.com/ministryofjustice/analytics-platform-idler/pull/11
+
+### Added
+- Added `logLevel` value and setting `LOG_LEVEL` in the job
+
+
 ## [0.2.3] - 2018-04-25
 ### Fixed
 - Added permissions required to list pods and pods' metrics
