@@ -1,5 +1,5 @@
 # Docker image version
-image: quay.io/mojanalytics/idler:v0.2.3
+image: quay.io/mojanalytics/idler:v0.2.4
 
 # Schedule when to run
 #   min    hour   day    month (Sun-Sat)
@@ -13,6 +13,8 @@ schedule: "0 22 * * *"
 concurrencyPolicy: Forbid
 
 labelSelector: 'app=rstudio'
+
+logLevel: 'INFO'
 
 # percentage of a CPU in the last minute which marks an active instance
 # (which should not be idled)
