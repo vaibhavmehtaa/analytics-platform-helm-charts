@@ -31,6 +31,11 @@ githubOrgResource:
   image: quay.io/mojanalytics/github-org-resource
   tag: v0.3.4
 
+ipRanges:
+  wifi102pf: ""
+  dom1: ""
+  quantum: ""
+
 kubernetes:
   apiUrl: ""
   caCert: ""
