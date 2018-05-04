@@ -43,6 +43,7 @@ with `IAM_ARN_BASE:saml-provider/` to make an ARN | |
 | `API.Environment.RSTUDIO_AUTH_CLIENT_ID` | OAuth client ID for RStudio | `""` |
 | `API.Environment.RSTUDIO_AUTH_CLIENT_SECRET` | OAuth client secret for RStudio | `""` |
 | `API.Environment.TOOLS_ID` | Tools domain, e.g. "tools.example.com" | `""` |
+| `API.Environment.ELASTICSEARCH_CONN` | Connection string with username:pass@host | `""` |
 | `AWS.DefaultRegion` | AWS region | `eu-west-1` |
 | `AWS.IAMRole` | IAM role assumed by the instance running the API | |
 | `postgresql.postgresDatabase` | The database name where API data will be stored | |
