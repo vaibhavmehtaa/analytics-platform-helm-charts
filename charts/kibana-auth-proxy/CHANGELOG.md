@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [1.1.3] - 2018-05-09
+### Changed
+Use [`kibana-auth-proxy` v1.1.2](https://github.com/ministryofjustice/analytics-platform-kibana-auth-proxy/releases/tag/v1.1.2).
+
+This version of the proxy bumps some dependencies and fixes
+[hoek vulnerability](https://nvd.nist.gov/vuln/detail/CVE-2018-3728).
+
+
 ## [1.1.2] - 2018-03-19
 ### Fixed
 - Fixed redirect loop caused by `nginx.ingress.kubernetes.io/force-ssl-redirect`
