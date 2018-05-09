@@ -5,10 +5,12 @@ Authentication layer in front of kibana.
 
 ## Installing the Chart
 
+**NOTE**: Remove the `--dry-run` option when you're happy with the command.
+
 To install the chart:
 
 ```bash
-helm install mojanalytics/kibana-auth-proxy \
+helm install --dry-run mojanalytics/kibana-auth-proxy \
   --name cluster-logviewer \
   --namespace kube-system \
   --set auth.domain=$AUTH_DOMAIN \
@@ -20,6 +22,14 @@ helm install mojanalytics/kibana-auth-proxy \
   --set kibana.user.username=$KIBANA_USER_USERNAME \
   --set kibana.user.password=$KIBANA_USER_PASSWORD \
   --set ingress.host=$INGRESS_HOST \
+```
+
+To upgrade the existing chart:
+
+```bash
+helm upgrade --dry-run --install cluster-logviewer mojanalytics/kibana-auth-proxy \
+  --namespace kube-system \
+  -f chart-env-config/ENV/kibana.yml
 ```
 
 The proxy will be available at the host specified via `ingress.host` value.
