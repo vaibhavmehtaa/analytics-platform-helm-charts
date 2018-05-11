@@ -4,9 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [1.5.2] - 2018-05-10
+### Changed
+Use `rstudio-auth-proxy` [`v1.4.3`](https://github.com/ministryofjustice/analytics-platform-rstudio-auth-proxy/releases/tag/v1.4.3.).
+This version of the proxy updates some dependencies and fixes [CVE-2018-3728](https://nvd.nist.gov/vuln/detail/CVE-2018-3728).
+
+
 ## [1.5.1] - 2018-04-27
 ### RStudio Image
-- Modified `values.yaml` to use v1.3.2 RStudio image. 
+- Modified `values.yaml` to use v1.3.2 RStudio image.
+
 
 ## [1.5.0] - 2018-04-26
 ### New RStudio Image
