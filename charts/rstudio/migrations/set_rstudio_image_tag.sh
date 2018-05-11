@@ -17,6 +17,7 @@ while true; do
 done
 
 APP=rstudio
+IMAGE=rstudio
 TAG=v1.3.2
 POD_CONTAINER=r-studio-server
 NAMESPACES=$(kubectl get ns | grep user- | grep -v user-init-platform | cut -f1 -d' ')
@@ -25,7 +26,7 @@ NAMESPACES=$(kubectl get ns | grep user- | grep -v user-init-platform | cut -f1 
 
 for ns in $NAMESPACES; do
 
-	kubectl set image deployments -l app=$APP $POD_CONTAINER=quay.io/mojanalytics/$APP:$TAG \
+	kubectl set image deployments -l app=$APP $POD_CONTAINER=quay.io/mojanalytics/$IMAGE:$TAG \
 	--namespace $ns \
 	--dry-run=$DRY_RUN
 
