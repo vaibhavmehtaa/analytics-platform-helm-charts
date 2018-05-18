@@ -24,7 +24,7 @@ authProxy:
 
 jupyter:
   image: quay.io/mojanalytics/datascience-notebook
-  tag: v0.3.1
+  tag: v0.3.2
   imagePullPolicy: IfNotPresent
   containerPort: 8888
   resources:
