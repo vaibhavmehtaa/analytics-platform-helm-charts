@@ -20,16 +20,7 @@ jobs:
       tag: release/commit_sha
       additional_tags: release/tag
 
-  - put: cpanel-auth0-client
-
   - get: cpanel-helm-config
-
-  - task: decrypt-config
-    file: common-tasks/decrypt-gitcrypt.yaml
-    input_mapping: {encrypted: cpanel-helm-config}
-    output_mapping: {decrypted: cpanel-helm-config}
-    params:
-      SYMMETRIC_KEY: ((secrets.gitcrypt-symmetric-key))
 
   - put: cpanel-helm-release
     params:
@@ -40,8 +31,6 @@ jobs:
       - { key: API.Image.Tag, path: release/commit_sha }
       - { key: API.Branch, value: master }
       - { key: tags.branch, value: false }
-      - { key: API.Environment.OIDC_CLIENT_ID, path: cpanel-auth0-client/client_id }
-      - { key: API.Environment.OIDC_CLIENT_SECRET, path: cpanel-auth0-client/client_secret }
 
 resources:
 - name: common-tasks
@@ -56,17 +45,6 @@ resources:
     repository: analytics-platform-control-panel
     access_token: ((secrets.github-access-token))
 
-- name: cpanel-auth0-client
-  type: auth0-client
-  source:
-    app-name: cpanel-master
-    app-domain: ((secrets.services-domain))
-    client-id: ((secrets.auth0-client-id))
-    client-secret: ((secrets.auth0-client-secret))
-    domain: ((secrets.auth0-domain))
-    authz-url: ((secrets.auth0-authz-url))
-    authz-audience: ((secrets.auth0-authz-audience))
-
 - name: cpanel-docker-image
   type: docker-image
   source:
@@ -77,6 +55,7 @@ resources:
 - name: cpanel-helm-config
   type: git
   source:
+    git_crypt_key: ((secrets.gitcrypt-symmetric-key))
     uri: https://github.com/ministryofjustice/analytics-platform-config.git
 
 - name: cpanel-helm-release
@@ -93,14 +72,8 @@ resources:
       url: https://ministryofjustice.github.io/analytics-platform-helm-charts/charts
 
 resource_types:
-- name: auth0-client
-  type: docker-image
-  source:
-    repository: quay.io/mojanalytics/concourse-auth0-resource
-    tag: v0.1.1
-
 - name: helm
   type: docker-image
   source:
-    repository: linkyard/concourse-helm-resource
-    tag: 2.9.0
+    repository: quay.io/mojanalytics/concourse-helm-resource
+    tag: 0.1.9
