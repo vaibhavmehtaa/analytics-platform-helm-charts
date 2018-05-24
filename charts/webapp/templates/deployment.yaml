@@ -135,7 +135,8 @@ spec:
               mountPath: /var/log/nginx
             - name: varlogshinyserver
               mountPath: /var/log/shiny-server
-
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
       volumes:
         - name: varlognginx
           emptyDir: {}
