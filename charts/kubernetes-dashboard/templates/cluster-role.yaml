@@ -35,7 +35,7 @@ rules:
     resources: ["deployments", "ingresses", "statefulsets", "daemonsets", "replicasets"]
     verbs: ["get", "watch", "list"]
   - apiGroups: [""]
-    resources: ["pods", "services", "persistentvolumes", "persistentvolumeclaims", "endpoints", "namespaces", "limitranges", "resourcequotas", "configmaps", "nodes", "events", "replicationcontrollers"]
+    resources: ["pods", "services", "persistentvolumes", "persistentvolumeclaims", "endpoints", "namespaces", "limitranges", "resourcequotas", "nodes", "events", "replicationcontrollers"]
     verbs: ["get", "watch", "list"]
   - apiGroups: ["batch"]
     resources: ["cronjobs", "jobs"]
