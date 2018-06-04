@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.3.9] - 2018-06-04
+### Changed
+- FluentD-Elasticsearch configuration. Increased buffer params, fixed no method errors from `time_nano` tag
+
 ## [1.3.8] - 2018-05-24
 ### Changed
 - Increased memory resources from 256MB(default if unspecified) to 512MB
