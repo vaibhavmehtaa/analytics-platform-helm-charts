@@ -68,7 +68,7 @@ data:
         hostname "#{Socket.gethostname}"
       </record>
       <record>
-        time_nano ${t = Time.now; (t.to_i * 1000000000) + t.nsec}
+        time_nano ${t = Time.now; ((t.to_i * 1000000000) + t.nsec).t_s}
       </record>
     </filter>
 
@@ -82,10 +82,13 @@ data:
        user "#{ENV['FLUENT_ELASTICSEARCH_USERNAME']}"
        password "#{ENV['FLUENT_ELASTICSEARCH_PASSWORD']}"
        logstash_prefix "#{ENV['FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX'] || 'logstash'}"
+       reload_connections false
        logstash_format true
-       buffer_chunk_limit 2M
-       buffer_queue_limit 32
-       flush_interval 5s
+       buffer_chunk_limit 8M
+       buffer_queue_limit 1024
+       slow_flush_log_threshold 120s
+       reload_on_failure true
+       request_timeout 60
        max_retry_wait 30
        disable_retry_limit
        num_threads 8
