@@ -1,0 +1,20 @@
+toolsDomain: "tools.EXAMPLE.COM"
+airflow:
+  image:
+    # repository: "puckel/docker-airflow"
+    repository: "airflow/ci"
+    # tag: "1.9.0-4"
+    tag: "latest"
+    pullPolicy: "IfNotPresent"
+    port: "8080"
+  loadExamples: false
+  tasksNamespace: "airflow-tasks"
+  config:
+    core:
+      parallelism: 32
+postgres:
+  host: ""
+  port: "5432"
+  user: "airflow"
+  password: ""
+  db: "airflow"
