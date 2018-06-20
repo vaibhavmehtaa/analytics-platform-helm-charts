@@ -1,14 +1,10 @@
 toolsDomain: "tools.EXAMPLE.COM"
 airflow:
   image:
-    # repository: "puckel/docker-airflow"
-    repository: "airflow/ci"
-    # tag: "1.9.0-4"
-    tag: "latest"
+    repository: "quay.io/mojanalytics/airflow"
+    tag: "0.0.2"
     pullPolicy: "IfNotPresent"
     port: "8080"
-  loadExamples: false
-  tasksNamespace: "airflow-tasks"
   config:
     core:
       parallelism: 32

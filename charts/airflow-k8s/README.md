@@ -21,8 +21,6 @@ Airflow will be available at <https://airflow.tools.ENV.mojanalytics.xyz>.
 
 | Parameter           | Description     | Default.    |
 | ------------------- | --------------- | ----------- |
-| `airflow.loadExamples` | Load example DAGs | `false`|
-| `airflow.tasksNamespace` | Namespace where tasks' pods will be created | `"airflow-tasks"`|
 | `postgres.host`     | (required)      | `""`        |
 | `postgres.port`     |                 | `5432`      |
 | `postgres.user`     | (required)      | `"airflow"` |
