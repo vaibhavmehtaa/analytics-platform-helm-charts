@@ -134,13 +134,14 @@ Creates k8s resources related to the users homes (AWS EFS).
 $ helm install charts/init-platform -f chart-env-config/dev/init-platform.yml --namespace default --name init-platform
 ```
 
+## Concourse
 
-## jenkins
+CI/CD platform for automated jobs, builds and deployments
 
-Control panel with jobs to set up users and spawn analysys platforms.
+[Chart](https://github.com/kubernetes/charts/tree/master/stable/concourse)
 
-Available at https://jenkins.services.dev.mojanalytics.xyz
+Available at https://concourse.services.alpha.mojanalytics.xyz
 
 ```bash
-$ helm install stable/jenkins -f chart-env-config/dev/jenkins.yml --namespace default --name control-panel
+$ helm upgrade --install --recreate-pods --namespace default concourse stable/concourse --values analytics-platform-config/chart-env-config/alpha/concourse.yaml
 ```
