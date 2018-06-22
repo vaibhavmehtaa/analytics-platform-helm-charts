@@ -10,6 +10,10 @@ airflow:
   config:
     core:
       parallelism: 32
+  admin:
+    username: ""
+    password: ""
+    email: ""
 postgres:
   host: ""
   port: "5432"

@@ -39,7 +39,7 @@ spec:
           - "bash"
         args:
           - "-cx"
-          - "cd /usr/local/lib/python2.7/dist-packages/airflow && cp -R example_dags/* /root/airflow/dags/ && airflow initdb && alembic upgrade heads && (airflow create_user -u airflow -l airflow -f jon -e airflow@apache.org -r Admin -p airflow || true)"
+          - "cd /usr/local/lib/python2.7/dist-packages/airflow && cp -R example_dags/* /root/airflow/dags/ && airflow initdb && alembic upgrade heads && (airflow create_user --role Admin --username {{ .Values.airflow.admin.username }} --password {{ .Values.airflow.admin.password }} --firstname {{ .Values.airflow.admin.username }} --lastname {{ .Values.airflow.admin.username }} --email {{ .Values.airflow.admin.email }} || true)"
 
       containers:
 
@@ -106,14 +106,6 @@ spec:
             - name: {{ .Release.Name }}-storage
               mountPath: "/root/airflow/logs/"
               subPath: logs
-
-          # livenessProbe:
-          #   exec:
-          #     command:
-          #       - ls
-          #       - /root/airflow/airflow-scheduler.pid
-          #   initialDelaySeconds: 15
-          #   periodSeconds: 5
 
       volumes:
         - name: {{ .Release.Name }}-config
