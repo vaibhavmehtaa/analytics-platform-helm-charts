@@ -23,11 +23,12 @@ spec:
         image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
         imagePullPolicy: IfNotPresent
         volumeMounts:
-          - name: {{ .Release.Name }}
+          - name: {{ .Release.Name }}-config
             mountPath: /root/airflow/airflow.cfg
             subPath: airflow.cfg
-          - name: {{ .Release.Name }}-dags
+          - name: {{ .Release.Name }}-storage
             mountPath: "/root/airflow/dags/"
+            subPath: dags
         env:
           - name: SQL_ALCHEMY_CONN
             valueFrom:
@@ -60,13 +61,15 @@ spec:
                   key: sql-alchemy-conn
 
           volumeMounts:
-            - name: {{ .Release.Name }}
+            - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/airflow.cfg
               subPath: airflow.cfg
-            - name: {{ .Release.Name }}-dags
+            - name: {{ .Release.Name }}-storage
               mountPath: "/root/airflow/dags/"
-            - name: {{ .Release.Name }}-logs
+              subPath: dags
+            - name: {{ .Release.Name }}-storage
               mountPath: "/root/airflow/logs/"
+              subPath: logs
 
           livenessProbe:
             exec:
@@ -94,13 +97,15 @@ spec:
                   key: sql-alchemy-conn
 
           volumeMounts:
-            - name: {{ .Release.Name }}
+            - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/airflow.cfg
               subPath: airflow.cfg
-            - name: {{ .Release.Name }}-dags
+            - name: {{ .Release.Name }}-storage
               mountPath: "/root/airflow/dags/"
-            - name: {{ .Release.Name }}-logs
+              subPath: dags
+            - name: {{ .Release.Name }}-storage
               mountPath: "/root/airflow/logs/"
+              subPath: logs
 
           # livenessProbe:
           #   exec:
@@ -111,12 +116,9 @@ spec:
           #   periodSeconds: 5
 
       volumes:
-        - name: {{ .Release.Name }}
+        - name: {{ .Release.Name }}-config
           configMap:
             name: {{ .Release.Name }}
-        - name: {{ .Release.Name }}-dags
+        - name: {{ .Release.Name }}-storage
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-dags
-        - name: {{ .Release.Name }}-logs
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-logs
+            claimName: {{ .Release.Name }}-storage

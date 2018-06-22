@@ -146,9 +146,9 @@ data:
     smtp_mail_from = airflow@example.com
     [kubernetes]
     airflow_configmap = {{ .Release.Name }}
-    worker_container_repository = airflow
-    worker_container_tag = latest
-    worker_container_image_pull_policy = IfNotPresent
+    worker_container_repository = {{ .Values.airflow.image.repository }}
+    worker_container_tag = {{ .Values.airflow.image.tag }}
+    worker_container_image_pull_policy = {{ .Values.airflow.image.pullPolicy }}
     delete_worker_pods = True
     worker_service_account_name = {{ .Release.Name}}-tasks
     git_repo = https://github.com/apache/incubator-airflow.git
@@ -161,7 +161,7 @@ data:
     logs_volume_claim = {{ .Release.Name }}-logs
     logs_volume_subpath =
     in_cluster = True
-    namespace = airflow
+    namespace = {{ .Release.Namespace }}
     gcp_service_account_keys =
     # For cloning DAGs from git repositories into volumes: https://github.com/kubernetes/git-sync
     git_sync_container_repository = gcr.io/google-containers/git-sync-amd64
