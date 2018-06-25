@@ -36,6 +36,44 @@ spec:
     server: {{ .Values.airflow.volume.nfsServer }}
     path: /
 ---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-dags
+  annotations:
+    volume.beta.kubernetes.io/storage-class: nfs
+  labels:
+    app: {{ .Release.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    name: {{ .Release.Name }}-dags
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: {{ .Values.airflow.volume.nfsServer }}
+    path: /dags
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-logs
+  annotations:
+    volume.beta.kubernetes.io/storage-class: nfs
+  labels:
+    app: {{ .Release.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    name: {{ .Release.Name }}-logs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: {{ .Values.airflow.volume.nfsServer }}
+    path: /logs
+---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -53,6 +91,48 @@ spec:
   selector:
     matchLabels:
       name: {{ .Release.Name }}-storage
+  resources:
+    requests:
+      storage: 10Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-dags
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    name: {{ .Release.Name }}-dags
+  annotations:
+    volume.beta.kubernetes.io/storage-class: nfs
+spec:
+  accessModes:
+    - ReadWriteMany
+  selector:
+    matchLabels:
+      name: {{ .Release.Name }}-dags
+  resources:
+    requests:
+      storage: 10Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-logs
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    name: {{ .Release.Name }}-logs
+  annotations:
+    volume.beta.kubernetes.io/storage-class: nfs
+spec:
+  accessModes:
+    - ReadWriteMany
+  selector:
+    matchLabels:
+      name: {{ .Release.Name }}-logs
   resources:
     requests:
       storage: 10Gi
