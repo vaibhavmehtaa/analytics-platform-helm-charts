@@ -2,11 +2,16 @@ toolsDomain: "tools.EXAMPLE.COM"
 airflow:
   image:
     repository: "quay.io/mojanalytics/airflow"
-    tag: "0.0.2"
+    tag: "0.0.3"
     pullPolicy: "IfNotPresent"
     port: "8080"
-  volume:
-    nfsServer: ""
+  volumes:
+    dags:
+      nfsServer: ""
+      path: "/dags"
+    logs:
+      nfsServer: ""
+      path: "/logs"
   config:
     core:
       parallelism: 32

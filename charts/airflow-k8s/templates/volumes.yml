@@ -16,26 +16,6 @@
 #  under the License.                                           *
 
 # The backing volume can be anything you want, it just needs to be `ReadWriteOnce`
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: {{ .Release.Name }}-storage
-  annotations:
-    volume.beta.kubernetes.io/storage-class: nfs
-  labels:
-    app: {{ .Release.Name }}
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-    name: {{ .Release.Name }}-storage
-spec:
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: {{ .Values.airflow.volume.nfsServer }}
-    path: /
----
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -52,8 +32,8 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: {{ .Values.airflow.volume.nfsServer }}
-    path: /dags
+    server: {{ .Values.airflow.volumes.dags.nfsServer }}
+    path:  {{ .Values.airflow.volumes.dags.path }}
 ---
 kind: PersistentVolume
 apiVersion: v1
@@ -71,29 +51,8 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: {{ .Values.airflow.volume.nfsServer }}
-    path: /logs
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: {{ .Release.Name }}-storage
-  namespace: {{ .Release.Namespace }}
-  labels:
-    app: {{ .Release.Name }}
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-    name: {{ .Release.Name }}-storage
-  annotations:
-    volume.beta.kubernetes.io/storage-class: nfs
-spec:
-  accessModes:
-    - ReadWriteMany
-  selector:
-    matchLabels:
-      name: {{ .Release.Name }}-storage
-  resources:
-    requests:
-      storage: 10Gi
+    server: {{ .Values.airflow.volumes.logs.nfsServer }}
+    path: {{ .Values.airflow.volumes.logs.path }}
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1

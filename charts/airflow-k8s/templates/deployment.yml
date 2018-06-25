@@ -26,9 +26,8 @@ spec:
           - name: {{ .Release.Name }}-config
             mountPath: /root/airflow/airflow.cfg
             subPath: airflow.cfg
-          - name: {{ .Release.Name }}-storage
+          - name: {{ .Release.Name }}-dags
             mountPath: "/root/airflow/dags/"
-            subPath: dags
         env:
           - name: SQL_ALCHEMY_CONN
             valueFrom:
@@ -64,13 +63,10 @@ spec:
             - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/airflow.cfg
               subPath: airflow.cfg
-            - name: {{ .Release.Name }}-storage
+            - name: {{ .Release.Name }}-dags
               mountPath: "/root/airflow/dags/"
-              subPath: dags
-            - name: {{ .Release.Name }}-storage
+            - name: {{ .Release.Name }}-logs
               mountPath: "/root/airflow/logs/"
-              subPath: logs
-
           livenessProbe:
             exec:
               command:
@@ -100,17 +96,17 @@ spec:
             - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/airflow.cfg
               subPath: airflow.cfg
-            - name: {{ .Release.Name }}-storage
+            - name: {{ .Release.Name }}-dags
               mountPath: "/root/airflow/dags/"
-              subPath: dags
-            - name: {{ .Release.Name }}-storage
+            - name: {{ .Release.Name }}-logs
               mountPath: "/root/airflow/logs/"
-              subPath: logs
-
       volumes:
         - name: {{ .Release.Name }}-config
           configMap:
             name: {{ .Release.Name }}
-        - name: {{ .Release.Name }}-storage
+        - name: {{ .Release.Name }}-dags
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-storage
+            claimName: {{ .Release.Name }}-dags
+        - name: {{ .Release.Name }}-logs
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-logs
