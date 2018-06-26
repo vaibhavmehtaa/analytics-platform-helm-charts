@@ -38,14 +38,14 @@ spec:
           - "bash"
         args:
           - "-cx"
-          - "cd /usr/local/lib/python2.7/dist-packages/airflow && cp -R example_dags/* /root/airflow/dags/ && airflow initdb && alembic upgrade heads && (airflow create_user --role Admin --username {{ .Values.airflow.admin.username }} --password {{ .Values.airflow.admin.password }} --firstname {{ .Values.airflow.admin.username }} --lastname {{ .Values.airflow.admin.username }} --email {{ .Values.airflow.admin.email }} || true)"
+          - "cd /usr/local/lib/python3.6/site-packages/airflow && cp -R example_dags/* /root/airflow/dags/ && airflow initdb && alembic upgrade heads && (airflow create_user --role Admin --username {{ .Values.airflow.admin.username }} --password {{ .Values.airflow.admin.password }} --firstname {{ .Values.airflow.admin.username }} --lastname {{ .Values.airflow.admin.username }} --email {{ .Values.airflow.admin.email }} || true)"
 
       containers:
 
         - name: webserver
           image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
           command:
-            - "/bootstrap.sh"
+            - "airflow"
           args:
             - "webserver"
           imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
@@ -78,7 +78,7 @@ spec:
         - name: scheduler
           image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
           command:
-            - "/bootstrap.sh"
+            - "airflow"
           args:
             - "scheduler"
           imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
