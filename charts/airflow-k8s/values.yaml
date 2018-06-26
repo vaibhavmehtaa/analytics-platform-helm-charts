@@ -1,8 +1,17 @@
 toolsDomain: "tools.EXAMPLE.COM"
 airflow:
+  auth:
+    type: "AUTH_DB"
+    oauth:
+      consumer_secret: ""
+      consumer_key: ""
+      token_key: ""
+      base_url: ""
+      authorize_url: ""
+      access_token_url: ""
   image:
     repository: "quay.io/mojanalytics/airflow"
-    tag: "0.0.3"
+    tag: "0.0.5"
     pullPolicy: "IfNotPresent"
     port: "8080"
   volumes:

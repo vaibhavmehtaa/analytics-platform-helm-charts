@@ -63,6 +63,9 @@ spec:
             - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/airflow.cfg
               subPath: airflow.cfg
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/webserver_config.py
+              subPath: webserver_config.py
             - name: {{ .Release.Name }}-dags
               mountPath: "/root/airflow/dags/"
             - name: {{ .Release.Name }}-logs
