@@ -30,7 +30,7 @@ data:
     logging_level = INFO
     executor = KubernetesExecutor
     parallelism = {{ .Values.airflow.config.core.parallelism }}
-    load_examples = True
+    load_examples = False
     plugins_folder = /root/airflow/plugins
     sql_alchemy_conn = $SQL_ALCHEMY_CONN
     [scheduler]
@@ -164,9 +164,6 @@ data:
     namespace = {{ .Release.Namespace }}
     gcp_service_account_keys =
     # For cloning DAGs from git repositories into volumes: https://github.com/kubernetes/git-sync
-    git_sync_container_repository = gcr.io/google-containers/git-sync-amd64
-    git_sync_container_tag = v2.0.5
-    git_sync_init_container_name = git-sync-clone
     [kubernetes_secrets]
     SQL_ALCHEMY_CONN = {{ .Release.Name }}=sql-alchemy-conn
     [hive]

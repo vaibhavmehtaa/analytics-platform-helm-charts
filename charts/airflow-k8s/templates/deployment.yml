@@ -17,7 +17,6 @@ spec:
         app: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ .Release.Name }}
-
       initContainers:
       - name: "init"
         image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
@@ -38,7 +37,20 @@ spec:
           - "bash"
         args:
           - "-cx"
-          - "cd /usr/local/lib/python3.6/site-packages/airflow && cp -R example_dags/* /root/airflow/dags/ && airflow initdb && alembic upgrade heads && (airflow create_user --role Admin --username {{ .Values.airflow.admin.username }} --password {{ .Values.airflow.admin.password }} --firstname {{ .Values.airflow.admin.username }} --lastname {{ .Values.airflow.admin.username }} --email {{ .Values.airflow.admin.email }} || true)"
+          - >
+              cd /usr/local/lib/python3.6/site-packages/airflow &&
+              curl -L {{ .Values.airflow.git.dagRepo }} | tar xzf - -C /tmp &&
+              cp -R /tmp/analytics-platform-airflow-example-dags-master/* /root/airflow/dags &&
+              airflow initdb && airflow upgradedb &&
+              (
+              airflow create_user
+              --role Admin
+              --username {{ .Values.airflow.admin.username }}
+              --password {{ .Values.airflow.admin.password }}
+              --firstname {{ .Values.airflow.admin.username }}
+              --lastname {{ .Values.airflow.admin.username }}
+              --email {{ .Values.airflow.admin.email }} || true
+              )
 
       containers:
 

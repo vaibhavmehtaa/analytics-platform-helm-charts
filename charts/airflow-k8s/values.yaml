@@ -1,5 +1,7 @@
 toolsDomain: "tools.EXAMPLE.COM"
 airflow:
+  git:
+    dagRepo: "https://github.com/ministryofjustice/analytics-platform-airflow-example-dags/archive/master.tar.gz"
   auth:
     type: "AUTH_DB"
     oauth:
