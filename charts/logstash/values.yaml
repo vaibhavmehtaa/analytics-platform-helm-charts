@@ -1,0 +1,31 @@
+
+replicaCount: 1
+
+image:
+  repository: docker.elastic.co/logstash/logstash
+  tag: 5.6.10
+  pullPolicy: IfNotPresent
+  port: 8080
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    memory: 512Mi
+
+service:
+  port: 80
+
+ingress:
+  enabled: true
+
+config:
+
+  logstash.yml: |-
+    http.host: "0.0.0.0"
+    path.config: /usr/share/logstash/pipeline
+    xpack.monitoring.elasticsearch.url: '${ELASTICSEARCH_URL}'
+    xpack.monitoring.elasticsearch.username: '${ELASTICSEARCH_USER}'
+    xpack.monitoring.elasticsearch.password: '${ELASTICSEARCH_PASSWORD}'
