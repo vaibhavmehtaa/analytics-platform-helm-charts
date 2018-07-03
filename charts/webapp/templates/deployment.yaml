@@ -16,6 +16,7 @@ spec:
         checksum/secrets: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
         iam.amazonaws.com/role: {{ .Values.AWS.IAMRole }}
     spec:
+      serviceAccountName: {{ template "fullname" . }}
       containers:
         - name: auth-proxy
           image: "{{ .Values.AuthProxy.Image.Repository }}:{{ .Values.AuthProxy.Image.Tag }}"
