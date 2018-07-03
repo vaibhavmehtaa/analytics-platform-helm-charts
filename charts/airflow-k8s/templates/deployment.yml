@@ -39,8 +39,6 @@ spec:
           - "-cx"
           - >
               cd /usr/local/lib/python3.6/site-packages/airflow &&
-              curl -L {{ .Values.airflow.git.dagRepo }} | tar xzf - -C /tmp &&
-              cp -R /tmp/analytics-platform-airflow-example-dags-master/* /root/airflow/dags &&
               airflow initdb && airflow upgradedb &&
               (
               airflow create_user

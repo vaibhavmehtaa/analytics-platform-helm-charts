@@ -1,7 +1,5 @@
 toolsDomain: "tools.EXAMPLE.COM"
 airflow:
-  git:
-    dagRepo: "https://github.com/ministryofjustice/analytics-platform-airflow-example-dags/archive/master.tar.gz"
   auth:
     type: "AUTH_DB"
     oauth:
@@ -30,6 +28,13 @@ airflow:
     username: ""
     password: ""
     email: ""
+gitSync:
+  interval: "180"
+  repository: "https://github.com/ministryofjustice/analytics-platform-airflow-example-dags"
+  branch: "master"
+  image:
+    repository: "openweb/git-sync"
+    tag: "0.0.1"
 postgres:
   host: ""
   port: "5432"
