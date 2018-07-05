@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [1.5.3] - 2018-06-05
+### Changed
+- Adjusted memory resource limits and requests from `request: 1GB => 5GB` & `limit: 12GB => 20GB`
+
 ## [1.5.2] - 2018-05-10
 ### Changed
 Use `rstudio-auth-proxy` [`v1.4.3`](https://github.com/ministryofjustice/analytics-platform-rstudio-auth-proxy/releases/tag/v1.4.3.).
