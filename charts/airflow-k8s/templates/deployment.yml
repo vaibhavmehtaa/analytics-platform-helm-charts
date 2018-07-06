@@ -5,6 +5,8 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: {{ .Release.Name }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yml") . | sha256sum }}
 spec:
   selector:
     matchLabels:
@@ -28,11 +30,7 @@ spec:
           - name: {{ .Release.Name }}-dags
             mountPath: "/root/airflow/dags/"
         env:
-          - name: SQL_ALCHEMY_CONN
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Release.Name }}
-                key: sql-alchemy-conn
+            {{ include "env" . | indent 12 }}
         command:
           - "bash"
         args:
@@ -63,12 +61,7 @@ spec:
             - name: http
               containerPort: {{ .Values.airflow.image.port }}
           env:
-            - name: SQL_ALCHEMY_CONN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}
-                  key: sql-alchemy-conn
-
+            {{ include "env" . | indent 12 }}
           volumeMounts:
             - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/airflow.cfg
@@ -76,6 +69,9 @@ spec:
             - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/webserver_config.py
               subPath: webserver_config.py
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/client_secret.json
+              subPath: client_secret.json
             - name: {{ .Release.Name }}-dags
               mountPath: "/root/airflow/dags/"
             - name: {{ .Release.Name }}-logs
@@ -99,12 +95,7 @@ spec:
             - name: http
               containerPort: {{ .Values.airflow.image.port }}
           env:
-            - name: SQL_ALCHEMY_CONN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}
-                  key: sql-alchemy-conn
-
+            {{ include "env" . | indent 12 }}
           volumeMounts:
             - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/airflow.cfg

@@ -33,6 +33,8 @@ data:
     load_examples = False
     plugins_folder = /root/airflow/plugins
     sql_alchemy_conn = $SQL_ALCHEMY_CONN
+    fernet_key = $FERNET_KEY
+
     [scheduler]
     dag_dir_list_interval = 300
     child_process_log_directory = /root/airflow/logs/scheduler
@@ -91,7 +93,7 @@ data:
     # Number of seconds to wait before refreshing a batch of workers.
     worker_refresh_interval = 30
     # Secret key used to run your flask app
-    secret_key = temporary_key
+    secret_key = $SECRET_KEY
     # Number of workers to run the Gunicorn web server
     workers = 4
     # The worker class gunicorn should use. Choices include
@@ -166,6 +168,7 @@ data:
     # For cloning DAGs from git repositories into volumes: https://github.com/kubernetes/git-sync
     [kubernetes_secrets]
     SQL_ALCHEMY_CONN = {{ .Release.Name }}=sql-alchemy-conn
+    FERNET_KEY = {{ .Release.Name }}=fernet-key
     [hive]
     # Default mapreduce queue for HiveOperator tasks
     default_hive_mapred_queue =
@@ -299,7 +302,10 @@ data:
     from airflow import configuration as conf
     # from flask_appbuilder.security.manager import AUTH_LDAP
     from flask_appbuilder.security.manager import AUTH_OAUTH
+    from flask_appbuilder.security.manager import AUTH_OID
+
     from flask_appbuilder.security.manager import AUTH_DB
+    from fab_oidc.security import OIDCSecurityManager
 
     # from flask_appbuilder.security.manager import AUTH_OID
     basedir = os.path.abspath(os.path.dirname(__file__))
@@ -324,23 +330,37 @@ data:
     # The default user self registration role
     AUTH_USER_REGISTRATION_ROLE = "Admin"
 
-    # When using LDAP Auth, setup the ldap server
-    # AUTH_LDAP_SERVER = "ldap://ldapserver.new"
+    OIDC_CLIENT_SECRETS = '/root/airflow/client_secret.json'
+    SECURITY_MANAGER_CLASS = OIDCSecurityManager
+    OIDC_USER_INFO_ENABLED = False
+    OIDC_SCOPES = ['openid', 'email', 'profile']
+    OIDC_LOGOUT_URI = '{{ .Values.airflow.auth.oauth.base_url }}' + 'v2/logout/?client_id={{ .Values.airflow.auth.oauth.consumer_key }}&returnTo='
 
-    # When using OAuth Auth, uncomment to setup provider(s) info
-    OAUTH_PROVIDERS = [{
-      'name':'google',
-        'token_key':'access_token',
-        'icon':'fa-github',
-            'remote_app': {
-                'base_url':'{{ .Values.airflow.auth.oauth.base_url }}',
-                'request_token_params':{
-                    'scope': 'openid email profile'
-                },
-                'access_token_url': '{{ .Values.airflow.auth.oauth.access_token_url }}',
-                'authorize_url': '{{ .Values.airflow.auth.oauth.authorize_url }}',
-                'request_token_url': None,
-                'consumer_key': '{{ .Values.airflow.auth.oauth.consumer_key }}',
-                'consumer_secret': '{{ .Values.airflow.auth.oauth.consumer_secret }}',
-            }
-    }]
+
+
+    OPENID_PROVIDERS = [
+       { 'name': 'Yahoo', 'url': 'https://me.yahoo.com' },
+       { 'name': 'AOL', 'url': 'http://openid.aol.com/<username>' },
+       { 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>' },
+       { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' }]
+
+    PREFERRED_URL_SCHEME = 'https'
+
+    SESSION_COOKIE_SECURE = True
+
+
+  client_secret.json: |
+    {
+        "web": {
+            "issuer": "{{ .Values.airflow.auth.oauth.baseUrl }}",
+            "auth_uri": "{{ .Values.airflow.auth.oauth.authorizeUrl }}",
+            "client_id": "{{ .Values.airflow.auth.oauth.consumerKey }}",
+            "client_secret": "{{ .Values.airflow.auth.oauth.consumerSecret }}",
+            "redirect_uris": [
+                "https://{{ .Release.Name }}.{{ .Values.toolsDomain }}/oidc_callback"
+
+            ],
+            "token_uri": "{{ .Values.airflow.auth.oauth.accessTokenUrl }}",
+            "userinfo_uri": "{{ .Values.airflow.auth.oauth.baseUrl }}userinfo"
+          }
+    }

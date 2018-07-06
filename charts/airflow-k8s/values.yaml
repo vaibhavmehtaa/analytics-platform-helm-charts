@@ -1,17 +1,19 @@
 toolsDomain: "tools.EXAMPLE.COM"
 airflow:
+  secretKey: ""
+  fernetKey: ""
   auth:
     type: "AUTH_DB"
     oauth:
-      consumer_secret: ""
-      consumer_key: ""
-      token_key: ""
-      base_url: ""
-      authorize_url: ""
-      access_token_url: ""
+      consumerSecret: ""
+      consumerKey: ""
+      tokenKey: ""
+      baseUrl: ""
+      authorizeUrl: ""
+      accessTokenUrl: ""
   image:
     repository: "quay.io/mojanalytics/airflow"
-    tag: "0.0.5"
+    tag: "0.0.6"
     pullPolicy: "IfNotPresent"
     port: "8080"
   volumes:
