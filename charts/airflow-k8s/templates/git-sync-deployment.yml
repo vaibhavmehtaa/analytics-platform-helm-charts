@@ -19,7 +19,7 @@ spec:
 
       initContainers:
         - name: "delete-files"
-          image: alpine
+          image: alpine:3.8
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: {{ .Release.Name }}-dags
