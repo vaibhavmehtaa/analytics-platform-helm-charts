@@ -30,7 +30,7 @@ rstudio:
   port: "8787"
   image:
     repository: quay.io/mojanalytics/rstudio
-    tag: "v1.3.2"
+    tag: "3.4.2-5"
     pullPolicy: "Always"
   resources:
     limits:
