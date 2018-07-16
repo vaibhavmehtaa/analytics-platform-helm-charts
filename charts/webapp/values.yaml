@@ -26,8 +26,8 @@ AWS:
   IAMRole: ""
 Fluentd:
   Image:
-    Repository: quay.io/mojanalytics/fluentd
-    Tag: tempFork
+    Repository: gcr.io/google-containers/fluentd-elasticsearch
+    Tag: v2.0.4
     PullPolicy: "IfNotPresent"
 Elasticsearch:
   Scheme: "http"
