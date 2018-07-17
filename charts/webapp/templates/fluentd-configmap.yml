@@ -81,7 +81,7 @@ data:
        scheme "#{ENV['FLUENT_ELASTICSEARCH_SCHEME']}"
        host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
        port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
-       user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
+       user "#{ENV['FLUENT_ELASTICSEARCH_USERNAME']}"
        password "#{ENV['FLUENT_ELASTICSEARCH_PASSWORD']}"
        logstash_prefix "#{ENV['FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX'] || 'logstash'}"
        reload_connections false
@@ -89,7 +89,7 @@ data:
        buffer_chunk_limit 2M
        buffer_queue_limit 1024
        slow_flush_log_threshold 120s
-       reload_on_failure true
+       reload_on_failure false
        request_timeout 60
        max_retry_wait 30
        disable_retry_limit

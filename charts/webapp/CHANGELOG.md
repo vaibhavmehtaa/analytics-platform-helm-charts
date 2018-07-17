@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.3.13] - 2018-07-17
+### Changed
+- Mismatched `FLUENT_ELASTICSEARCH_USERNAME` env var in configmap
+- Set reload on failure to __false__.  See: https://github.com/uken/fluent-plugin-elasticsearch/issues/257#issuecomment-348946393
+
 ## [1.3.12] - 2018-07-16
 ### Changed
 - After upgrading Elasticsearch. The webapp logs stopped working after a few days.  
