@@ -1,0 +1,45 @@
+toolsDomain: "tools.EXAMPLE.COM"
+airflow:
+  secretKey: ""
+  fernetKey: ""
+  auth:
+    type: "AUTH_DB"
+    oauth:
+      consumerSecret: ""
+      consumerKey: ""
+      tokenKey: ""
+      baseUrl: ""
+      authorizeUrl: ""
+      accessTokenUrl: ""
+  image:
+    repository: "quay.io/mojanalytics/airflow"
+    tag: "0.0.6"
+    pullPolicy: "IfNotPresent"
+    port: "8080"
+  volumes:
+    dags:
+      nfsServer: ""
+      path: "/dags"
+    logs:
+      nfsServer: ""
+      path: "/logs"
+  config:
+    core:
+      parallelism: 32
+  admin:
+    username: ""
+    password: ""
+    email: ""
+gitSync:
+  interval: "180"
+  repository: "https://github.com/ministryofjustice/analytics-platform-airflow-example-dags"
+  branch: "master"
+  image:
+    repository: "openweb/git-sync"
+    tag: "0.0.1"
+postgres:
+  host: ""
+  port: "5432"
+  user: "airflow"
+  password: ""
+  db: "airflow"

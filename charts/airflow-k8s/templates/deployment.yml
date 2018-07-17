@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: {{ .Release.Name }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yml") . | sha256sum }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ .Release.Name }}
+      initContainers:
+      - name: "init"
+        image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - name: {{ .Release.Name }}-config
+            mountPath: /root/airflow/airflow.cfg
+            subPath: airflow.cfg
+          - name: {{ .Release.Name }}-dags
+            mountPath: "/root/airflow/dags/"
+        env:
+            {{ include "env" . | indent 12 }}
+        command:
+          - "bash"
+        args:
+          - "-cx"
+          - >
+              cd /usr/local/lib/python3.6/site-packages/airflow &&
+              airflow initdb && airflow upgradedb &&
+              (
+              airflow create_user
+              --role Admin
+              --username {{ .Values.airflow.admin.username }}
+              --password {{ .Values.airflow.admin.password }}
+              --firstname {{ .Values.airflow.admin.username }}
+              --lastname {{ .Values.airflow.admin.username }}
+              --email {{ .Values.airflow.admin.email }} || true
+              )
+
+      containers:
+
+        - name: webserver
+          image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
+          command:
+            - "airflow"
+          args:
+            - "webserver"
+          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.airflow.image.port }}
+          env:
+            {{ include "env" . | indent 12 }}
+          volumeMounts:
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/airflow.cfg
+              subPath: airflow.cfg
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/webserver_config.py
+              subPath: webserver_config.py
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/client_secret.json
+              subPath: client_secret.json
+            - name: {{ .Release.Name }}-dags
+              mountPath: "/root/airflow/dags/"
+            - name: {{ .Release.Name }}-logs
+              mountPath: "/root/airflow/logs/"
+          livenessProbe:
+            exec:
+              command:
+                - ls
+                - /root/airflow/airflow-webserver.pid
+            initialDelaySeconds: 15
+            periodSeconds: 5
+
+        - name: scheduler
+          image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
+          command:
+            - "airflow"
+          args:
+            - "scheduler"
+          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.airflow.image.port }}
+          env:
+            {{ include "env" . | indent 12 }}
+          volumeMounts:
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/airflow.cfg
+              subPath: airflow.cfg
+            - name: {{ .Release.Name }}-dags
+              mountPath: "/root/airflow/dags/"
+            - name: {{ .Release.Name }}-logs
+              mountPath: "/root/airflow/logs/"
+      volumes:
+        - name: {{ .Release.Name }}-config
+          configMap:
+            name: {{ .Release.Name }}
+        - name: {{ .Release.Name }}-dags
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-dags
+        - name: {{ .Release.Name }}-logs
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-logs

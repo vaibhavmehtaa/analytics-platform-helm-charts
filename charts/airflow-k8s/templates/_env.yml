@@ -1,0 +1,20 @@
+{{/*
+Shared env for workers
+*/}}
+{{- define "env" }}
+- name: SQL_ALCHEMY_CONN
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}
+      key: sql-alchemy-conn
+- name: FERNET_KEY
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}
+      key: fernet-key
+- name: SECRET_KEY
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Release.Name }}
+      key: secret-key
+{{- end }}
