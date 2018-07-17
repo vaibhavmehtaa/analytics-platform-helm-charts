@@ -129,13 +129,19 @@ spec:
                 configMapKeyRef:
                   name: {{ template "fullname" . }}-fluentd
                   key: logstash_prefix
+            - name: FLUENTD_ARGS
+              value: "-c /etc/fluent/fluent.conf --no-supervisor"
           volumeMounts:
             - name: fluentd-config
-              mountPath: /fluentd/etc
+              mountPath: /etc/fluent/fluent.conf
+              subPath: fluent.conf
             - name: varlognginx
               mountPath: /var/log/nginx
             - name: varlogshinyserver
               mountPath: /var/log/shiny-server
+            - name: libsystemddir
+              mountPath: /host/lib
+              readOnly: true
           resources:
 {{ toYaml .Values.resources | indent 12 }}
       volumes:
@@ -149,3 +155,6 @@ spec:
             items:
             - key: fluent.conf
               path: fluent.conf
+        - name: libsystemddir
+          hostPath:
+            path: /usr/lib64

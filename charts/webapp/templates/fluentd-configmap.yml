@@ -68,23 +68,25 @@ data:
         hostname "#{Socket.gethostname}"
       </record>
       <record>
-        time_nano ${t = Time.now; ((t.to_i * 1000000000) + t.nsec).t_s}
+        time_nano ${t = Time.now; ((t.to_i * 1000000000) + t.nsec).to_s}
       </record>
     </filter>
 
     <match **>
+       @id elasticsearch
        @type elasticsearch
-       log_level info
+       @log_level info
+       type_name time
        include_tag_key true
        scheme "#{ENV['FLUENT_ELASTICSEARCH_SCHEME']}"
        host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
        port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
-       user "#{ENV['FLUENT_ELASTICSEARCH_USERNAME']}"
+       user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
        password "#{ENV['FLUENT_ELASTICSEARCH_PASSWORD']}"
        logstash_prefix "#{ENV['FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX'] || 'logstash'}"
        reload_connections false
        logstash_format true
-       buffer_chunk_limit 8M
+       buffer_chunk_limit 2M
        buffer_queue_limit 1024
        slow_flush_log_threshold 120s
        reload_on_failure true

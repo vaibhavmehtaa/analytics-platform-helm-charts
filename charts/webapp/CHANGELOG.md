@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.3.12] - 2018-07-16
+### Changed
+- After upgrading Elasticsearch. The webapp logs stopped working after a few days.  
+  This was due to deprecations with mappings and Elasticsearch 6 not supporting multiple mapping per index. 
+  See: https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking-changes-6.0.html
+  Setting `type_name` to resolve this as fluentd-elasticsearch-plugin sets two mappings.
+- Switched to using the more stable Kubernetes tested fluentd image. Made config changes to deployment accordingly.
+- Fixed "No Method" error on `time_nano` filter
+
 ## [1.3.11] - 2018-07-16
 ### Changed
 - Use [auth-proxy `v0.1.3`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v0.1.3) which upgrades login-passwordless page to use `lock` library instead of `lock-passwordless`
