@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2018-07-17
+## Jupyter Tag
+-Updating the image tag from 0.3.2 to 0.3.3
+
 ## [0.1.3] - 2018-5-18
 ## Package Home
 - Profile failed to auto load alias. Amended `pip-user-home.sh` to create `.bash_aliases` file which `.bashrc` checks exists
