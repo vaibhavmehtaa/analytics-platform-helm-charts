@@ -38,3 +38,4 @@ Airflow will be available at <https://airflow.tools.ENV.mojanalytics.xyz>.
 | `postgres.user`     | (required)      | `"airflow"` |
 | `postgres.password` | (required)      | `""`        |
 | `postgres.db`       | (required)      | `"airflow"` |
+| `redis.password`    | password for redis-server (required)      | `"airflow"` |

@@ -20,6 +20,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: {{ .Release.Name }}-dags
+  namespace: {{ .Release.Namespace }}
   annotations:
     volume.beta.kubernetes.io/storage-class: nfs
   labels:
@@ -39,6 +40,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: {{ .Release.Name }}-logs
+  namespace: {{ .Release.Namespace }}
   annotations:
     volume.beta.kubernetes.io/storage-class: nfs
   labels:

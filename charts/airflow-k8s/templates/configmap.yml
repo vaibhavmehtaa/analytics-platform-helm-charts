@@ -18,6 +18,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: {{ .Release.Name }}
@@ -299,13 +300,15 @@ data:
     elasticsearch_host =
   webserver_config.py: |
     import os
+    from werkzeug.contrib.cache import RedisCache
     from airflow import configuration as conf
     # from flask_appbuilder.security.manager import AUTH_LDAP
     from flask_appbuilder.security.manager import AUTH_OAUTH
     from flask_appbuilder.security.manager import AUTH_OID
 
     from flask_appbuilder.security.manager import AUTH_DB
-    from fab_oidc.security import OIDCSecurityManager
+    from fab_oidc.security import AirflowOIDCSecurityManager
+    from fab_oidc.store import WerkzeugCacheBackedCredentialStore
 
     # from flask_appbuilder.security.manager import AUTH_OID
     basedir = os.path.abspath(os.path.dirname(__file__))
@@ -315,7 +318,9 @@ data:
 
     # Flask-WTF flag for CSRF
     CSRF_ENABLED = True
-
+    REDIS_HOST = os.environ.get('REDIS_HOST')
+    REDIS_PASSWORD = os.environ.get('REDIS_PASSWORD')
+    REDIS_TIMEOUT = int(os.environ.get('REDIS_TIMEOUT', 86400))
     # AUTH_REMOTE_USER : Is for using REMOTE_USER from web server
     # AUTH_OAUTH : Is for OAuth
     AUTH_TYPE = {{ .Values.airflow.auth.type }}
@@ -331,11 +336,14 @@ data:
     AUTH_USER_REGISTRATION_ROLE = "Admin"
 
     OIDC_CLIENT_SECRETS = '/root/airflow/client_secret.json'
-    SECURITY_MANAGER_CLASS = OIDCSecurityManager
+    SECURITY_MANAGER_CLASS = AirflowOIDCSecurityManager
     OIDC_USER_INFO_ENABLED = False
     OIDC_SCOPES = ['openid', 'email', 'profile']
     OIDC_LOGOUT_URI = '{{ .Values.airflow.auth.oauth.base_url }}' + 'v2/logout/?client_id={{ .Values.airflow.auth.oauth.consumer_key }}&returnTo='
-
+    if REDIS_HOST:
+      OIDC_CREDENTIALS_STORE = WerkzeugCacheBackedCredentialStore(
+        RedisCache(host=REDIS_HOST, password=REDIS_PASSWORD)
+      )
 
 
     OPENID_PROVIDERS = [

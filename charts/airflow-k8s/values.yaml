@@ -13,7 +13,7 @@ airflow:
       accessTokenUrl: ""
   image:
     repository: "quay.io/mojanalytics/airflow"
-    tag: "0.0.6"
+    tag: "0.0.9"
     pullPolicy: "IfNotPresent"
     port: "8080"
   volumes:
@@ -43,3 +43,9 @@ postgres:
   user: "airflow"
   password: ""
   db: "airflow"
+redis:
+  password: "airflow"
+  cluster:
+    enabled: false
+  persistence:
+    enabled: false
