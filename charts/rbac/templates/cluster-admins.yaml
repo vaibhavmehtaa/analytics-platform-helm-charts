@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Values.teams.clusterAdmins.name }}
+  labels:
+    chart: {{ template "rbac.chart" . }}
+  annotations:
+    moj-analytical-services/teams: {{ .Values.teams.clusterAdmins.name }}
+    description: {{ .Values.teams.clusterAdmins.description | quote }}
+roleRef: 
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: {{ .Values.teams.clusterAdmins.name }}

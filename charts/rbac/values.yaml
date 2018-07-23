@@ -1,0 +1,8 @@
+teams:
+  clusterAdmins:
+    name: cluster-admins
+    description: "K8s: Analytical Platform admins"
+  appSupport:
+    name: app-support
+    namespace: apps-prod
+    desciprtion: "Analytical Platform Shiny Application Support. Namespace: apps-prod"
