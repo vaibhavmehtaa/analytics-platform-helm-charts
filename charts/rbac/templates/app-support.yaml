@@ -1,0 +1,47 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Values.teams.appSupport.name }}
+  labels:
+    chart: {{ template "rbac.chart" . }}
+  annotations:
+    moj-analytical-services/teams: {{ .Values.teams.appSupport.name }}
+    description: {{ .Values.teams.appSupport.description | quote }}
+rules:
+    # Manage pods: All permissions except for create and deletecollections
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch", "update", "patch", "delete"]
+    # Manage deployments: All permissions except for create, delete and deletecollections
+  - apiGroups: ["extensions", "apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "update", "patch"]
+    # Read only: services, ingresses, configmaps and logs
+  - apiGroups: ["", "extensions"]
+    resources: ["services", "ingresses", "configmaps", "pods/log"]
+    verbs: ["get", "list", "watch"]
+    # Exec into pods
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: 
+  name: {{ .Values.teams.appSupport.name }}
+  namespace: {{ .Values.teams.appSupport.namespace }}
+  labels:
+    chart: {{ template "rbac.chart" . }}
+  annotations:
+    moj-analytical-services/teams: {{ .Values.teams.appSupport.name }}
+    description: {{ .Values.teams.appSupport.description | quote }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Values.teams.appSupport.name }}
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: {{ .Values.teams.appSupport.name }}
