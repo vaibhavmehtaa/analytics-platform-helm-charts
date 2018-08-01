@@ -27,6 +27,8 @@ helm install mojanalytics/concourse-org-pipeline \
 | auth0.domain | Auth0 tenant domain | "" |
 | aws.ecrAccessKeyId | AWS Access Key ID for read/write to ECR | "" |
 | aws.ecrSecretAccessKey | AWS Secret Access Key for read/write to ECR | "" |
+| aws.iamListRolesAccessKeyId | AWS Access Key ID to list AWS IAM roles | "" |
+| aws.iamListRolesSecretAccessKey | AWS Secret Access Key to list AWS IAM roles | "" |
 | aws.region | Default AWS region | "eu-west-1" |
 | concourse.externalURL | The same value as for the Concourse Helm chart | "" |
 | concourse.password | Basic authentication password for Concourse | "" |

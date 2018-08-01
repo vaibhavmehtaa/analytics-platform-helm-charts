@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.1.6] - 2018-07-30
+### Added
+Added `secrets.iam-list-roles-key-id` and `secrets.iam-list-roles-secret-access-key` secrets, intended to be overridden in config repo.
+This is to allow concourse to list aws iam roles.
+
 ## [0.1.5] - 2018-05-17
 ### Added
 Added `secrets.cpanel-api-user` and `secrets.cpanel-api-password` secrets, intended to be overridden in config repo.
