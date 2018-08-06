@@ -25,10 +25,11 @@ helm upgrade rbac-chart analytics-platform-helm-charts/charts/rbac --install
 
 Configured Resources
 --------------
-| Name/Team     | Type            | github org              | Description               |
-| ----------    | --------------- | ----------              | -----------               |
-| App-Support   | `Group`         | moj-analytical-services | Shiny application support |
-| Cluster-Admins| `Group`         | moj-analytical-services | Kubernetes Cluster Admins |
+| Name/Team       | Type            | github org              | Description               |
+| --------------- | --------------- | ----------              | -----------               |
+| App-Support     | `Group`         | moj-analytical-services | Shiny application support |
+| Cluster-Admins  | `Group`         | moj-analytical-services | Kubernetes Cluster Admins |
+| Airflow_support | `Group`         | moj-analytical-services | Airflow job support       |
 
 
 #### Example
