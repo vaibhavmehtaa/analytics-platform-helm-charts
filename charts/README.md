@@ -8,7 +8,7 @@ by running these commands from the root of the project (change `dev` to your env
 1. Install helm (see link for instructions)
 2. Run `$ helm init`
 
-# How to contribue?
+# How to contribute?
 
 1. Create a branch off master
 2. Make	 the changes in the helm charts
@@ -27,7 +27,7 @@ by running these commands from the root of the project (change `dev` to your env
 Necessary to access the services from outside the cluster.
 
 ```bash
-$ helm install charts/nginx-ingress -f chart-env-config/dev/nginx-ingress.yml --namespace kube-system --name cluster-ingress
+$ helm install charts/nginx-ingress -f ../analytics-platform-config/chart-env-config/dev/nginx-ingress.yml --namespace kube-system --name cluster-ingress
 ```
 
 
@@ -68,7 +68,7 @@ Alternatively
 Get an idToken with the [Auth0-Kube-App](https://quay.io/repository/mojanalytics/auth0-golang-kube-app)
 
 ```bash
-$ kubectl apply -f chart-env-config/dev/kube-dashboard.yml
+$ kubectl apply -f ../analytics-platform-config/chart-env-config/dev/kube-dashboard.yml
 ```
 
 
@@ -79,7 +79,7 @@ annotation.
 
 
 ```bash
-$ helm install charts/kube2iam -f chart-env-config/dev/kube2iam.yml --namespace default --name kube2iam
+$ helm install charts/kube2iam -f ../analytics-platform-config/chart-env-config/dev/kube2iam.yml --namespace default --name kube2iam
 ```
 
 
@@ -88,7 +88,7 @@ $ helm install charts/kube2iam -f chart-env-config/dev/kube2iam.yml --namespace 
 Reads the logs and sends them to ElasticSearch/Kibana.
 
 ```bash
-$ helm install charts/fluentd -f chart-env-config/dev/fluentd.yml --namespace kube-system --name cluster-logging
+$ helm install charts/fluentd -f ../analytics-platform-config/chart-env-config/dev/fluentd.yml --namespace kube-system --name cluster-logging
 ```
 
 
@@ -99,7 +99,7 @@ Grant (authorised) access to the Kibana to view the logs. Kibana is hosted with 
 Available at https://kibana.services.dev.mojanalytics.xyz/_plugin/kibana
 
 ```bash
-$ helm install charts/kibana-auth-proxy -f chart-env-config/dev/kibana.yml --namespace kube-system --name cluster-logviewer
+$ helm install charts/kibana-auth-proxy -f ../analytics-platform-config/chart-env-config/dev/kibana.yml --namespace kube-system --name cluster-logviewer
 ```
 
 
@@ -122,7 +122,7 @@ Analytics and monitoring interface.
 Available at https://grafana.services.dev.mojanalytics.xyz
 
 ```bash
-$ helm install stable/grafana -f chart-env-config/dev/grafana.yml --namespace kube-system --name cluster-monitoring
+$ helm install stable/grafana -f ../analytics-platform-config/chart-env-config/dev/grafana.yml --namespace kube-system --name cluster-monitoring
 ```
 
 
@@ -131,7 +131,7 @@ $ helm install stable/grafana -f chart-env-config/dev/grafana.yml --namespace ku
 Creates k8s resources related to the users homes (AWS EFS).
 
 ```bash
-$ helm install charts/init-platform -f chart-env-config/dev/init-platform.yml --namespace default --name init-platform
+$ helm install charts/init-platform -f ../analytics-platform-config/chart-env-config/dev/init-platform.yml --namespace default --name init-platform
 ```
 
 ## Concourse
