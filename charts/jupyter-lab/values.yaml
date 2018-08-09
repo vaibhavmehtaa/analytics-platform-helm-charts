@@ -21,6 +21,7 @@ authProxy:
       memory: 64Mi
   auth0_domain: ""
   auth0_client_id: ""
+  cookie_maxage: 36000 #10 hours
 
 jupyter:
   image: quay.io/mojanalytics/datascience-notebook
