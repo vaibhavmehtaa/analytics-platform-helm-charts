@@ -49,3 +49,6 @@ redis:
     enabled: false
   persistence:
     enabled: false
+kube2iam:
+  allowedRoles: ".*"
+  serviceAccountName: ""

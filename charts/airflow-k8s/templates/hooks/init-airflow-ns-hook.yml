@@ -1,0 +1,60 @@
+# This hook depends on helm creating the target namespace if it doesn't exist
+# before the hook is called. This is the case on Helm >v2.9.1
+{{ if eq .Chart.Version "0.0.3"}}
+## apply this only on one upgrade - like a database migration
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: upgrade-airflow-ns
+  namespace: kube-system
+  labels:
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: annotator
+        image: gcr.io/google_containers/hyperkube:v1.11.2
+        command:
+        - kubectl
+        - annotate
+        - --overwrite
+        - ns
+        - {{ .Release.Namespace }}
+        - |
+            iam.amazonaws.com/allowed-roles=[{{ .Values.kube2iam.allowedRoles | quote }}]
+      restartPolicy: Never
+      serviceAccountName: helm
+{{ else }}
+# Apply this on a new install
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-airflow-ns
+  namespace: kube-system
+  labels:
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-delete-policy: hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: annotator
+        image: gcr.io/google_containers/hyperkube:v1.11.2
+        command:
+        - kubectl
+        - annotate
+        - ns
+        - {{ .Release.Namespace }}
+        - |
+            iam.amazonaws.com/allowed-roles=[{{ .Values.kube2iam.allowedRoles | quote }}]
+      restartPolicy: Never
+      serviceAccountName: {{ .Values.kube2iam.serviceAccountName }}
+{{ end }}

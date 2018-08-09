@@ -17,3 +17,5 @@ spec:
           serviceName: {{ .Release.Name }}
           servicePort: 80
         path: /
+  tls:
+    - hosts:
