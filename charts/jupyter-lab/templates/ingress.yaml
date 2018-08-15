@@ -17,3 +17,6 @@ spec:
             backend:
               serviceName: {{ template "fullname" . }}
               servicePort: {{ .Values.service.port }}
+  tls:
+    - hosts:
+        - {{ .Values.Username | lower }}-jupyter-lab.{{ .Values.toolsDomain }}

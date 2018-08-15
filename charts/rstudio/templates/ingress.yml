@@ -16,3 +16,6 @@ spec:
           serviceName: {{ template "fullname" . }}
           servicePort: 80
         path: /
+  tls:
+    - hosts:
+        - {{ .Values.username | lower }}-rstudio.{{ .Values.toolsDomain }}

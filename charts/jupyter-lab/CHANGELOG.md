@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.7] - 2018-08-15
+### Changed
+- Added tls config to ingress.  This is required for tls termination with the nginx ingress controller. See [Trello](https://trello.com/c/M1snktNZ)
+- Auth-proxy image tag from 0.1.4 to 0.1.3 while investigating ssl redirect issues 
+
 ## [0.1.6] - 2018-08-10
 ## jupyter-tag-3
 - Update datascience-notebook image tag from 0.3.3 to 0.4.0. Relates to [PR](https://github.com/ministryofjustice/analytics-platform-jupyter-notebook/pull/8)
