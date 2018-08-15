@@ -28,7 +28,7 @@ spec:
         - |
             iam.amazonaws.com/allowed-roles=[{{ .Values.kube2iam.allowedRoles | quote }}]
       restartPolicy: Never
-      serviceAccountName: helm
+      serviceAccountName: {{ .Values.kube2iam.serviceAccountName }}
 {{ else }}
 # Apply this on a new install
 apiVersion: batch/v1
