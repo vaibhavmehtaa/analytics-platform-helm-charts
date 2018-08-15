@@ -23,6 +23,8 @@ spec:
             - "--host-interface={{ .Values.host_interface }}"
             - "--host-ip=$(HOST_IP)"
             - "--default-role={{ .Values.default_role }}"
+            - "--namespace-restrictions=true"
+            - "--namespace-restriction-format=regexp"
           env:
             - name: HOST_IP
               valueFrom:
