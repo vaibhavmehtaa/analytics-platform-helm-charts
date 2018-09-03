@@ -16,8 +16,8 @@ resources:
     concourse_url: ((concourse_url))
     username: ((fly.username))
     password: ((fly.password))
-    access_token: ((github-access-token))
-  webhook_token: ((github-webhook-token))
+    access_token: ((secrets.github-access-token))
+  webhook_token: ((secrets.github-webhook-token))
 
 resource_types:
 - name: github-org
