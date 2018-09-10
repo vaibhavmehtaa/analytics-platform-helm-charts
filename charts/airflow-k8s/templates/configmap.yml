@@ -139,14 +139,14 @@ data:
     # If you want airflow to send emails on retries, failure, and you want to use
     # the airflow.utils.email.send_email_smtp function, you have to configure an
     # smtp server here
-    smtp_host = localhost
-    smtp_starttls = True
-    smtp_ssl = False
+    smtp_host = {{ .Values.airflow.config.smtp.smtp_host }}
+    smtp_starttls = {{ .Values.airflow.config.smtp.smtp_starttls }}
+    smtp_ssl = {{ .Values.airflow.config.smtp.smtp_ssl }}
     # Uncomment and set the user/pass settings if you want to use SMTP AUTH
-    # smtp_user = airflow
-    # smtp_password = airflow
-    smtp_port = 25
-    smtp_mail_from = airflow@example.com
+    smtp_user = $SMTP_USER
+    smtp_password = $SMTP_PASSWORD
+    smtp_port = {{ .Values.airflow.config.smtp.smtp_port }}
+    smtp_mail_from = {{ .Values.airflow.config.smtp.smtp_mail_from }}
     [kubernetes]
     airflow_configmap = {{ .Release.Name }}
     worker_container_repository = {{ .Values.airflow.image.repository }}

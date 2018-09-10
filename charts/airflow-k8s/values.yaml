@@ -26,6 +26,14 @@ airflow:
   config:
     core:
       parallelism: 32
+    smtp:
+      smtp_host: localhost
+      smtp_starttls: true
+      smtp_ssl: false
+      smtp_user: airflow
+      smtp_password: airflow
+      smtp_port: 25
+      smtp_mail_from: airflow@example.com
   admin:
     username: ""
     password: ""
