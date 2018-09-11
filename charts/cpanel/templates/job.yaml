@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "fullname" . }}-migration
+spec:
+  template:
+    spec:
+      containers:
+        - name: django-migrate
+          image: "{{ .Values.API.Image.Repository }}:{{ .Values.API.Image.Tag }}"
+          command: ["/bin/sh","-c","python3 wait_for_db && python3 manage.py migrate"]
+          env:
+            - name: DB_HOST
+              value: {{ if .Values.tags.branch -}}
+                  "{{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}"
+                {{- else -}}
+                  "{{ .Values.postgresql.postgresHost }}"
+                {{- end }}
+            - name: DB_NAME
+              value: "{{ .Values.postgresql.postgresDatabase }}"
+            - name: DB_USER
+              value: "{{ .Values.postgresql.postgresUser }}"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  {{ if .Values.tags.branch -}}
+                  name: "{{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}"
+                  {{- else -}}
+                  name: "{{ template "fullname" . }}"
+                  {{- end }}
+                  key: postgres-password
+      restartPolicy: OnFailure
+  backoffLimit: 5
