@@ -1,7 +1,7 @@
 # Control Panel API Helm Chart
 
 Installing this chart will deploy the Analytical Platform Control Panel API, a
-REST API with which the creation and maintainance of users, apps and data
+REST API with which the creation and maintenance of users, apps and data
 sources on the platform can be managed.
 
 
@@ -18,7 +18,7 @@ helm install mojanalytics/cpanel \
   --set tags.branch=true
 ```
 
-The instance will be available at https://cpanelapi-$BRANCH_NAME.<ServicesDomain>.
+The instance will be available at https://cpanel-$BRANCH_NAME.<ServicesDomain>.
 
 
 ## Configuration
