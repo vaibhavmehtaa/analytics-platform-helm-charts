@@ -170,6 +170,8 @@ data:
     [kubernetes_secrets]
     SQL_ALCHEMY_CONN = {{ .Release.Name }}=sql-alchemy-conn
     FERNET_KEY = {{ .Release.Name }}=fernet-key
+    SMTP_USER = {{ .Release.Name }}=smtp-user
+    SMTP_PASSWORD = {{ .Release.Name }}=smtp-password
     [hive]
     # Default mapreduce queue for HiveOperator tasks
     default_hive_mapred_queue =
