@@ -6,23 +6,21 @@
 management, policy enforcement, and telemetry collection.
 
 Istio has many components and features but initially we're only using it to
-replace nginx-ingress.
+direct traffic from the internet into right pod (Ingress resources).
 
 
 ### Installation
-We're using the official Istio helm chart to install Istio in our k8s cluster.
-The Istio website has installation instructions [here](https://istio.io/docs/setup/kubernetes/helm-install/),
-please refer to Istio website for up-to-date instructions.
+This repository does *not* include the helm chart for Istio - we're using the
+official helm chart which is part of the Istio release (see below).
+
+This repository includes instructions on how to install Istio in kubernetes
+but for up-to-date documentation refer to the [Istio's webside](https://istio.io/docs/setup/kubernetes/helm-install/).
 
 
 #### Download Istio release
-First, [download the release](https://istio.io/docs/setup/kubernetes/download-release/):
+Istio keeps the official helm chart inside its release.
 
-```bash
-curl -L https://git.io/getLatestIstio | sh -
-```
-
-You can specify the version as follow:
+To [download it](https://istio.io/docs/setup/kubernetes/download-release/):
 
 ```bash
 curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.0.2 sh
@@ -39,7 +37,7 @@ cd into the folder you just downloaded.
   `$ kubectl apply -f install/kubernetes/helm/istio/templates/crds.yaml`
 
 
-### Install helm chart
+#### Install helm chart
 
 Configuration for the helm chart is in the usual [config repository](https://github.com/ministryofjustice/analytics-platform-config)
 
@@ -50,7 +48,7 @@ $ helm install install/kubernetes/helm/istio --name istio --namespace istio-syst
 ```
 
 
-### Uninstall helm chart
+### Uninstall
 
 ```bash
 $ helm delete --purge istio
