@@ -1,0 +1,19 @@
+issuer:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: ""
+
+  dns01:
+    provider:
+      name: route53
+      route53:
+        region: eu-west-1
+        hostedzoneid: ""
+
+cert:
+  commonname: ""
+  dnsnames: []
+
+  acme:
+    config:
+      domains: []

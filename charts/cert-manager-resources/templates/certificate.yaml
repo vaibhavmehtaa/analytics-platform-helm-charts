@@ -1,0 +1,22 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: cert-manager
+spec:
+  # Name of a secret to store tls certificate
+  secretName: {{ .Release.Name }}-tls
+  issuerRef:
+    name: {{ .Release.Name }}
+    kind: ClusterIssuer
+  commonName: '{{ .Values.cert.commonname }}'
+  dnsNames:
+{{ toYaml .Values.cert.dnsnames | indent 4 }}
+  acme:
+    config:
+      - dns01:
+          provider: {{ .Values.issuer.dns01.provider.name }}
+        domains:
+{{ toYaml .Values.cert.acme.config.domains | indent 10 }}
