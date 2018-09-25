@@ -22,6 +22,15 @@ by running these commands from the root of the project (change `dev` to your env
 1. Set the `kubectl` context to the dev cluster
 2. Read the Chart's README or see below for specific installation instructions
 
+# A minimal set-up
+
+To run a minimal version of AP, these are the essential charts to deploy:
+* `init-platform`
+* `nginx-ingress`
+* `cpanel`
+* `cpfrontend`
+* `kube2iam`
+
 ## nginx-ingress
 
 Necessary to access the services from outside the cluster.
