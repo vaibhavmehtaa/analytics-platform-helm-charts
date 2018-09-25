@@ -23,3 +23,5 @@ spec:
         env:
           - name: LOG_LEVEL
             value: "{{ .Values.logLevel }}"
+          - name: INGRESS_CLASS_NAME
+            value: "{{ .Values.ingress.className }}"
