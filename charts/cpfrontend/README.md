@@ -37,3 +37,4 @@ The instance will be available at https://cpfrontend-$BRANCH_NAME.$SERVICES_DOMA
 | `Frontend.Environment.SENTRY_DSN` | Credentials needed to report errors to Sentry | `""` |
 | `Frontend.Environment.TOOLS_DOMAIN` | Domain under which tools are deployed, e.g. `tools.example.com` | `""` |
 | `ServicesDomain` | domain under which the UI will be available, e.g. `services.example.com` | `""` |
+| `ingress.addTlsBlock` | Adds tls block to ingress resource. This needs to be `true` if you're using `nginx` as ingress-controller but it may need to be `false` for others (e.g. `traefik`) | `true` |
