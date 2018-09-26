@@ -35,6 +35,9 @@ AWS:
 tags:
   branch: false
 
+ingress:
+  addTlsBlock: true
+
 postgresql:
     postgresHost: ""
     postgresUser: ""
