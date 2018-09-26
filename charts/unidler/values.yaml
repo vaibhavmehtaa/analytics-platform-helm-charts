@@ -9,6 +9,7 @@ logLevel: INFO
 replicaCount: 1
 
 ingress:
+  addTlsBlock: true
   className: "istio"
 
 service:

@@ -9,10 +9,15 @@ metadata:
     kubernetes.io/ingress.class: "{{ .Values.ingress.className }}"
 spec:
   rules:
-  - host: {{ .Release.Name }}.{{ .Values.servicesDomain }}
+  - host: {{ template "hostname" . }}
     http:
       paths:
       - backend:
           serviceName: {{ .Release.Name }}
           servicePort: 80
         path: /
+{{ if .Values.ingress.addTlsBlock }}
+  tls:
+  - hosts:
+    - {{ template "hostname" . }}
+{{ end }}
