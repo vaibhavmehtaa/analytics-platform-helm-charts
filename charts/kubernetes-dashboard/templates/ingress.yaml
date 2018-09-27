@@ -10,10 +10,15 @@ metadata:
     nginx.ingress.kubernetes.io/secure-backends: "true"  # ----- Proxy back to https ----- #
 spec:
   rules:
-    - host: dashboard.{{ .Values.servicesDomain }}
+    - host: {{ template "hostname" . }}
       http:
         paths:
           - path: /
             backend:
               serviceName: {{ .Chart.Name }}
               servicePort: 443
+{{- if .Values.ingress.addTlsBlock }}
+  tls:
+    - hosts:
+        - {{ template "hostname" . }}
+{{- end }}
