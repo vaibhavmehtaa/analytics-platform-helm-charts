@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.3.15] - 2018-10-01
+### Changed
+- Update ingress object created by this chart to have a tls block (required by
+  nginx + nlb ingress)
+- Remove `path` from ingress object as it's not required (`/` is already the default)
+
 ## [1.3.14] - 2018-08-02
 ### Changed
 - Update auth-proxy to v0.1.4, which fixes the login loop problem which happens

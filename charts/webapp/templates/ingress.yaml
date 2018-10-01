@@ -11,10 +11,12 @@ metadata:
     nginx.ingress.kubernetes.io/affinity: "cookie"
 spec:
   rules:
-  - host: {{ .Values.WebApp.Name }}.{{ .Values.WebApp.BaseHost }}
+  - host: {{ template "hostname" . }}
     http:
       paths:
       - backend:
           serviceName: {{ template "fullname" . }}
           servicePort: {{ .Values.WebApp.Port }}
-        path: /
+  tls:
+    - hosts:
+      - {{ template "hostname" . }}
