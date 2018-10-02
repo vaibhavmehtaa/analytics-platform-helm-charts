@@ -2,7 +2,7 @@
 
 This repository contains the source YAML for our Helm charts.
 
-Commits to the master branch of this repository will trigger a Concourse CI pipeline which updates the packaged Helm charts and index in our Helm repository:
+Commits to the master branch of this repository will trigger a [Concourse CI pipeline](https://github.com/ministryofjustice/analytics-platform-concourse-pipelines#update-helm-repoyaml) which updates the packaged Helm charts and index in our Helm repository:
 http://moj-analytics-helm-repo.s3-website-eu-west-1.amazonaws.com/
 
 You can install these charts by adding the repo to your helm client, eg:
