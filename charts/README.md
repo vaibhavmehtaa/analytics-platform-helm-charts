@@ -1,7 +1,20 @@
 # Charts installation
 
-After the cluster is set up you can install the following charts
-by running these commands from the root of the project (change `dev` to your environment name).
+After the cluster is set-up you can install the following charts
+by running these commands from the root of this repo.
+
+Set $ENV to your environment name. In the URLs, replace `dev` with your environment name.
+
+# A minimal set-up
+
+To run a minimal version of AP, these are the essential charts to deploy:
+* `init-platform`
+* `nginx-ingress`
+* `cpanel`
+* `cpfrontend`
+* `kube2iam`
+
+# About
 
 **[Helm](https://github.com/kubernetes/helm)** is a tool for managing Kubernetes charts. Charts are packages of pre-configured Kubernetes resources.
 
@@ -22,21 +35,13 @@ by running these commands from the root of the project (change `dev` to your env
 1. Set the `kubectl` context to the dev cluster
 2. Read the Chart's README or see below for specific installation instructions
 
-# A minimal set-up
-
-To run a minimal version of AP, these are the essential charts to deploy:
-* `init-platform`
-* `nginx-ingress`
-* `cpanel`
-* `cpfrontend`
-* `kube2iam`
 
 ## nginx-ingress
 
 Necessary to access the services from outside the cluster.
 
 ```bash
-$ helm upgrade cluster-ingress charts/nginx-ingress -f ../analytics-platform-config/chart-env-config/dev/nginx-ingress.yml --namespace default --install
+$ helm upgrade cluster-ingress charts/nginx-ingress -f ../analytics-platform-config/chart-env-config/$ENV/nginx-ingress.yml --namespace default --install
 ```
 
 ## cpanel
@@ -44,7 +49,7 @@ $ helm upgrade cluster-ingress charts/nginx-ingress -f ../analytics-platform-con
 Control panel app
 
 ```bash
-$ helm install charts/cpanel -f ../analytics-platform-config/chart-env-config/dev/cpanel.yml --name cpanel-master
+$ helm install charts/cpanel -f ../analytics-platform-config/chart-env-config/$ENV/cpanel.yml --name cpanel-master
 ```
 
 ## node-exporter
@@ -84,7 +89,7 @@ Alternatively
 Get an idToken with the [Auth0-Kube-App](https://quay.io/repository/mojanalytics/auth0-golang-kube-app)
 
 ```bash
-$ kubectl apply -f ../analytics-platform-config/chart-env-config/dev/kube-dashboard.yml
+$ kubectl apply -f ../analytics-platform-config/chart-env-config/$ENV/kube-dashboard.yml
 ```
 
 
@@ -95,7 +100,7 @@ annotation.
 
 
 ```bash
-$ helm install charts/kube2iam -f ../analytics-platform-config/chart-env-config/dev/kube2iam.yml --namespace default --name kube2iam
+$ helm install charts/kube2iam -f ../analytics-platform-config/chart-env-config/$ENV/kube2iam.yml --namespace default --name kube2iam
 ```
 
 
@@ -104,7 +109,7 @@ $ helm install charts/kube2iam -f ../analytics-platform-config/chart-env-config/
 Reads the logs and sends them to ElasticSearch/Kibana.
 
 ```bash
-$ helm install charts/fluentd -f ../analytics-platform-config/chart-env-config/dev/fluentd.yml --namespace kube-system --name cluster-logging
+$ helm install charts/fluentd -f ../analytics-platform-config/chart-env-config/$ENV/fluentd.yml --namespace kube-system --name cluster-logging
 ```
 
 
@@ -115,7 +120,7 @@ Grant (authorised) access to the Kibana to view the logs. Kibana is hosted with 
 Available at https://kibana.services.dev.mojanalytics.xyz/_plugin/kibana
 
 ```bash
-$ helm install charts/kibana-auth-proxy -f ../analytics-platform-config/chart-env-config/dev/kibana.yml --namespace kube-system --name cluster-logviewer
+$ helm install charts/kibana-auth-proxy -f ../analytics-platform-config/chart-env-config/$ENV/kibana.yml --namespace kube-system --name cluster-logviewer
 ```
 
 
@@ -138,7 +143,7 @@ Analytics and monitoring interface.
 Available at https://grafana.services.dev.mojanalytics.xyz
 
 ```bash
-$ helm install stable/grafana -f ../analytics-platform-config/chart-env-config/dev/grafana.yml --namespace kube-system --name cluster-monitoring
+$ helm install stable/grafana -f ../analytics-platform-config/chart-env-config/$ENV/grafana.yml --namespace kube-system --name cluster-monitoring
 ```
 
 
@@ -147,7 +152,7 @@ $ helm install stable/grafana -f ../analytics-platform-config/chart-env-config/d
 Creates k8s resources related to the users homes (AWS EFS).
 
 ```bash
-$ helm install charts/init-platform -f ../analytics-platform-config/chart-env-config/dev/init-platform.yml --namespace default --name init-platform
+$ helm install charts/init-platform -f ../analytics-platform-config/chart-env-config/$ENV/init-platform.yml --namespace default --name init-platform
 ```
 
 ## Concourse
