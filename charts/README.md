@@ -36,6 +36,14 @@ To run a minimal version of AP, these are the essential charts to deploy:
 2. Read the Chart's README or see below for specific installation instructions
 
 
+## init-platform
+
+Creates k8s resources related to the users homes (AWS EFS).
+
+```bash
+$ helm install charts/init-platform -f ../analytics-platform-config/chart-env-config/$ENV/init-platform.yml --namespace default --name init-platform
+```
+
 ## nginx-ingress
 
 Necessary to access the services from outside the cluster.
@@ -46,7 +54,7 @@ $ helm upgrade cluster-ingress charts/nginx-ingress -f ../analytics-platform-con
 
 ## cpanel
 
-Control panel app
+Control panel app. See [cpanel README](cpanel/README.md) for Auth0 set-up.
 
 ```bash
 $ helm install charts/cpanel -f ../analytics-platform-config/chart-env-config/$ENV/cpanel.yml --name cpanel-master
@@ -144,15 +152,6 @@ Available at https://grafana.services.dev.mojanalytics.xyz
 
 ```bash
 $ helm install stable/grafana -f ../analytics-platform-config/chart-env-config/$ENV/grafana.yml --namespace kube-system --name cluster-monitoring
-```
-
-
-## init-platform
-
-Creates k8s resources related to the users homes (AWS EFS).
-
-```bash
-$ helm install charts/init-platform -f ../analytics-platform-config/chart-env-config/$ENV/init-platform.yml --namespace default --name init-platform
 ```
 
 ## Concourse
