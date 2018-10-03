@@ -39,33 +39,6 @@ Necessary to access the services from outside the cluster.
 $ helm upgrade cluster-ingress charts/nginx-ingress -f ../analytics-platform-config/chart-env-config/dev/nginx-ingress.yml --namespace default --install
 ```
 
-### Domain SSL certificate
-
-Each new environment needs an SSL certificate for its domain name, specified in this chart's config under key: `controller.service.annotations."service.beta.kubernetes.io/aws-load-balancer-ssl-cert"`
-
-To get provide this, go to AWS console's Certificate Manager.
-
-1. Click "Request a certificate"
-2. Select "Request a public certificate" and click "Request a certificate"
-3. Add these domain names to the certificate (replacing "dev.mojanalytics.xyz" with your environment's domain name):
-    * dev.mojanalytics.xyz
-    * *.dev.mojanalytics.xyz
-    * *.tools.dev.mojanalytics.xyz
-    * *.services.dev.mojanalytics.xyz
-    * *.apps.dev.mojanalytics.xyz
-4. Choose "DNS validation" and click "Review" and "Confirm and Request"
-5. Under each of the domain names, click the little expand arrow and click "Create record in Route 53".
-6. In the Certificate Manager's list, find your domain name. Click the little arrow to expand the details below and under Details note down the ARN value. Put this into your environments' `nginx-ingress.yml` e.g.:
-
-`service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-west-1:111111111111:certificate/111111111-1111-1111-1111-1111111111"`
-
-7. It will take 30 minutes or so to validate the SSL cert and actually create the certificate. Once it has complete you can install the helm chart. Before the certificate is created you'll see this error:
-
-    ```
-    $ kubectl describe svc cluster-ingress-nginx-ingress-controller
-      Warning  CreatingLoadBalancerFailed  33s (x4 over 10m)   service-controller  (combined from similar events): Error creating load balancer (will retry): Failed to ensure load balancer for service default/cluster-ingress-nginx-ingress-controller: CertificateNotFound: Server Certificate not found for the key: arn:aws:acm:eu-west-1:111111111111:certificate/111111111-1111-1111-1111-1111111111
-    ```
-
 ## cpanel
 
 Control panel app
