@@ -55,3 +55,4 @@ with `IAM_ARN_BASE:saml-provider/` to make an ARN | |
 | `postgresql.postgresUser` | The username to connect to the database with | |
 | `ServicesDomain` | DNS Domain where the app will be hosted | |
 | `tags.branch` | If true, a PostgreSQL instance will be deployed alongside the API, instead of using RDS | `false` |
+| `ingress.addTlsBlock` | Adds tls block to ingress resource. This needs to be `true` if you're using `nginx` as ingress-controller but it may need to be `false` for others (e.g. `traefik`) | `true` |

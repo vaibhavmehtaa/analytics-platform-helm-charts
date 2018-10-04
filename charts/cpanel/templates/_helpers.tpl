@@ -14,3 +14,10 @@ We truncate at 24 chars because some Kubernetes name fields are limited to this 
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 24 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+CP API hostname
+*/}}
+{{- define "hostname" -}}
+"cpanelapi{{- if .Values.API.Branch -}}-{{ .Values.API.Branch }}{{- end -}}.{{ .Values.ServicesDomain }}"
+{{- end -}}
