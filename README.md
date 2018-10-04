@@ -46,7 +46,7 @@ To run a minimal version of AP, these are the essential charts to deploy:
 4. [Test in dev](#how-to-test)
 5. Push the changes
 
-Commits to the master branch of this repository will trigger a Concourse CI pipeline which updates the packaged Helm charts and index in our Helm repository:
+Commits to the master branch of this repository will trigger a [Concourse CI pipeline](https://github.com/ministryofjustice/analytics-platform-concourse-pipelines#update-helm-repoyaml) which updates the packaged Helm charts and index in our Helm repository:
 http://moj-analytics-helm-repo.s3-website-eu-west-1.amazonaws.com/
 
 # How to test?

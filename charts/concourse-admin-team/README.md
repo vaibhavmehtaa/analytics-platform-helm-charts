@@ -29,3 +29,5 @@ helm install mojanalytics/concourse-admin-team \
 | kubernetes.token | Kubernetes token for API access | "" |
 | quay.password | Password / token for quay.io | "" |
 | quay.username | Username for quay.io | "" |
+| aws.iamPutObjectHelmRepoBucketAccessKeyId | Access Key Id for a user that can push to the helm repo bucket | "" |
+| aws.iamPutObjectHelmRepoBucketSecretAccessKey | Secret Access Key for a user that can push to the helm repo bucket | "" |

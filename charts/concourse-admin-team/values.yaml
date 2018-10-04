@@ -18,3 +18,7 @@ kubernetes:
 quay:
   password: ""
   username: ""
+
+aws:
+  iamPutObjectHelmRepoBucketAccessKeyId: ""
+  iamPutObjectHelmRepoBucketSecretAccessKey: ""
