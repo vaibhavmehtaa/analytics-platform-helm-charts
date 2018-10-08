@@ -5,6 +5,7 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
+    "mojanalytics.xyz/idleable": "true"
 spec:
   replicas: 1
   strategy:
