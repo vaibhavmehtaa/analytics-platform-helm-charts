@@ -12,6 +12,11 @@ aws:
   ecrAccessKeyId: ""
   ecrSecretAccessKey: ""
   region: "eu-west-1"
+  nodesRoleArn: ""
+  iamListRolesAccessKeyId: ""
+  iamListRolesSecretAccessKey: ""
+  rolePutterAccessKeyId: ""
+  rolePutterSecretAccessKey: ""
 
 concourse:
   # externalURL is the same value as for the concourse helm chart
@@ -19,6 +24,10 @@ concourse:
   password: ""
   team: main
   username: ""
+  pipeline_name: "create-webapp-pipelines"
+  target_team: ""
+  target_username: ""
+  target_password: ""
 
 cookieSecret: ""
 
