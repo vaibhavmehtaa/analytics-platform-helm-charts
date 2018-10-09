@@ -22,4 +22,5 @@ kibana:
     username: ""
     password: ""
 ingress:
+  addTlsBlock: true
   host: "example.com"

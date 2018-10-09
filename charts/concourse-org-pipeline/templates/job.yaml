@@ -5,6 +5,10 @@ metadata:
   namespace: concourse-{{ .Values.concourse.team }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    "helm.sh/hook": post-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   template:
     metadata:
@@ -15,19 +19,23 @@ spec:
         image: appropriate/curl:3.1
         imagePullPolicy: IfNotPresent
         env:
+          - name: PIPELINE_NAME
+            value: {{ .Values.concourse.pipeline_name }}
           - name: CONCOURSE_TEAM
             value: {{ .Values.concourse.team }}
+          - name: CONCOURSE_TARGET_TEAM
+            value: {{ .Values.concourse.target_team }}
           - name: CONCOURSE_URL
             value: {{ .Values.concourse.externalURL }}
           - name: FLY_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: fly
+                name: fly-admin
                 key: password
           - name: FLY_USERNAME
             valueFrom:
               secretKeyRef:
-                name: fly
+                name: fly-admin
                 key: username
           - name: GITHUB_ACCESS_TOKEN
             valueFrom:

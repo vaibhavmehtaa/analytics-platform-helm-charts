@@ -16,6 +16,9 @@ Frontend:
   ServicePort: 80
   Protocol: "https"
 
+ingress:
+  addTlsBlock: true
+
 redis:
   persistence:
     enabled: false

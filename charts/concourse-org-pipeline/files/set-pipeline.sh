@@ -11,13 +11,11 @@ fly -t default login \
     -n $CONCOURSE_TEAM
 
 fly -t default set-pipeline \
-    -n $CONCOURSE_TEAM \
-    -p $1 \
+    -n \
+    -p $PIPELINE_NAME \
     -c /scripts/pipeline.yaml \
-    -v team_name=$CONCOURSE_TEAM \
+    -v team_name=$CONCOURSE_TARGET_TEAM \
     -v concourse_url=$CONCOURSE_URL \
-    -v github-access-token=$GITHUB_ACCESS_TOKEN \
     -v github-org=$1 \
     -v github-org-resource-image=$GITHUB_ORG_RESOURCE_IMAGE \
-    -v github-org-resource-tag=$GITHUB_ORG_RESOURCE_TAG \
-    -v github-webhook-token=$GITHUB_WEBHOOK_TOKEN
+    -v github-org-resource-tag=$GITHUB_ORG_RESOURCE_TAG

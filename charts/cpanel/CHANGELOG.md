@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [1.0.0] - 2018-09-26
+### Added
+Added (optional) TLS block in ingress resource.
+You can set the `ingress.addTlsBlock` value to `false` if your
+ingress-controller doesn't work when ingress resources have this block (e.g.
+[traefik](https://traefik.io) doesn't seem to work)
+
 ## [0.12.2] - 2018-05-30
 ### Added
 Added `ELASTICSEARCH_HOST`, `ELASTICSEARCH_PORT`, `ELASTICSEARCH_USERNAME` and

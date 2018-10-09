@@ -9,10 +9,15 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-  - host: "cpanelapi{{- if .Values.API.Branch -}}-{{ .Values.API.Branch }}{{- end -}}.{{ .Values.ServicesDomain }}"
+  - host: {{ template "hostname" . }}
     http:
       paths:
       - backend:
           serviceName: {{ template "fullname" . }}
           servicePort: 80
         path: /
+{{ if .Values.ingress.addTlsBlock }}
+  tls:
+  - hosts:
+    - {{ template "hostname" . }}
+{{ end }}
