@@ -27,7 +27,7 @@ by running these commands from the root of the project (change `dev` to your env
 Necessary to access the services from outside the cluster.
 
 ```bash
-$ helm upgrade cluster-ingress charts/nginx-ingress -f chart-env-config/<ENV>/nginx-ingress.yml --namespace kube-system --install
+$ helm upgrade cluster-ingress stable/nginx-ingress -f ../analytics-platform-config/chart-env-config/$ENV/nginx-ingress.yml --namespace default --install --version 0.28.2
 ```
 
 
