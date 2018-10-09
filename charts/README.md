@@ -73,7 +73,7 @@ $ helm install charts/init-platform -f ../analytics-platform-config/chart-env-co
 Necessary to access the services from outside the cluster.
 
 ```bash
-$ helm upgrade cluster-ingress charts/nginx-ingress -f ../analytics-platform-config/chart-env-config/$ENV/nginx-ingress.yml --namespace default --install
+$ helm upgrade cluster-ingress stable/nginx-ingress -f ../analytics-platform-config/chart-env-config/$ENV/nginx-ingress.yml --namespace default --install --version 0.28.2
 ```
 
 ## cpanel
