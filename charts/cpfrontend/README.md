@@ -27,12 +27,19 @@ The instance will be available at https://cpfrontend-$BRANCH_NAME.$SERVICES_DOMA
 
 ## Configuration
 
+### Auth0 application
+
+The 'kubectl-oidc' Auth0 application should already be created - see: https://github.com/ministryofjustice/analytics-platform-ops/blob/master/README.md
+
+### cpfrontend.yml
+
 | Parameter  | Description     | Default |
 | ---------- | --------------- | ------- |
-| `Frontend.Environment.API_URL` | URL where the API is running | `""` |
-| `Frontend.Environment.AUTH0_CLIENT_ID` | Auth0 client ID | `""` |
-| `Frontend.Environment.AUTH0_CLIENT_SECRET` | Auth0 client ID | `""` |
-| `Frontend.Environment.AUTH0_DOMAIN` | Auth0 client domain | `""` |
+| `Frontend.Environment.API_URL` | URL where the API is running | `http://cpanel-master-cpanel` |
+| `Frontend.Environment.AUTH0_CLIENT_ID` | Auth0 'kubectl-oidc' application's client ID | `""` |
+| `Frontend.Environment.AUTH0_CLIENT_SECRET` | Auth0 'kubectl-oidc' application's client secret | `""` |
+| `Frontend.Environment.AUTH0_DOMAIN` | Auth0 tenant domain e.g. `dev-analytics-moj.eu.auth0.com` | `""` |
+| `Frontend.Environment.AWS_LOGIN_URL` | Auth0's 'AWS' Application SAML Protocol URL (find it under the AWS application's Advanced Settings, Endpoints) | `""` |
 | `Frontend.Environment.ENV` | Environment name, e.g. `"dev"` | `""` |
 | `Frontend.Environment.SENTRY_DSN` | Credentials needed to report errors to Sentry | `""` |
 | `Frontend.Environment.TOOLS_DOMAIN` | Domain under which tools are deployed, e.g. `tools.example.com` | `""` |
