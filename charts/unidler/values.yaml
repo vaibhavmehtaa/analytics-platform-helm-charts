@@ -1,16 +1,14 @@
 # Docker image
 image:
-  name: quay.io/mojanalytics/unidler
-  tag: v1.0.0
+  name: quay.io/mojanalytics/go-unidler
+  tag: v0.0.4
   pullPolicy: IfNotPresent
 
-logLevel: INFO
-
-replicaCount: 1
+replicaCount: 3
 
 ingress:
   addTlsBlock: true
-  className: "istio"
+  className: "nginx"
 
 service:
   externalPort: 80

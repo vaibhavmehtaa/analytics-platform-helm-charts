@@ -11,8 +11,10 @@ rules:
       - "deployments"
     verbs:
       - "get"
+      - "list"
       - "patch"
       - "update"
+      - "watch"
   - apiGroups:
       - "extensions"
     resources:
@@ -21,3 +23,4 @@ rules:
       - "get"
       - "list"
       - "patch"
+      - "update"
