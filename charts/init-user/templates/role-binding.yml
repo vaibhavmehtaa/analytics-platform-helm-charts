@@ -10,4 +10,4 @@ roleRef:
 subjects:
   - apiGroup: rbac.authorization.k8s.io
     kind: User
-    name: https://alpha-analytics-moj.eu.auth0.com/#{{ .Values.Username }}
+    name: https://{{ .Valus.OidcDomain }}/#{{ .Values.Username }}
