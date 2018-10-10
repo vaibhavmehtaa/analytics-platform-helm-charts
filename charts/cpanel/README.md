@@ -34,8 +34,6 @@ In Auth0 you need to install Extension 'Auth0 Authorization':
     2. Choose "Webtask Storage"
     3. Click "Install"
 
-OIDC_AUTH_EXTENSION_URL
-
 ### cpanel.yml
 
 | Parameter  | Description     | Default |
@@ -65,7 +63,7 @@ with `IAM_ARN_BASE:saml-provider/` to make an ARN | |
 | `AWS.DefaultRegion` | AWS region | `eu-west-1` |
 | `AWS.IAMRole` | IAM role assumed by the instance running the API | |
 | `postgresql.postgresDatabase` | The database name where API data will be stored | |
-| `postgresql.postgresHost` | The hostname of the database (this will be ignored if `tags.branch` is `true`). Get it from terraform environment output `control_panel_api_db_host` | |
+| `postgresql.postgresHost` | The hostname of the database (this will be ignored if `tags.branch` is `true`). Get it from terraform platform output `control_panel_api_db_host` | |
 | `postgresql.postgresPassword` | The password to connect to the database with. Get it from the environment's terraform.tfvars | |
 | `postgresql.postgresUser` | The username to connect to the database with | |
 | `ServicesDomain` | DNS Domain where the app will be hosted | |
