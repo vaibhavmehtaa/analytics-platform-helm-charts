@@ -4,8 +4,14 @@ Chart to deploy user and group [RBAC](https://kubernetes.io/docs/reference/acces
 
 ### Installing and Upgrading a release
 
+You may need to create these namespaces:
 ```
-helm upgrade rbac-chart analytics-platform-helm-charts/charts/rbac --install
+k create ns airflow
+k create ns apps-prod
+```
+Now install the chart:
+```
+helm upgrade rbac-chart charts/rbac --install
 ```
 
 ## Configuration

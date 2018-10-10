@@ -43,6 +43,27 @@ Necessary to access the services from outside the cluster.
 $ helm upgrade cluster-ingress stable/nginx-ingress -f ../analytics-platform-config/chart-env-config/$ENV/nginx-ingress.yml --namespace default --install --version 0.28.2
 ```
 
+## kube2iam
+
+Responsible for attaching IAM roles to pods with the `iam.amazonaws.com/role`
+annotation.
+
+
+```bash
+$ helm install charts/kube2iam -f ../analytics-platform-config/chart-env-config/$ENV/kube2iam.yml --namespace default --name kube2iam
+```
+
+## rbac
+
+Responsible for authorizing users that authenticated with OIDC.
+
+
+```bash
+k create ns airflow
+k create ns apps-prod
+helm upgrade rbac-chart charts/rbac --install
+```
+
 ## cpanel
 
 Control panel app. See [cpanel README](charts/cpanel/README.md) for Auth0 set-up.
@@ -90,18 +111,6 @@ Get an idToken with the [Auth0-Kube-App](https://quay.io/repository/mojanalytics
 ```bash
 $ kubectl apply -f ../analytics-platform-config/chart-env-config/$ENV/kube-dashboard.yml
 ```
-
-
-## kube2iam
-
-Responsible for attaching IAM roles to pods with the `iam.amazonaws.com/role`
-annotation.
-
-
-```bash
-$ helm install charts/kube2iam -f ../analytics-platform-config/chart-env-config/$ENV/kube2iam.yml --namespace default --name kube2iam
-```
-
 
 ## fluentd
 
