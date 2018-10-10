@@ -27,6 +27,7 @@ helm install charts/$chart_name -f ...
 To run a minimal version of AP, these are the essential charts to deploy:
 * `init-platform`
 * `nginx-ingress`
+* `kube2iam`
+* `rbac`
 * `cpanel`
 * `cpfrontend`
-* `kube2iam`
