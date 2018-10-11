@@ -21,7 +21,17 @@ spec:
         - name: http
           containerPort: {{ .Values.service.internalPort }}
         env:
-          - name: LOG_LEVEL
-            value: "{{ .Values.logLevel }}"
           - name: INGRESS_CLASS_NAME
             value: "{{ .Values.ingress.className }}"
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 1
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 1
+          periodSeconds: 10

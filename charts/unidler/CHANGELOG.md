@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v3.0.0] - 2018-10-10
+### Changed
+- Changed Docker image to use [`go-unidler`](https://github.com/ministryofjustice/analytics-platform-go-unidler) instead of ["old" `unidler` (Python)](https://github.com/ministryofjustice/analytics-platform-unidler)
+- Use `/healthz` endpoint provided by `go-unidler` to check readiness/liveness.
+- Increased `replicaCount` from `1` to `3` as `go-unidler` is stateless and unidling is idempotent
+- `ingress.className` defaults to `"nginx"` again (not `"istio"`)
+- removed unused values (`logLevel`)
+- added `appVersion` to `Chart.yaml`
+
+
 ## [v2.0.0] - 2018-09-26
 ### Changed
 Added (optional) TLS block in ingress resource.
