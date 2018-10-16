@@ -3,7 +3,7 @@ Frontend:
   Branch: "master"
   Image:
     Repository: quay.io/mojanalytics/control-panel-frontend
-    Tag: 0.1.0
+    Tag: v1.3.14
     PullPolicy: Always
   Environment:
     API_URL: "http://cpanel-master-cpanel"

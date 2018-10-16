@@ -25,10 +25,34 @@ $ helm upgrade USERNAME-rstudio charts/rstudio -f chart-env-config/ENV/rstudio.y
 
 ## Configuration
 
+### Auth0 application
+
+In Auth0 you need to create an Application:
+
+1. Login to https://manage.auth0.com/ and select the tenant for your environment
+2. In the side-bar click "Applications"
+3. Click "Create Application"
+      * Name: RStudio
+      * Application Type: Regular Web Applications
+4. Click "Save"
+5. Click "Settings"
+      * Allowed Callback URLs: `http://localhost:3000/callback, https://*-rstudio.tools.$env.$domain/callback`
+      (replace the $variables)
+      * Allowed Logout URLs: `https://*-rstudio.tools.$env.$domain` (replace the $variables)
+      * Allowed Origins (CORS): `https://*-rstudio.tools.$env.$domain` (replace the $variables)
+6. Click "Save changes"
+
+Record the Client ID and Client Secret values - you'll use them in the configuration below.
+
+### cpfrontend.yml
+
 Listing only the required params here. See `/chart-env-config/` for more
 details.
 
 | Parameter  | Description     | Default |
 | ---------- | --------------- | ------- |
-| `username` | Github username | `""`    |
-| `authProxy.cookieMaxAge` | Seconds after which session cookies will expire | `3600` (1 hour) |
+| `authProxy.auth0.clientId` | Auth0 'RStudio' application's client ID | `""`    |
+| `authProxy.auth0.clientSecret` | Auth0 'RStudio' application's client secret | `""`    |
+| `authProxy.auth0.domain` | Auth0 tenant domain e.g. `dev-analytics-moj.eu.auth0.com` | `""`    |
+| `authProxy.cookieSecret` | Random UUID `$ uuidgen` | `""` |
+| `rstudio.secureCookieKey` | Random UUID `$ uuidgen` | `""` |
