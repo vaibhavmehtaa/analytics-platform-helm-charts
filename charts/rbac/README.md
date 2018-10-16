@@ -6,8 +6,8 @@ Chart to deploy user and group [RBAC](https://kubernetes.io/docs/reference/acces
 
 You may need to create these namespaces:
 ```
-k create ns airflow
-k create ns apps-prod
+kubectl create ns airflow
+kubectl create ns apps-prod
 ```
 Now install the chart:
 ```

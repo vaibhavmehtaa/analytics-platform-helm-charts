@@ -29,7 +29,7 @@ Set $ENV to your environment name. In the URLs, replace `dev` with your environm
 
 ## init-platform
 
-Creates k8s resources related to the users homes (AWS EFS).
+Creates k8s resources related to the users home directories.
 
 ```bash
 $ helm install charts/init-platform -f ../analytics-platform-config/chart-env-config/$ENV/init-platform.yml --namespace default --name init-platform
@@ -59,8 +59,8 @@ Responsible for authorizing users that authenticated with OIDC.
 
 
 ```bash
-k create ns airflow
-k create ns apps-prod
+kubectl create ns airflow
+kubectl create ns apps-prod
 helm upgrade rbac-chart charts/rbac --install
 ```
 
