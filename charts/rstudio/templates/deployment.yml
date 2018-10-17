@@ -89,7 +89,7 @@ spec:
             httpGet:
               path: /healthz
               port: proxy
-            initialDelaySeconds: 5
+            initialDelaySeconds: 10
             periodSeconds: 2
           resources:
 {{ toYaml .Values.authProxy.resources | indent 12 }}
@@ -125,7 +125,7 @@ spec:
             httpGet:
               path: /
               port: rstudio
-            initialDelaySeconds: 5
+            initialDelaySeconds: 10
             periodSeconds: 2
           volumeMounts:
             - name: home
