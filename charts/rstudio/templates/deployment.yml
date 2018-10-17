@@ -84,7 +84,13 @@ spec:
               path: /healthz
               port: proxyPort
             initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: proxyPort
+            initialDelaySeconds: 5
+            periodSeconds: 2
           resources:
 {{ toYaml .Values.authProxy.resources | indent 12 }}
 
@@ -114,7 +120,13 @@ spec:
               path: /
               port: rstudioPort
             initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /
+              port: rstudioPort
+            initialDelaySeconds: 5
+            periodSeconds: 2
           volumeMounts:
             - name: home
               mountPath: "/home/{{ .Values.username }}"

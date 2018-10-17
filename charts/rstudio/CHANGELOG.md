@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Don't hardcode target port in `Service`, use provided value
 - Renamed ports in `Deployment` to be more explicit and avoid any possible
   confusion (they're called `proxyPort` and `rstudioPort` respectively now)
+- Increaded probe frequency by reduced `periodSeconds` to `2` from `5`,
+  this could help with the user experience as k8s could respond to problems
+  more promptly.
+
+### Added
+- Added `livenessProbe` to containers. This will ensure that containers
+  are terminated (and restarted) when containers stop serving traffic
+  for whatever reason.
 
 
 ## [1.5.6] - 2018-10-05
