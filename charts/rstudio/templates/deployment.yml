@@ -27,7 +27,7 @@ spec:
           image: "{{ .Values.authProxy.image.repository }}:{{ .Values.authProxy.image.tag }}"
           imagePullPolicy: {{ .Values.authProxy.image.pullPolicy }}
           ports:
-            - name: http
+            - name: proxyPort
               containerPort: {{ .Values.authProxy.express.port }}
           env:
             - name: USER
@@ -82,7 +82,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /healthz
-              port: http
+              port: proxyPort
             initialDelaySeconds: 5
             periodSeconds: 5
           resources:
@@ -92,7 +92,7 @@ spec:
           image: "{{ .Values.rstudio.image.repository }}:{{ .Values.rstudio.image.tag }}"
           imagePullPolicy: {{ .Values.rstudio.image.pullPolicy }}
           ports:
-            - name: http
+            - name: rstudioPort
               containerPort: {{ .Values.rstudio.port }}
           env:
             - name: USER
@@ -112,7 +112,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: rstudioPort
             initialDelaySeconds: 5
             periodSeconds: 5
           volumeMounts:
