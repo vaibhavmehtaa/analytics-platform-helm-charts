@@ -4,23 +4,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [1.5.7] - 2018-10-17
+
+### Changed
+- Don't hardcode target port in `Service`, use provided value
+- Renamed ports in `Deployment` to be more explicit and avoid any possible
+  confusion (they're now called `proxy` and `rstudio` respectively)
+- Increaded probes' frequency by reduced `periodSeconds` to `2` from `5`,
+  this could help with the user experience as k8s could respond to problems
+  more promptly.
+
+### Added
+- Added `livenessProbe` to containers. This will ensure that containers
+  are terminated (and restarted) when containers stop serving traffic
+  for whatever reason.
+
+
 ## [1.5.6] - 2018-10-05
 ### Added
 - Deployment has new label `idleable: "true"` to allow for future opt-in to new
   label-selector in the idler. This will allow idling of both rstudio (as
   currently avaiable) and jupyter or any other deployment we add this label to.
 
+
 ## [1.5.5] - 2018-08-15
 ### Changed
 - Added tls config to ingress.  This is required for tls termination with the nginx ingress controller. See [Trello](https://trello.com/c/M1snktNZ)
+
 
 ## [1.5.4] - 2018-07-09
 ### Changed
 - Modified RStudio image tag from v1.3.2 to 3.4.2-5 See: [PR](https://github.com/ministryofjustice/analytics-platform-rstudio/pull/34)
 
+
 ## [1.5.3] - 2018-06-05
 ### Changed
 - Adjusted memory resource limits and requests from `request: 1GB => 5GB` & `limit: 12GB => 20GB`
+
 
 ## [1.5.2] - 2018-05-10
 ### Changed
