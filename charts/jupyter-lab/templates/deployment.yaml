@@ -30,7 +30,7 @@ spec:
           image: {{ .Values.authProxy.image }}:{{ .Values.authProxy.tag }}
           imagePullPolicy: {{ .Values.authProxy.imagePullPolicy }}
           ports:
-            - name: http
+            - name: proxy
               containerPort: {{ .Values.authProxy.containerPort }}
           env:
             - name: TARGET_URL
@@ -67,16 +67,22 @@ spec:
           readinessProbe:
             httpGet:
               path: /healthz
-              port: http
-          initialDelaySeconds: 5
-          periodSeconds: 5
+              port: proxy
+            initialDelaySeconds: 5
+            periodSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: proxy
+            initialDelaySeconds: 10
+            periodSeconds: 2
           resources:
 {{ toYaml .Values.authProxy.resources | indent 12 }}
         - name: {{ .Chart.Name }}
           image: {{ .Values.jupyter.image }}:{{ .Values.jupyter.tag }}
           imagePullPolicy: {{ .Values.jupyter.imagePullPolicy }}
           ports:
-            - name: http
+            - name: jupyter
               containerPort: {{ .Values.jupyter.containerPort }}
           command:
             - "start.sh"
@@ -86,9 +92,15 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: jupyter
             initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /
+              port: jupyter
+            initialDelaySeconds: 10
+            periodSeconds: 2
           volumeMounts:
             - name: nfs-home
               mountPath: /home/jovyan
