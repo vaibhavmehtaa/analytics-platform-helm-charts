@@ -44,7 +44,7 @@ In Auth0 you need to create an Application:
 
 Record the Client ID and Client Secret values - you'll use them in the configuration below.
 
-### cpfrontend.yml
+### rstudio.yml
 
 Listing only the required params here. See `/chart-env-config/` for more
 details.
