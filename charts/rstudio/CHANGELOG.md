@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Don't hardcode target port in `Service`, use provided value
 - Renamed ports in `Deployment` to be more explicit and avoid any possible
   confusion (they're now called `proxy` and `rstudio` respectively)
-- Increaded probe frequency by reduced `periodSeconds` to `2` from `5`,
+- Increaded probes' frequency by reduced `periodSeconds` to `2` from `5`,
   this could help with the user experience as k8s could respond to problems
   more promptly.
 
