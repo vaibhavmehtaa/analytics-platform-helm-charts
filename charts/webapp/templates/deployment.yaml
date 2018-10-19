@@ -22,7 +22,7 @@ spec:
           image: "{{ .Values.AuthProxy.Image.Repository }}:{{ .Values.AuthProxy.Image.Tag }}"
           imagePullPolicy: {{ .Values.AuthProxy.Image.PullPolicy }}
           ports:
-            - name: http
+            - name: proxy
               containerPort: 3000
           env:
             - name: USER
@@ -65,19 +65,33 @@ spec:
           readinessProbe:
             httpGet:
               path: /healthz
-              port: http
+              port: proxy
             initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: proxy
+            initialDelaySeconds: 10
+            periodSeconds: 2
 
         - name: webapp
           image: "{{ .Values.WebApp.Image.Repository }}:{{ .Values.WebApp.Image.Tag | replace ":" "" }}"
           imagePullPolicy: {{ .Values.WebApp.Image.PullPolicy }}
           ports:
-            - containerPort: {{ .Values.WebApp.Port }}
+            - name: webapp
+              containerPort: {{ .Values.WebApp.Port }}
+          readinessProbe:
+            httpGet:
+              path: /?healthz
+              port: webapp
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 60
           livenessProbe:
             httpGet:
               path: /?healthz
-              port: {{ .Values.WebApp.Port }}
+              port: webapp
             initialDelaySeconds: 180
             periodSeconds: 10
             timeoutSeconds: 60
