@@ -35,6 +35,7 @@ The 'kubectl-oidc' Auth0 application should already be created - see: https://gi
 
 | Parameter  | Description     | Default |
 | ---------- | --------------- | ------- |
+| `ServicesDomain` | Domain under which tools are deployed, e.g. `tools.example.com` | `""` |
 | `Frontend.Environment.API_URL` | URL where the API is running | `http://cpanel-master-cpanel` |
 | `Frontend.Environment.AUTH0_CLIENT_ID` | Auth0 'kubectl-oidc' application's client ID | `""` |
 | `Frontend.Environment.AUTH0_CLIENT_SECRET` | Auth0 'kubectl-oidc' application's client secret | `""` |

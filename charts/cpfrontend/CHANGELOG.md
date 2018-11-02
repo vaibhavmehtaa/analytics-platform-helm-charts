@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.1] 2018-11-02
+### Changed
+Added `SERVICES_DOMAIN` environment variable to the pod. This value is to be
+used to build the link to AWS S3 bucket page, rather than using a hard-coded
+'mojanalytics.xyz' value.
+
 ## [2.0.0] - 2018-09-26
 ### Changed
 Added (optional) TLS block in ingress resource.
