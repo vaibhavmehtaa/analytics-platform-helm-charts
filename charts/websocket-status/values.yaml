@@ -1,0 +1,19 @@
+# Default values for webhook-dispatcher.
+replicaCount: 1
+
+image:
+  name: quay.io/mojanalytics/websocket-status
+  tag: v0.1.0
+  pullPolicy: IfNotPresent
+
+service:
+  externalPort: 80
+  internalPort: 8000
+  type: ClusterIP
+
+ingress:
+  addTlsBlock: true
+  className: "nginx"
+
+servicesDomain: ""
+
