@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-nfs-dir
+  namespace: default
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+spec:
+  template:
+    metadata:
+      name: create-nfs-dir
+    spec:
+      containers:
+      - name: "create-nfs-dirs"
+        restart: Never
+        image: bash
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - name: user-homes-root
+            mountPath: "/tmp/homes"
+        command:
+          - "bash"
+        args:
+          - "-cx"
+          - >
+              cd /tmp/homes &&
+              mkdir -p users/homes
+      restartPolicy: Never
+      volumes:
+      - name: user-homes-root
+        nfs:
+          server: {{ .Values.NFSHostname }}
+          path: /
