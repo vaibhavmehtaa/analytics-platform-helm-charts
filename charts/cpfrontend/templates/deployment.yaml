@@ -57,6 +57,8 @@ spec:
                 secretKeyRef:
                   name: "{{ printf "%s-%s" .Release.Name "redis" | trunc 63 | trimSuffix "-" }}"
                   key: redis-password
+            - name: SERVICES_DOMAIN
+              value: "{{ .Values.ServicesDomain }}"
             - name: TOOLS_DOMAIN
               valueFrom:
                 secretKeyRef:
