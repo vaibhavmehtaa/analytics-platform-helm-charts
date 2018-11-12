@@ -35,10 +35,12 @@ In Auth0 you need to create an Application:
       * Name: Jupyter Lab
       * Application Type: Regular Web Applications
 4. Click "Save"
-5. Click "Settings"
+5. Click "Connections" tab
+6. Switch OFF "Database" and "Google"
+7. Click "Settings"
       * Allowed Callback URLs: `http://localhost:3000/callback, https://*-jupyter-lab.tools.$env.$domain/callback`
       (replace the $variables)
-6. Click "Save changes"
+8. Click "Save changes"
 
 Record the Client ID and Client Secret values - you'll use them in the configuration below.
 

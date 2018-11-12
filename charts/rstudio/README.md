@@ -35,12 +35,14 @@ In Auth0 you need to create an Application:
       * Name: RStudio
       * Application Type: Regular Web Applications
 4. Click "Save"
-5. Click "Settings"
+5. Click "Connections" tab
+6. Switch OFF "Database" and "Google"
+7. Click "Settings"
       * Allowed Callback URLs: `http://localhost:3000/callback, https://*-rstudio.tools.$env.$domain/callback`
       (replace the $variables)
       * Allowed Logout URLs: `https://*-rstudio.tools.$env.$domain` (replace the $variables)
       * Allowed Origins (CORS): `https://*-rstudio.tools.$env.$domain` (replace the $variables)
-6. Click "Save changes"
+8. Click "Save changes"
 
 Record the Client ID and Client Secret values - you'll use them in the configuration below.
 
