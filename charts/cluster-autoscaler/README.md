@@ -49,3 +49,14 @@ the [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cl
 | `autoscalingGroups.max` | The maximum number of worker instances that can be provisioned | `10` |
 | `env` | The environment being deployed to. i.e. `dev` or `alpha` | "" |
 | `aws_region` | The AWS region your cluster resides in | "" |
+| `pdb.key` | The key of the target pod's label you wish to create a PodDisruptionBudget for | "" |
+| `pdb.val` | The value of the target Pod's label you wish to create a PodDisruptionBudget for | "" |
+
+
+**Note**
+
+By default [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) ignores nodes that contain `pods`
+in the `kube-system` namespace.  It is likely that this behaviour will lead to underutilised nodes remaining after a scale down operation.
+[Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) uses the eviction API and respects [PodDisruptionBudgets](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
+Implementing [PodDisruptionBudgets](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/), allows [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) to evict `pods` in the 
+`kube-system` namespace.
