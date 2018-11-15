@@ -1,0 +1,45 @@
+env: ""
+
+replicaCount: 1
+
+image:
+  repository: k8s.gcr.io/cluster-autoscaler
+  tag: v1.2.2
+  pullPolicy: IfNotPresent
+
+autoscalingGroups:
+# At least one ASG is required
+   - name: ""
+     minSize: 3
+     maxSize: 10
+   # - name: my-autoscaling-group-name
+   #   maxSize: 2
+   #   minSize: 1
+
+aws_region: ""
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 300Mi
+  requests:
+    cpu: 100m
+    memory: 300Mi
+
+pdb:
+  - key: k8s-app
+    val: kube-dns
+  - key: app
+    val: cert-manager
+  - key: k8s-app
+    val: kube-dns-autoscaler
+  - key: app
+    val: cluster-logging-fluentd
+  - key: k8s-app
+    val: calico-node
+  - key: k8s-app
+    val: kubernetes-dashboard
+  - key: app
+    val: cluster-logviewer-kibana-auth-proxy
+  - key: app
+    val: metrics-server

@@ -1,0 +1,15 @@
+{{- if .Values.pdb }}
+    {{- range .Values.pdb }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ .val }}
+  namespace: kube-system
+spec:
+  minAvailable: 0
+  selector:
+    matchLabels:
+      {{ .key }}: {{ quote .val }}
+---
+    {{- end }}
+{{ end }}
