@@ -1,0 +1,28 @@
+# Default values for cran-proxy.
+replicaCount: 1
+
+image:
+  name: quay.io/mojanalytics/cran-proxy
+  tag: v0.2.2
+  pullPolicy: IfNotPresent
+
+service:
+  externalPort: 80
+  internalPort: 8000
+  type: ClusterIP
+
+ingress:
+  addTlsBlock: true
+  className: "nginx"
+
+servicesDomain: ""
+logLevel: ""
+## CPU and memory limits for cran server
+##
+resources:
+  requests:
+    memory: 1Gi
+    cpu: 1
+  limits:
+    memory: 5Gi
+    cpu: 2
