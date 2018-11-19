@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.12] - 2018-11-19
+### Changed
+- Modified `livenessProbe` and `readinessProbe` to type `exec` for Jupyter container
+
 ## [0.1.11] - 2018-11-14
 ### Changed
 - Adjusted `livenessProbe` and `readinessProbe` to bigger values for Jupyter container
