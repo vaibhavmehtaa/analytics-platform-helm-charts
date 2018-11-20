@@ -31,6 +31,7 @@ spec:
             - --logtostderr=true
             - --cloud-provider=aws
             - --skip-nodes-with-local-storage=false
+            - --namespace=default
           {{- if .Values.autoscalingGroups }}
             {{- range .Values.autoscalingGroups }}
             - --nodes={{ .minSize }}:{{ .maxSize }}:{{ .name }}
