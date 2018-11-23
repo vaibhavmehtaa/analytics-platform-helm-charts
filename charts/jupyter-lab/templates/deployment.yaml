@@ -90,18 +90,20 @@ spec:
             - "jupyter lab"
             - "--NotebookApp.token=''"
           readinessProbe:
-            httpGet:
-              path: /
-              port: jupyter
-            initialDelaySeconds: 30
+            exec:
+              command:
+                - /usr/bin/pgrep
+                - jupyter-lab
+            initialDelaySeconds: 20
             periodSeconds: 20
             timeoutSeconds: 10
           livenessProbe:
-            httpGet:
-              path: /
-              port: jupyter
-            initialDelaySeconds: 30
-            periodSeconds: 20
+            exec:
+              command:
+                - /usr/bin/pgrep
+                - jupyter-lab
+            initialDelaySeconds: 10
+            periodSeconds: 5
             timeoutSeconds: 10
           volumeMounts:
             - name: nfs-home
