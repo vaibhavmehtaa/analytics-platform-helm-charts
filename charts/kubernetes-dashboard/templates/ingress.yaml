@@ -13,8 +13,7 @@ spec:
     - host: {{ template "hostname" . }}
       http:
         paths:
-          - path: /
-            backend:
+          - backend:
               serviceName: {{ .Chart.Name }}
               servicePort: 443
 {{- if .Values.ingress.addTlsBlock }}

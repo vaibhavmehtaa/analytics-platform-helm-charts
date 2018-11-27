@@ -15,7 +15,6 @@ spec:
       - backend:
           serviceName: {{ .Release.Name }}
           servicePort: 80
-        path: /
 {{ if .Values.ingress.addTlsBlock }}
   tls:
   - hosts:

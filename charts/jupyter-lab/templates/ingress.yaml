@@ -13,8 +13,7 @@ spec:
     - host: {{ .Values.Username | lower }}-jupyter-lab.{{ .Values.toolsDomain }}
       http:
         paths:
-          - path: /
-            backend:
+          - backend:
               serviceName: {{ template "fullname" . }}
               servicePort: {{ .Values.service.port }}
   tls:
