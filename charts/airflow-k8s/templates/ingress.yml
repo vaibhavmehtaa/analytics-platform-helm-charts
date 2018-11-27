@@ -16,7 +16,6 @@ spec:
       - backend:
           serviceName: {{ .Release.Name }}
           servicePort: 80
-        path: /
   tls:
     - hosts:
       - {{ printf "%s.%s" .Release.Name .Values.toolsDomain | lower }}

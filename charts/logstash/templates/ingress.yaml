@@ -15,8 +15,7 @@ spec:
     - host: {{ template "hostname" . }}
       http:
         paths:
-          - path: /
-            backend:
+          - backend:
               serviceName: {{ .Release.Name }}
               servicePort: {{ .Values.service.port }}
 {{- if .Values.ingress.addTlsBlock }}
