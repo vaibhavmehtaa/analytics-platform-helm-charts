@@ -31,3 +31,4 @@ To run a minimal version of AP, these are the essential charts to deploy:
 * `rbac`
 * `cpanel`
 * `cpfrontend`
+* `aws-login`
