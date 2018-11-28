@@ -89,22 +89,6 @@ spec:
           args:
             - "jupyter lab"
             - "--NotebookApp.token=''"
-          readinessProbe:
-            exec:
-              command:
-                - /usr/bin/pgrep
-                - jupyter-lab
-            initialDelaySeconds: 20
-            periodSeconds: 20
-            timeoutSeconds: 10
-          livenessProbe:
-            exec:
-              command:
-                - /usr/bin/pgrep
-                - jupyter-lab
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 10
           volumeMounts:
             - name: nfs-home
               mountPath: /home/jovyan
