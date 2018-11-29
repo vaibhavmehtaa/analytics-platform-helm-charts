@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.14] - 2018-11-29
+### Changed
+- Jupyter-lab container will run as uid 1001 to match r-studio. This is
+  no longer done by the image itself
+- Re-added `livenessProbe` and `readinessProbe` from Jupyter container
+
 ## [0.1.13] - 2018-11-28
 ### Changed
 - Removed `livenessProbe` and `readinessProbe` from Jupyter container
