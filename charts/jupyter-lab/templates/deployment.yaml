@@ -68,14 +68,14 @@ spec:
             httpGet:
               path: /healthz
               port: proxy
-            initialDelaySeconds: 5
-            periodSeconds: 2
+            initialDelaySeconds: 15
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /healthz
               port: proxy
-            initialDelaySeconds: 10
-            periodSeconds: 2
+            initialDelaySeconds: 20
+            periodSeconds: 10
           resources:
 {{ toYaml .Values.authProxy.resources | indent 12 }}
         - name: {{ .Chart.Name }}
@@ -89,6 +89,18 @@ spec:
           args:
             - "jupyter lab"
             - "--NotebookApp.token=''"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: jupyter
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: jupyter
+            initialDelaySeconds: 15
+            periodSeconds: 10
           volumeMounts:
             - name: nfs-home
               mountPath: /home/jovyan
@@ -98,3 +110,5 @@ spec:
         - name: nfs-home
           persistentVolumeClaim:
             claimName: nfs-home
+      securityContext:
+        runAsUser: 1001
