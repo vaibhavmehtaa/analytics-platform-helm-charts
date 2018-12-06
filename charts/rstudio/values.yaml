@@ -30,8 +30,8 @@ rstudio:
   port: "8787"
   image:
     repository: quay.io/mojanalytics/rstudio
-    tag: "3.4.2-5"
-    pullPolicy: "Always"
+    tag: "3.4.2-6"
+    pullPolicy: "IfNotPresent"
   resources:
     limits:
       cpu: 1.5
