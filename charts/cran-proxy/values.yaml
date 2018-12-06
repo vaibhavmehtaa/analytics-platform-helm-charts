@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   name: quay.io/mojanalytics/cran-proxy
-  tag: v0.2.3
+  tag: v0.3.0
   pullPolicy: IfNotPresent
 
 service:
