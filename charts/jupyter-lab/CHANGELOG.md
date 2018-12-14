@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.16] - 2018-12-13
+### Changed
+- Revert previous change setting uid as 1001 at the pod level. We have
+put this back into the image as we found a couple of issues with this approach
+
 ## [0.1.14] - 2018-11-29
 ### Changed
 - Jupyter-lab container will run as uid 1001 to match r-studio. This is

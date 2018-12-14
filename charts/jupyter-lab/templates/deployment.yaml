@@ -110,5 +110,3 @@ spec:
         - name: nfs-home
           persistentVolumeClaim:
             claimName: nfs-home
-      securityContext:
-        runAsUser: 1001
