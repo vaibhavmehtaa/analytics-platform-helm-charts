@@ -13,6 +13,8 @@ spec:
     spec:
       serviceAccountName: kube2iam
       hostNetwork: true
+      updateStrategy:
+        type: RollingUpdate
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -25,11 +27,18 @@ spec:
             - "--default-role={{ .Values.default_role }}"
             - "--namespace-restrictions=true"
             - "--namespace-restriction-format=regexp"
+            {{- if .Values.sts_region }}
+            - "--use-regional-sts-endpoint=true"
+            {{- end }}
           env:
             - name: HOST_IP
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+            {{- if .Values.sts_region }}
+            - name: AWS_REGION
+              value: {{ .Values.sts_region }}
+            {{- end }}
           ports:
             - containerPort: 8181
               hostPort: 8181
