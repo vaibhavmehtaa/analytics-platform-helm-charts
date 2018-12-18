@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Values.teams.kubeletAPI.name }}
+  labels:
+    chart: {{ template "rbac.chart" . }}
+  annotations:
+    description: {{ .Values.teams.kubeletAPI.description | quote }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: "system:{{ .Values.teams.kubeletAPI.name }}-admin"
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: {{ .Values.teams.kubeletAPI.name }}

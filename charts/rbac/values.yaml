@@ -10,3 +10,6 @@ teams:
     name: airflow-support
     namespace: airflow
     description: "Airflow job support. Namespace: airflow"
+  kubeletAPI:
+    name: kubelet-api
+    description: "Assigns the builtin kubelet-api-admin Clusterrole to the kubelet-api user"
