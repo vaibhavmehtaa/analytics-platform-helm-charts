@@ -1,7 +1,8 @@
 host_interface: docker0
 base_role: ""
 default_role: ""
+sts_region: ""
 image:
   repository: jtblin/kube2iam
-  tag: latest
-  pullPolicy: Always
+  tag: 0.10.4
+  pullPolicy: IfNotPresent
