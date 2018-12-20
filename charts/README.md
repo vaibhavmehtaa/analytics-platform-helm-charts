@@ -50,7 +50,7 @@ annotation.
 
 
 ```bash
-$ helm install charts/kube2iam -f ../analytics-platform-config/chart-env-config/$ENV/kube2iam.yml --namespace default --name kube2iam
+$ helm install stable/kube2iam -f ../analytics-platform-config/chart-env-config/$ENV/kube2iam.yml --namespace default --name kube2iam
 ```
 
 ## rbac
@@ -100,7 +100,7 @@ Available at http://dashboard.services.dev.mojanalytics.xyz
 
 At __login__ screen select __Skip__ to view dashboard in Read-Only mode.
 
-#### Admin 
+#### Admin
 
 At __login__ screen select idToken and paste the appropriate idToken from your `KUBECONFIG` file.
 
