@@ -36,6 +36,7 @@ Configured Resources
 | App-Support     | `Group`         | moj-analytical-services | Shiny application support |
 | Cluster-Admins  | `Group`         | moj-analytical-services | Kubernetes Cluster Admins |
 | Airflow_support | `Group`         | moj-analytical-services | Airflow job support       |
+| kubelet-api     | `User`          | ""                      | Binding for builtin account|   
 
 
 #### Example
