@@ -21,10 +21,14 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        {{ if .Values.logLevel }}
         env:
+        {{ if .Values.logLevel }}
           - name: LOG_LEVEL
             value: {{ .Values.logLevel | quote }}
+        {{ end }}
+        {{ if .Values.passive }}
+          - name: PASSIVE
+            value: {{ .Values.passive | quote }}
         {{ end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
