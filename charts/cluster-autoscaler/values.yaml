@@ -4,7 +4,7 @@ replicaCount: 1
 
 image:
   repository: k8s.gcr.io/cluster-autoscaler
-  tag: v1.2.2
+  tag: v1.3.5
   pullPolicy: IfNotPresent
 
 autoscalingGroups:
