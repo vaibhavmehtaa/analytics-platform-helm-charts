@@ -1,0 +1,9 @@
+A DaemonSet will now run an pull the following Docker images:
+{{ range .Values.docker.images }}
+- {{ . -}}
+{{ end }}
+
+NOTE: You can configure which images to pre-pull by changing the `images`
+value. See chart's README.md
+
+Have a great day :)
