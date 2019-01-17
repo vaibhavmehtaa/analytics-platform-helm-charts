@@ -14,7 +14,7 @@ data:
 
     for image in `cat images.txt`; do
         echo "\n\nPulling '$image'..."
-        docker pull $image;
+        docker image pull $image;
     done
 
   images.txt: |
