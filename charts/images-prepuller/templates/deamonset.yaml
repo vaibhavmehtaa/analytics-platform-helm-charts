@@ -33,7 +33,8 @@ spec:
           command: ["/images-prepuller/prepull.sh"]
           volumeMounts:
           - name: docker
-            mountPath: /var/run
+            mountPath: /var/run/docker.sock
+            subPath: docker.sock
           - name: configmap
             mountPath: /images-prepuller/prepull.sh
             subPath: prepull.sh
