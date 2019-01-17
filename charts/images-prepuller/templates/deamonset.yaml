@@ -30,7 +30,7 @@ spec:
       initContainers:
         - name: prepull
           image: "docker:2.7.0"
-          command: ["docker", "pull", "hello-world"]
+          command: ["/images-prepuller/prepull.sh"]
           volumeMounts:
           - name: docker
             mountPath: /var/run
