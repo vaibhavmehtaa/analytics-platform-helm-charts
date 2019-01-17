@@ -46,9 +46,10 @@ lost when this container terminate.
 To install the chart:
 
 ```bash
-$ helm install charts/images-prepuller -f chart-env-config/ENV/images-prepuller.yml --name images-prepuller --namespace default
+$ helm upgrade --dry-run --debug --install images-prepuller --namespace default charts/images-prepuller -f chart-env-config/ENV/images-prepuller.yml
 ```
 
+**NOTE**: Remove `--dry-run` from command above.
 
 ## Configuration
 
