@@ -10,11 +10,16 @@ data:
   prepull.sh: |
     #! /usr/bin/env sh
 
-    echo "Pulling images..."
+    set -eu
 
-    for image in `cat images.txt`; do
-        echo "\n\nPulling '$image'..."
-        docker image pull $image;
+    CONFIG_FILE=/images-prepuller/images.txt
+    IMAGES=$(cat $CONFIG_FILE)
+
+    printf "Pulling images on node '%s'..." "$NODE_NAME"
+
+    for image in $IMAGES; do
+        printf "\n\nPulling '%s'..." "$image"
+        docker image pull "$image";
     done
 
   images.txt: |

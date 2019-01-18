@@ -30,6 +30,11 @@ spec:
       initContainers:
         - name: prepull
           image: "docker:2.7.0"
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
           command: ["/images-prepuller/prepull.sh"]
           volumeMounts:
           - name: docker
@@ -53,3 +58,4 @@ spec:
         - name: configmap
           configMap:
             name: {{ .Release.Name }}
+            defaultMode: 0500 # can read/exec
