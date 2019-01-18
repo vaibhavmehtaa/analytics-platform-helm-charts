@@ -29,7 +29,7 @@ spec:
     spec:
       initContainers:
         - name: prepull
-          image: "docker:2.7.0"
+          image: "docker:18.09.1"
           env:
             - name: NODE_NAME
               valueFrom:
