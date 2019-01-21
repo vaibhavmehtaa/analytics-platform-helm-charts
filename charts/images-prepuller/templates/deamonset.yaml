@@ -1,0 +1,61 @@
+apiVersion: apps/v1  # apiVersion: apps/v1beta2
+kind: DaemonSet
+metadata:
+  name: prepull
+  annotations:
+    source: "https://gist.github.com/itaysk/7bc3e56d69c4d72a549286d98fd557dd"
+  labels:
+    app: {{ template "images-prepuller.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+    matchLabels:
+      name: prepull
+  updateStrategy:
+    # NOTE: This is important as it re-create the ds's pods when
+    # its template changes. The default is to only update them when k8s
+    # operator manually delete these pods
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: prepull
+      annotations:
+        # Force DaemonSet's pods to be re-created when config changes
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+
+    spec:
+      initContainers:
+        - name: prepull
+          image: "docker:18.09.1"
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          command: ["/images-prepuller/prepull.sh"]
+          volumeMounts:
+          - name: docker
+            mountPath: /var/run/docker.sock
+            subPath: docker.sock
+          - name: configmap
+            mountPath: /images-prepuller/prepull.sh
+            subPath: prepull.sh
+          - name: configmap
+            mountPath: /images-prepuller/images.txt
+            subPath: images.txt
+
+      containers:
+        - name: pause
+          image: gcr.io/google_containers/pause
+
+      volumes:
+        - name: docker
+          hostPath:
+            path: {{ .Values.docker.hostPath }}
+        - name: configmap
+          configMap:
+            name: {{ .Release.Name }}
+            defaultMode: 0500 # can read/exec
