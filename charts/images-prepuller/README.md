@@ -118,3 +118,13 @@ Status: Downloaded newer image for busybox:1-musl
 In this case you can see that on this node (`ip-1-2-3-4.compute.internal`):
 - `gcr.io/google-containers/busybox:1.27` was already up-to-date
 - `busybox:1-musl` was new and it was downloaded
+
+
+## How to determine the images to prepull/cache?
+
+You can have a good idea of from where to start by listing all docker images
+used by all deployments in any namespace:
+
+```bash
+$ kubectl get deployment --all-namespaces -o custom-columns=images:.spec.template.spec.containers[*].image
+```
