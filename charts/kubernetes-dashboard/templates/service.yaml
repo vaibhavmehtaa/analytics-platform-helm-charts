@@ -7,7 +7,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   ports:
-    - port: 443
-      targetPort: {{ .Values.port }}
+    - port: 80
+      targetPort: {{ .Values.authProxy.containerPort }}
   selector:
     k8s-app: {{ .Chart.Name }}

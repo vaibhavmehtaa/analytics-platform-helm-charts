@@ -1,6 +1,24 @@
-image: k8s.gcr.io/kubernetes-dashboard-amd64
-tag: v1.8.3
-port: 8443
-ingress:
+dashboard:
+  image: k8s.gcr.io/kubernetes-dashboard-amd64
+  tag: v1.10.1
+  port: 9090
+  ingress:
     addTlsBlock: true
     host: ""
+
+authProxy:
+  image: quay.io/mojanalytics/auth-proxy
+  tag: v0.1.6
+  imagePullPolicy: IfNotPresent
+  containerPort: 3000
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 25m
+      memory: 64Mi
+  auth0_domain: ""
+  auth0_client_id: ""
+  auth0_client_secret: ""
+  cookie_secret: ""

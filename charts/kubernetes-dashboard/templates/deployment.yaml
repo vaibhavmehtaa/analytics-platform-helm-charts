@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -17,32 +17,52 @@ spec:
         k8s-app: {{ .Chart.Name }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}
-        image: {{ .Values.image }}:{{ .Values.tag }}
+      - name: auth-proxy
+        image: {{ .Values.authProxy.image }}:{{ .Values.authProxy.tag }}
+        imagePullPolicy: {{ .Values.authProxy.imagePullPolicy }}
         ports:
-        - containerPort: {{ .Values.port }}
+          - name: proxy
+            containerPort: {{ .Values.authProxy.containerPort }}
+        env:
+          - name: TARGET_URL
+            value: http://localhost:{{ .Values.dashboard.port }}
+          - name: AUTH0_DOMAIN
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Chart.Name }}
+                key: auth0Domain
+          - name: AUTH0_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Chart.Name }}
+                key: auth0ClientId
+          - name: AUTH0_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Chart.Name }}
+                key: auth0ClientSecret
+          - name: AUTH0_CALLBACK_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Chart.Name }}
+                key: auth0CallbackUrl
+          - name: COOKIE_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Chart.Name }}
+                key: cookieSecret
+{{ toYaml .Values.authProxy.resources | indent 12 }}
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.dashboard.image }}:{{ .Values.dashboard.tag }}
+        ports:
+        - containerPort: {{ .Values.dashboard.port }}
           protocol: TCP
+          name: dashboard
         args:
-          - --auto-generate-certificates
-        volumeMounts:
-        - name: {{ .Chart.Name }}-certs
-          mountPath: /certs
-        - mountPath: /tmp
-          name: tmp-volume
-        livenessProbe:
-          httpGet:
-            scheme: HTTPS
-            path: /
-            port: {{ .Values.port }}
-          initialDelaySeconds: 30
-          timeoutSeconds: 30
-      volumes:
-      - name: {{ .Chart.Name }}-certs
-        secret:
-          secretName: {{ .Chart.Name }}-certs
-          defaultMode: 0600
-      - name: tmp-volume
-        emptyDir: {}
+          - --enable-insecure-login=true
+          - --insecure-port={{ .Values.dashboard.port }}
+          - --insecure-bind-address=127.0.0.1
+          - --enable-skip-login=true
       serviceAccountName: {{ .Chart.Name }}
       tolerations:
       - key: node-role.kubernetes.io/master
