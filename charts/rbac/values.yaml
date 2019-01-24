@@ -10,6 +10,9 @@ teams:
     name: airflow-support
     namespace: airflow
     description: "Airflow job support. Namespace: airflow"
+  genericSupport:
+    name: generic-support
+    description: "Read-only access to non-sensitive resources in all namespaces"
   kubeletAPI:
     name: kubelet-api
     description: "Assigns the builtin kubelet-api-admin Clusterrole to the kubelet-api user"
