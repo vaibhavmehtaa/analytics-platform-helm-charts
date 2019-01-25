@@ -1,0 +1,42 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Values.teams.genericSupport.name }}
+  labels:
+    chart: {{ template "rbac.chart" . }}
+  annotations:
+    moj-analytical-services/teams: {{ .Values.teams.genericSupport.name }}
+    description: {{ .Values.teams.genericSupport.description | quote }}
+rules:
+    # Read only access to main resources
+    # NOTE: They can **NOT** read secrets/configmaps or exec into pods
+  - apiGroups: ["", "apps", "batch", "extensions"]
+    resources:
+      - "ingresses"
+      - "services"
+      - "deployments"
+      - "pods"
+      # - "pods/log"
+      - "cronjobs"
+      - "jobs"
+    verbs: ["get", "list", "watch"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Values.teams.genericSupport.name }}
+  labels:
+    chart: {{ template "rbac.chart" . }}
+  annotations:
+    moj-analytical-services/teams: {{ .Values.teams.genericSupport.name }}
+    description: {{ .Values.teams.genericSupport.description | quote }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Values.teams.genericSupport.name }}
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: {{ .Values.teams.genericSupport.name }}

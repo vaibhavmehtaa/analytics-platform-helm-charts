@@ -23,7 +23,7 @@ helm upgrade rbac-chart charts/rbac --install
 | `description` | Short description of RBAC resources use | "" |
 
 
-## Contributing 
+## Contributing
 
 - Add your `rbac` resources under the `./templates` directory keeping related resources in the same file where possible
 - Optionally add a hash/map using the configuration parameters above to `values.yaml`. See [Example](#example)
@@ -36,12 +36,13 @@ Configured Resources
 | App-Support     | `Group`         | moj-analytical-services | Shiny application support |
 | Cluster-Admins  | `Group`         | moj-analytical-services | Kubernetes Cluster Admins |
 | Airflow_support | `Group`         | moj-analytical-services | Airflow job support       |
-| kubelet-api     | `User`          | ""                      | Binding for builtin account|   
+| generic-support | `Group`         | moj-analytical-services | Read-only access to non-sensitive resources in all namespaces |
+| kubelet-api     | `User`          | ""                      | Binding for builtin account|
 
 
 #### Example
 
-Add the `superdevs` github team values to be used by you template 
+Add the `superdevs` github team values to be used by you template
 
 ```
 teams:
