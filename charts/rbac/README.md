@@ -11,8 +11,11 @@ kubectl create ns apps-prod
 ```
 Now install the chart:
 ```
-helm upgrade rbac-chart charts/rbac --install
+helm upgrade --dry-run --debug --install --namespace default rbac-chart charts/rbac
 ```
+
+**NOTE**: Double-check output and remove `--dry-run` flag to install the chart for real.
+
 
 ## Configuration
 

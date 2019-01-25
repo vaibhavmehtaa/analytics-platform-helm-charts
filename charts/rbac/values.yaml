@@ -5,7 +5,7 @@ teams:
   appSupport:
     name: app-support
     namespace: apps-prod
-    desciprtion: "Analytical Platform Shiny Application Support. Namespace: apps-prod"
+    description: "Analytical Platform Shiny Application Support. Namespace: apps-prod"
   airflowSupport:
     name: airflow-support
     namespace: airflow
