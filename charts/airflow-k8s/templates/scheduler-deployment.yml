@@ -35,6 +35,22 @@ spec:
             mountPath: "/root/airflow/dags/"
         env:
             {{ include "env" . | indent 12 }}
+
+            - name: ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: admin-username
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: admin-password
+            - name: ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: admin-email
         command:
           - "bash"
         args:
@@ -45,11 +61,11 @@ spec:
               (
               airflow create_user
               --role Admin
-              --username {{ .Values.airflow.admin.username }}
-              --password {{ .Values.airflow.admin.password }}
-              --firstname {{ .Values.airflow.admin.username }}
-              --lastname {{ .Values.airflow.admin.username }}
-              --email {{ .Values.airflow.admin.email }} || true
+              --username $ADMIN_USERNAME
+              --password $ADMIN_PASSWORD
+              --firstname $ADMIN_USERNAME
+              --lastname $ADMIN_USERNAME
+              --email $ADMIN_EMAIL || true
               )
 
       containers:
