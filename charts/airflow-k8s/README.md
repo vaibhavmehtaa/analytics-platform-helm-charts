@@ -8,8 +8,11 @@ Run Airflow on Kubernetes, tasks are executed as new pods.
 Run:
 
 ```bash
-$ helm upgrade --install airflow charts/airflow-k8s --namespace airflow -f chart-env-config/ENV/airflow-k8s.yml
+$ helm upgrade --dry-run --debug --install airflow charts/airflow-k8s --namespace airflow -f chart-env-config/ENV/airflow-k8s.yml
 ```
+
+**NOTE**: double-check output, than once you're happy with the changes remove
+          the `--dry-run` flag and re-run.
 
 Airflow will be available at <https://airflow.tools.ENV.mojanalytics.xyz>.
 

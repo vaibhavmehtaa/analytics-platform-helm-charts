@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.0.7] - 2019-01-25
+### Changed
+Moved OAuth secrets from ConfigMap to Secret. These are sensitive and it's
+a best-practice to keep them in a secret.
+
+
 ## [0.0.6] - 2018-09-13
 ### Fixed
 Fixed URLs in email notifications.
