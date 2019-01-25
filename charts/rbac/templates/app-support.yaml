@@ -29,7 +29,7 @@ rules:
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
-metadata: 
+metadata:
   name: {{ .Values.teams.appSupport.name }}
   namespace: {{ .Values.teams.appSupport.namespace }}
   labels:
