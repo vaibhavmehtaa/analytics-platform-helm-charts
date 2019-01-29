@@ -5,11 +5,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [1.3.18] - 2019-01-29
+### Changed
+- Updated auth-proxy from v0.1.4 to v0.1.7:
+   - Customize the passwordless Auth0 prompt (#80)
+   - Infinite loop bugfix for jupyter (#64)
+   - Update dependencies and node for security fixes
+
 
 ## [1.3.17] - 2019-01-17
 ### Changed
 - Added `host` label to deployment, ingress and service for use in
   LabelSelectors (useful for idle/unidle)
+
 
 ## [1.3.16] - 2018-10-19
 ### Changed
