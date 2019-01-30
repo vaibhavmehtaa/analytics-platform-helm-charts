@@ -49,7 +49,7 @@ spec:
             - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/webserver_config.py
               subPath: webserver_config.py
-            - name: {{ .Release.Name }}-config
+            - name: {{ .Release.Name }}-secrets
               mountPath: /root/airflow/client_secret.json
               subPath: client_secret.json
             - name: {{ .Release.Name }}-dags
@@ -75,6 +75,9 @@ spec:
         - name: {{ .Release.Name }}-config
           configMap:
             name: {{ .Release.Name }}
+        - name: {{ .Release.Name }}-secrets
+          secret:
+            secretName: {{ .Release.Name }}
         - name: {{ .Release.Name }}-dags
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-dags
