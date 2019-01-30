@@ -5,6 +5,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.1.0] - 2019-01-30
+### Changed
+- Bumped Airflow version/docker tag to [`1.10.2`]
+- Bumped `bitnami/redis` docker image from `4.0.10-debian-9` to
+  `4.0.12-debian-9-r46`
+- Change redis image pull policy from `Always` to `IfNotPresent`
+  (as we're not using `latest` therefore image with a given tag
+  shouldn't change!)
+- Added `appVersion` to chart metadata to improve visibility of
+  which Airflow version the chart is using.
+
+[`1.10.2`]: https://github.com/ministryofjustice/analytics-platform-airflow-docker-image/pull/3
+
+
 ## [0.0.9] - 2019-02-05
 ### Fixed
 Chart installation when chart was previously installed and purged.
