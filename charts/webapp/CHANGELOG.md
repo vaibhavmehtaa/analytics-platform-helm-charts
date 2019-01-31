@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [1.3.20] - 2019-01-31
+### Changed
+- Updated auth-proxy to v0.1.9:
+
+   - For passwordless/app log-in, the visual style is customized for AP(https://github.com/ministryofjustice/analytics-platform-auth-proxy/pull/84)
+
+
 ## [1.3.19] - 2019-01-30
 ### Changed
 - Updated auth-proxy to v0.1.8:
