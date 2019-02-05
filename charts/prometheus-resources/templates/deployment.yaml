@@ -1,0 +1,79 @@
+{{ range .Values.apps }}
+  {{- $callBack := printf "https://%s.%s/callback" .name $.Values.servicesDomain }}
+  {{- $name := printf "%s-%s-%s" $.Release.Name .name $.Values.authProxy.name | trunc 63 }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ $.Values.authProxy.name }}
+    target: {{ .name }}
+    chart: {{ $.Chart.Name }}
+spec:
+  progressDeadlineSeconds: 600
+  selector:
+    matchLabels:
+      target: {{ .name }}
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        target: {{ .name }}
+    spec:
+      serviceAccountName: {{ $.Release.Name }}-{{ .name }}
+      containers:
+        - name: {{ $name }}
+          image: {{ $.Values.authProxy.image }}:{{ $.Values.authProxy.tag }}
+          imagePullPolicy: {{ $.Values.authProxy.imagePullPolicy }}
+          ports:
+            - name: proxy
+              containerPort: {{ $.Values.authProxy.containerPort }}
+          env:
+            - name: TARGET_URL
+              value: http://{{ $.Release.Name }}-{{ .name }}.{{ $.Release.Namespace }}.svc.cluster.local
+            - name: AUTH0_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Release.Name }}
+                  key: auth0Domain
+            - name: AUTH0_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Release.Name }}
+                  key: auth0ClientId
+            - name: AUTH0_CALLBACK_URL
+              value: {{ $callBack }}
+            - name: AUTH0_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Release.Name }}
+                  key: auth0ClientSecret
+            - name: COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Release.Name }}
+                  key: cookieSecret
+            - name: COOKIE_MAXAGE
+              value: {{ $.Values.authProxy.cookie_maxage | quote }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: proxy
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: proxy
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          resources:
+{{ toYaml $.Values.authProxy.resources | indent 12 }}
+---
+{{ end }}

@@ -1,0 +1,46 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: {{ printf "%s-%s" .Release.Name .Values.authProxy.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.authProxy.name }}
+    chart: {{ .Chart.Name }}
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default'
+    seccomp.security.alpha.kubernetes.io/defaultProfileName:  'docker/default'
+    apparmor.security.beta.kubernetes.io/allowedProfileNames: 'runtime/default'
+    apparmor.security.beta.kubernetes.io/defaultProfileName:  'runtime/default'
+spec:
+  privileged: false
+  defaultAllowPrivilegeEscalation: false
+  requiredDropCapabilities: # DROP CAPABILITIES Listed below.  See: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
+    - SETPCAP
+    - MKNOD
+    - AUDIT_WRITE
+    - CHOWN
+    - NET_RAW
+    - FOWNER
+    - FSETID
+    - KILL
+    - SETGID
+    - SETUID
+    - NET_BIND_SERVICE
+    - SYS_CHROOT
+    - SETFCAP
+  volumes:
+    - secret
+    - emptyDir
+    - projected
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: 'RunAsAny'
+  seLinux:
+    rule: 'RunAsAny'
+  supplementalGroups:
+    rule: 'RunAsAny'
+  fsGroup:
+    rule: 'RunAsAny'
+  readOnlyRootFilesystem: false

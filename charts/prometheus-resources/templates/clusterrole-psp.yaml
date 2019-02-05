@@ -1,0 +1,13 @@
+{{ $name := printf "%s-%s" .Release.Name .Values.authProxy.name }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ $name }}
+  labels:
+    app: {{ .Values.authProxy.name }}
+    chart: {{ .Chart.Name }}
+rules:
+  - apiGroups: ["policy"]
+    resources: ["podsecuritypolicies"]
+    resourceNames: ["{{ $name }}"]
+    verbs: ["use"]

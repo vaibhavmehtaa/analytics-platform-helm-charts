@@ -1,0 +1,13 @@
+{{ if .Values.mojDashboardFiles }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-ap-dashboards
+  namespace: {{ .Release.Namespace | default "monitoring" }}
+  labels:
+    grafana_dashboard: "1"
+    app: {{ .Values.prometheusOperator.chartName }}
+    chart: {{ .Chart.Name }}
+data:
+{{ toYaml .Values.mojDashboardFiles | indent 2 }}
+{{ end }}
