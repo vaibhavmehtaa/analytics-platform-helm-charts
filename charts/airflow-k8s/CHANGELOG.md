@@ -5,6 +5,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.0.9] - 2019-02-05
+### Fixed
+Chart installation when chart was previously installed and purged.
+This was caused by `init-airflow-ns` job that annotate the
+`airflow` namespace.
+
+Techical details: The problem was that the `Job` created on new
+install (`else` statement) was not idempotent because it was
+missing the `--overwrite` flag (which the `if` block had).
+
+I've simplified the init job template to factor all the
+common parts and have a smaller `if` just for the
+`helm.sh/hook` annotation.
+
+
 ## [0.0.8] - 2019-01-25
 ### Changed
 Removed admin credentials from scheduler's init container definition.
