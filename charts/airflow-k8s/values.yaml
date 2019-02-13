@@ -45,6 +45,7 @@ gitSync:
   image:
     repository: "openweb/git-sync"
     tag: "0.0.1"
+    pullPolicy: "IfNotPresent"
 postgres:
   host: ""
   port: "5432"

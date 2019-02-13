@@ -33,7 +33,7 @@ spec:
       containers:
         - name: git-sync
           image: {{ .Values.gitSync.image.repository }}:{{ .Values.gitSync.image.tag }}
-          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.gitSync.image.pullPolicy }}
           env:
             - name: GIT_SYNC_REPO
               value: "{{ .Values.gitSync.repository }}"
