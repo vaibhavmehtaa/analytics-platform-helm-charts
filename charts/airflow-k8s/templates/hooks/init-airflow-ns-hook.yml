@@ -21,7 +21,9 @@ spec:
     spec:
       containers:
       - name: annotator
-        image: gcr.io/google_containers/hyperkube:v1.11.2
+        image: gcr.io/google_containers/hyperkube:v1.11.7
+        imagePullPolicy: "IfNotPresent"
+        restartPolicy: Never
         command:
         - kubectl
         - annotate
@@ -30,5 +32,4 @@ spec:
         - {{ .Release.Namespace }}
         - |
             iam.amazonaws.com/allowed-roles=[{{ .Values.kube2iam.allowedRoles | quote }}]
-      restartPolicy: Never
       serviceAccountName: {{ .Values.kube2iam.serviceAccountName }}

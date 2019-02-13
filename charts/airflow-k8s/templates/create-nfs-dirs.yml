@@ -14,8 +14,9 @@ spec:
       containers:
       - name: "create-nfs-dirs"
         restart: Never
-        image: bash
-        imagePullPolicy: IfNotPresent
+        image: "bash"
+        tag: "5.0.2"
+        imagePullPolicy: "IfNotPresent"
         volumeMounts:
           - name: {{ .Release.Name }}-storage
             mountPath: "/tmp/airflow/"

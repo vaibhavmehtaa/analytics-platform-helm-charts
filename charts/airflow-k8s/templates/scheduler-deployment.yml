@@ -26,7 +26,7 @@ spec:
       initContainers:
       - name: "init"
         image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
         volumeMounts:
           - name: {{ .Release.Name }}-config
             mountPath: /root/airflow/airflow.cfg
@@ -71,11 +71,11 @@ spec:
       containers:
         - name: scheduler
           image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
+          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
           command:
             - "airflow"
           args:
             - "scheduler"
-          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.airflow.image.port }}
