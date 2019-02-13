@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.1.0] - 2019-01-30
 ### Changed
-- Bumped Airflow version/docker tag to [`1.10.2`]
+- Bumped Airflow version/docker tag to [`1.10.2-2`]
 - Bumped `bitnami/redis` docker image from `4.0.10-debian-9` to
   `4.0.12-debian-9-r46`
 - Change redis image pull policy from `Always` to `IfNotPresent`

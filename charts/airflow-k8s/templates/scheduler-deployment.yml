@@ -56,7 +56,7 @@ spec:
         args:
           - "-cx"
           - >
-              cd /usr/local/lib/python3.6/site-packages/airflow &&
+              cd `python -c "import site; print(site.getsitepackages()[0])"` &&
               airflow initdb && airflow upgradedb &&
               (
               airflow create_user
