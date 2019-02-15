@@ -56,10 +56,6 @@ redis:
   password: "airflow"
   cluster:
     enabled: false
-  image:
-    pullPolicy: "IfNotPresent"
-    repository: "bitnami/redis"
-    tag: "4.0.12-debian-9-r46"
   persistence:
     enabled: false
 kube2iam:

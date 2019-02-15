@@ -20,11 +20,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   about tag instead of using `latest`
 - Bumped `gcr.io/google_containers/hyperkube` tag from
   `v1.11.2` => `v1.11.7`
-- Bumped `bitnami/redis` docker image from `4.0.10-debian-9` to
-  `4.0.12-debian-9-r46`
-- Set `redis` image pull policy from `Always` to `IfNotPresent`
-  (as we're not using `latest` therefore image with a given tag
-  shouldn't change!)
 - Set `git-sync`'s `pullPolicy` to `IfNotPresent` as
   we're not using `latest` as image tag
 
