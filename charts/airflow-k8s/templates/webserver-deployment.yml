@@ -25,11 +25,11 @@ spec:
       containers:
         - name: webserver
           image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
+          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
           command:
             - "airflow"
           args:
             - "webserver"
-          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.airflow.image.port }}

@@ -5,6 +5,36 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.1.0] - 2019-01-30
+### Features
+- Bumped Airflow version to [`1.10.2`] (docker image tag
+  is [`1.10.2-2`])
+- Added `appVersion` to chart metadata to improve visibility of
+  which Airflow version the chart is using.
+
+### Improvements
+- Use user-provided `.Values.airflow.image.pullPolicy`
+  value in all places where `airflow` docker image
+  is used
+- Bumped `bash` image tag to latest stable and be explicit
+  about tag instead of using `latest`
+- Bumped `gcr.io/google_containers/hyperkube` tag from
+  `v1.11.2` => `v1.11.7`
+- Set `git-sync`'s `pullPolicy` to `IfNotPresent` as
+  we're not using `latest` as image tag
+
+### Fixed
+- `git-sync` pod was using wrong value as pullPolicy
+
+### Cosmetic
+- Consistency in the way we have `image`, `tag` and
+  `pullPolicy` in the same order and next to each other
+
+
+[`1.10.2`]: https://github.com/ministryofjustice/analytics-platform-airflow-docker-image/pull/3
+[`1.10.2-2`]: https://github.com/ministryofjustice/analytics-platform-airflow-docker-image/pull/4
+
+
 ## [0.0.9] - 2019-02-05
 ### Fixed
 Chart installation when chart was previously installed and purged.

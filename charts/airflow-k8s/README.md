@@ -22,6 +22,9 @@ Airflow will be available at <https://airflow.tools.ENV.mojanalytics.xyz>.
 
 ## Configuration
 
+**IMPORTANT**: Please change credentials from the default/weak ones to proper/strong credentials.
+
+
 | Parameter           | Description     | Default.    |
 | ------------------- | --------------- | ----------- |
 | `airflow.admin.username` | Airflow admin username | `""` |
