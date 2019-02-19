@@ -34,6 +34,8 @@ airflow:
       smtp_password: airflow
       smtp_port: 25
       smtp_mail_from: airflow@example.com
+    webserver:
+      enable_proxy_fix: "True"
   admin:
     username: ""
     password: ""
