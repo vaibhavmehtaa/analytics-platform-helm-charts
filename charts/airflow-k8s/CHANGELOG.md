@@ -5,6 +5,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.1.1] - 2019-02-19
+### Security
+- Fixed problem where some of the authentication requests were done over
+  **non-secure** HTTP connection.
+- added `airflow.config.webserver.enable_proxy_fix` which
+  by default is `True` but can be changed if necessary
+- See:
+  - Airflow issue: [`AIRFLOW-3137`](https://issues.apache.org/jira/browse/AIRFLOW-3137)
+  - Airflow fix: [`PR #3983`](https://github.com/apache/airflow/pull/3983)
+
+**NOTE**: You should only enable the `ProxyFix` middleware when running
+Airflow behind a trusted proxy (AWS ELB, nginx, etc.).
+
+### Cosmetic
+- Added some newlines in `airflow` Configmap / `airflow.cfg` to
+  improve readability and reduce time necessary to find things in it.
+
+
 ## [0.1.0] - 2019-01-30
 ### Features
 - Bumped Airflow version to [`1.10.2`] (docker image tag

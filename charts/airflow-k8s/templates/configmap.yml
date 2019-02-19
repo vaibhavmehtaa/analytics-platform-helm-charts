@@ -70,6 +70,7 @@ data:
     # however it can be set on a per DAG basis in the
     # DAG definition (catchup)
     catchup_by_default = True
+
     [webserver]
     # The base url of your website as airflow cannot guess what domain or
     # cname you are using. This is used in automated emails that
@@ -135,6 +136,9 @@ data:
     page_size = 100
     # Use FAB-based webserver with RBAC feature
     rbac = True
+    # Enable werkzeug `ProxyFix` middleware
+    enable_proxy_fix = {{ .Values.airflow.config.webserver.enable_proxy_fix }}
+
     [smtp]
     # If you want airflow to send emails on retries, failure, and you want to use
     # the airflow.utils.email.send_email_smtp function, you have to configure an
@@ -147,6 +151,7 @@ data:
     smtp_password = $SMTP_PASSWORD
     smtp_port = {{ .Values.airflow.config.smtp.smtp_port }}
     smtp_mail_from = {{ .Values.airflow.config.smtp.smtp_mail_from }}
+
     [kubernetes]
     airflow_configmap = {{ .Release.Name }}
     worker_container_repository = {{ .Values.airflow.image.repository }}
@@ -167,14 +172,17 @@ data:
     namespace = {{ .Release.Namespace }}
     gcp_service_account_keys =
     # For cloning DAGs from git repositories into volumes: https://github.com/kubernetes/git-sync
+
     [kubernetes_secrets]
     SQL_ALCHEMY_CONN = {{ .Release.Name }}=sql-alchemy-conn
     FERNET_KEY = {{ .Release.Name }}=fernet-key
     SMTP_USER = {{ .Release.Name }}=smtp-user
     SMTP_PASSWORD = {{ .Release.Name }}=smtp-password
+
     [hive]
     # Default mapreduce queue for HiveOperator tasks
     default_hive_mapred_queue =
+
     [celery]
     # This section only applies if you are using the CeleryExecutor in
     # [core] section above
@@ -215,6 +223,7 @@ data:
     default_queue = default
     # Import path for celery configuration options
     celery_config_options = airflow.config_templates.default_celery.DEFAULT_CELERY_CONFIG
+
     [celery_broker_transport_options]
     # The visibility timeout defines the number of seconds to wait for the worker
     # to acknowledge the task before the message is redelivered to another worker.
@@ -226,6 +235,7 @@ data:
     ssl_key =
     ssl_cert =
     ssl_cacert =
+
     [dask]
     # This section only applies if you are using the DaskExecutor in
     # [core] section above
@@ -235,6 +245,7 @@ data:
     tls_ca =
     tls_cert =
     tls_key =
+
     [ldap]
     # set this to ldaps://<your.ldap.server>:<port>
     uri =
@@ -248,6 +259,7 @@ data:
     basedn = dc=example,dc=com
     cacert = /etc/ca/ldap_ca.crt
     search_scope = LEVEL
+
     [mesos]
     # Mesos master address which MesosExecutor will connect to.
     master = localhost:5050
@@ -281,6 +293,7 @@ data:
     # This image should be accessible from mesos slave i.e mesos slave
     # should be able to pull this docker image before executing the command.
     # docker_image_slave = puckel/docker-airflow
+
     [kerberos]
     ccache = /tmp/airflow_krb5_ccache
     # gets augmented with fqdn
@@ -288,18 +301,24 @@ data:
     reinit_frequency = 3600
     kinit_path = kinit
     keytab = airflow.keytab
+
     [cli]
     api_client = airflow.api.client.json_client
     endpoint_url = http://localhost:8080
+
     [api]
     auth_backend = airflow.api.auth.backend.default
+
     [github_enterprise]
     api_rev = v3
+
     [admin]
     # UI to hide sensitive variable fields when set to True
     hide_sensitive_variable_fields = True
+
     [elasticsearch]
     elasticsearch_host =
+
   webserver_config.py: |
     import os
     from werkzeug.contrib.cache import RedisCache
