@@ -58,8 +58,23 @@ redis:
   password: "airflow"
   cluster:
     enabled: false
-  persistence:
-    enabled: false
+  image:
+    pullPolicy: "IfNotPresent"
+  master:
+    persistence:
+      enabled: false
+  networkPolicy:
+    ## Specifies whether a NetworkPolicy should be created
+    ##
+    enabled: true
+
+    ## The Policy model to apply. When set to false, only pods with the correct
+    ## client label will have network access to the port Redis is listening
+    ## on. When true, Redis will accept connections from any source
+    ## (with the correct destination port).
+    ##
+    allowExternal: false
+
 kube2iam:
   allowedRoles: ".*"
   serviceAccountName: ""

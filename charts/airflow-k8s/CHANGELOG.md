@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.2.0] - 2019-02-25
+### Changed
+- Upgraded `redis` chart dependency `3.6.4` => `6.1.3`
+  - This upgrade `redis` version `4.0.10` => `4.0.13`
+- Updated values to reflect helm chart upgrade
+- Enabled `NetworkPolicy` so that only Airflow webserver
+  can access redis
+- Only download Redis docker image if it's not already present
+  in the k8s node (`IfNotPresent`).
+  Image tag is not `latest` so no reason to make unnecessary
+  requests and waste time.
+
+
 ## [0.1.1] - 2019-02-19
 ### Security
 - Fixed problem where some of the authentication requests were done over
