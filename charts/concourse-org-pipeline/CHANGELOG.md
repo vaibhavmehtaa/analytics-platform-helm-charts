@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.2.0] - 2019-02-28
 ### Added
 Added `secrets.lookup-access-key-id` and `secrets.lookup-secret-access-key` secrets, intended to give access to lookup s3 buckets.
-This is to allow concourse to list aws iam roles.
+This is to allow concourse to pass creds to docker container to write to the `moj-analytics-lookup-tables` bucket
 
 ## [0.1.8] - 2018-10-29
 ### Fix log shipping
