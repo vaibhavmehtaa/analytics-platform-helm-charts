@@ -20,3 +20,5 @@ servicesDomain: ""
 concourse:
   base_url: ""
   token: ""
+  main_username: ""
+  main_password: ""

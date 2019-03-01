@@ -30,6 +30,16 @@ spec:
             secretKeyRef:
               name: {{ .Release.Name }}
               key: CONCOURSE_WEBHOOK_TOKEN
+        - name: CONCOURSE_MAIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}
+              key: CONCOURSE_MAIN_PASSWORD
+        - name: CONCOURSE_MAIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}
+              key: CONCOURSE_MAIN_USERNAME
         - name: SECRET
           valueFrom:
             secretKeyRef:
