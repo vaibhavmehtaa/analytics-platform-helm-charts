@@ -1,0 +1,26 @@
+{{ range .Values.apps }}
+  {{- $host := printf "%s.%s" .name $.Values.servicesDomain }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $.Release.Name }}-{{ .name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ .name }}-{{ $.Values.authProxy.name }}
+    target: {{ .name }}
+  annotations:
+    kubernetes.io/ingress.class: {{ $.Values.ingressClass }}
+spec:
+  rules:
+    - host: {{ $host }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ printf "%s-%s-%s" $.Release.Name .name $.Values.authProxy.name | trunc 63 }}
+              servicePort: 80
+  tls:
+    - hosts:
+        - {{ $host }}
+
+---
+{{ end }}

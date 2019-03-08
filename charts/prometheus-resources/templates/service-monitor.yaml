@@ -1,0 +1,27 @@
+{{ if .Values.serviceMonitors }}
+  {{- range .Values.serviceMonitors }}
+apiVersion: {{ printf "%s/v1" ($.Values.prometheusOperator.crdApiGroup | default "monitoring.coreos.com") }}
+kind: ServiceMonitor
+metadata:
+  name: {{ .labelSelector }}
+  namespace: monitoring
+  labels:
+    app: {{ .labelSelector }}
+    release: prometheus-operator
+spec:
+  endpoints:
+    - interval: {{ .scrapeInterval | default "30s" }}
+      port: {{ .targetPort }}
+    {{- if .targetPath }}
+      path: {{ .targetPath }}
+    {{- end }}
+  selector:
+    matchLabels:
+      app: {{ .labelSelector }}
+  namespaceSelector:
+    matchNames:
+      - {{ .targetNamespace }}
+
+---
+  {{- end }}
+{{ end }}

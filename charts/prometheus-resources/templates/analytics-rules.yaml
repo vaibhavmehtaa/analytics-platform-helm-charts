@@ -1,0 +1,14 @@
+# https://github.com/coreos/prometheus-operator/blob/master/Documentation/design.md#prometheusrule
+{{- if .Values.prometheusRules }}
+apiVersion: {{ printf "%s/v1" (.Values.prometheusOperator.crdApiGroup | default "monitoring.coreos.com") }}
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Name }}-ap-rules
+  namespace: {{ .Release.Namespace | default "monitoring" }}
+  labels:
+    app: {{ .Values.prometheusOperator.chartName }}
+    chart: {{ .Chart.Name }}
+spec:
+  groups:
+{{ toYaml .Values.prometheusRules | indent 4 }}
+{{ end }}

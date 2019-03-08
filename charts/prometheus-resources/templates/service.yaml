@@ -1,0 +1,36 @@
+{{ range .Values.apps }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $.Release.Name }}-{{ .name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ .name }}
+    chart: {{ $.Chart.Name }}
+spec:
+  ports:
+    - port: 80
+      targetPort: {{ .port }}
+  selector:
+    app: {{ .name }}
+---
+{{ end }}
+
+---
+{{ range .Values.apps }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-%s-%s" $.Release.Name .name $.Values.authProxy.name | trunc 63 }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    app: {{ .name }}-{{ $.Values.authProxy.name }}
+    chart: {{ $.Chart.Name }}
+spec:
+  ports:
+    - port: 80
+      targetPort: {{ $.Values.authProxy.containerPort }}
+  selector:
+    target: {{ .name }}
+---
+{{ end }}
