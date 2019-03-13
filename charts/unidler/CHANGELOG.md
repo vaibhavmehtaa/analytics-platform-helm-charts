@@ -5,6 +5,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v3.2.0] - 2019-03-13
+### Changed
+New version of unidler which should fix [Issue #95]:
+
+"Unidler giving misleading messages", specifically it sometimes shows a
+strange `undefined` JS error. We think this was caused by the unidler
+erroneously updating the app Service too early. If then the client
+for whatever reason makes another request to `/events` this will go to
+the actual app which doesn't have a `/events` endpoint.
+
+Other improvements:
+- users receive more updates as their app is being unidled
+- fixed space between text and image
+- unidler logs more useful things now
+- other internal refactorings which shouldn't be user-facing
+- Don't set `INGRESS_CLASS_NAME` variable as unidler doesn't use it anymore
+
+[Issue #95](https://github.com/ministryofjustice/analytics-platform/issues/95)
+
+
 ## [v3.1.3] - 2019-02-14
 ### Changed
 Audit clusterrole rules, remove unused verbs
