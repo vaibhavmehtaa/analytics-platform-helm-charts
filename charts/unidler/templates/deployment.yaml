@@ -20,9 +20,6 @@ spec:
         ports:
         - name: http
           containerPort: {{ .Values.service.internalPort }}
-        env:
-          - name: INGRESS_CLASS_NAME
-            value: "{{ .Values.ingress.className }}"
         readinessProbe:
           httpGet:
             path: /healthz
