@@ -7,7 +7,7 @@ DRY_RUN=true
 CONFIG_PATH=
 ENV=alpha
 HELM_REPO=mojanalytics/webapp
-HELM_VER=2.9.1
+HELM_VER=2.13.0
 NAMESPACE=apps-prod
 MOJANALYTICS_REPO=http://moj-analytics-helm-repo.s3-website-eu-west-1.amazonaws.com
 PLATFORM=$(uname -s)
@@ -71,7 +71,7 @@ fi
 helm repo list | grep -F 'mojanalytics' && helm repo update || helm repo add mojanalytics $MOJANALYTICS_REPO
 
 # Get a list of shiny-apps
-SHINY_APPS=$(helm ls --max 10000 | grep "${NAMESPACE}" | awk '{print $1}')
+SHINY_APPS=$(helm ls --max 10000 --namespace "${NAMESPACE}" | awk '{print $1}')
 
 # When specifying values files.  The priority will be given to the last (right-most) file specified
 for shiny_app in $SHINY_APPS; do
