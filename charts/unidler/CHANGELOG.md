@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v3.2.1] - 2019-03-14
+### Changed
+Bumped unidler to version `v0.2.1`.
+
+**Better handling of connection errors and wording tweaks**
+
+- treat connection errors differently: e.g. don't show undefined message and
+  don't close EventSource to allow recover
+- tell the user that wait for the deployment could take minutes
+- don't send low-level k8s error to user when Service.Patch() failed
+- improved logging messages to be more accurate of what actually happened
+
+
 ## [v3.2.0] - 2019-03-13
 ### Changed
 New version of unidler which should fix [Issue #95]:
