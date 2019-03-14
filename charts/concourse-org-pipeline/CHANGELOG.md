@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2019-03-05
+### Changed
+Changed release versions of webhook-dispatcher and org-scanner releases
+This is to allow us to use the command line with parameters for concourse
+
+
 ## [0.2.0] - 2019-02-28
 ### Added
 Added `secrets.lookup-access-key-id` and `secrets.lookup-secret-access-key` secrets, intended to give access to lookup s3 buckets.
