@@ -1,4 +1,5 @@
 Username: ""
+toolsDomain: "tools.example.com"
 
 aws:
   iamRole: ""
