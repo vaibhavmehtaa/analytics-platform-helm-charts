@@ -1,12 +1,13 @@
 # Jupyter-Lab Helm Chart
 
 
-## Installing the Chart
+## Installing/upgrading the Chart
 
-To install an jupyter instance for the user specified in the Username variable (Github username):
+To install/upgrade an jupyter instance for the user specified in the Username
+variable (Github username):
 
 ```bash
-$ helm install charts/jupyter-lab -f chart-env-config/ENV/jupyter.yml --set aws.iamRole=ENV_user_USERNAME --set Username=USERNAME --namespace user-USERNAME --name=USERNAME-jupyter
+$ helm upgrade --dry-run --debug --install USERNAME-jupyter charts/jupyter-lab --namespace user-USERNAME --set Username=USERNAME --set aws.iamRole=ENV_user_USERNAME -f chart-env-config/ENV/jupyter.yml
 ```
 
 The instance will be available at <https://USERNAME-jupyter-lab.tools.ENV.mojanalytics.xyz>.
@@ -14,13 +15,7 @@ The instance will be available at <https://USERNAME-jupyter-lab.tools.ENV.mojana
 **NOTE**: Change the environment config file to deploy in a different environment
           (the URL will change accordingly)
 
-
-## Upgrading the Chart
-
-To upgrade a user jupyter chart:
-```bash
-$ helm upgrade USERNAME-jupyter charts/jupyter-lab -f chart-env-config/ENV/jupyter.yml --set Username=USERNAME
-```
+**NOTE**: Remove the `--dry-run` option to install/upgrade for real.
 
 
 ## Configuration
