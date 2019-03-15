@@ -6,6 +6,7 @@ metadata:
   labels:
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     app: {{ .Chart.Name }}
+    host: {{ template "host" . }}
 spec:
   ports:
     - name: http

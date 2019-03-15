@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2019-03-15
+
+### Changed
+- added `host=` label to everything, this will help simplify the idler
+- don't set unused `TOOLS_DOMAIN` environment variable
+- simplified installation/upgrade instructions in README
+- added `host` template to remove duplication
+- removed unused `name` template
+
 ## [1.6.0] - 2019-02-14
 
 ### Changed

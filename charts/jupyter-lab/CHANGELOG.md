@@ -4,15 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2019-03-15
+### Changed
+- added `host=` label to everything, this will help simplify the idler
+- simplified installation/upgrade instructions in README
+- added `host` template to remove duplication
+- added NOTES.txt so that jupyter URL will be shown after installation
+
+
 ## [0.1.17] - 2019-03-07
 ### Changed
 - Run `usermod` in Docker build to avoid it being run on startup. This will
 improve startup time for users.
 
+
 ## [0.1.16] - 2018-12-13
 ### Changed
 - Revert previous change setting uid as 1001 at the pod level. We have
 put this back into the image as we found a couple of issues with this approach
+
 
 ## [0.1.14] - 2018-11-29
 ### Changed
@@ -20,17 +30,21 @@ put this back into the image as we found a couple of issues with this approach
   no longer done by the image itself
 - Re-added `livenessProbe` and `readinessProbe` from Jupyter container
 
+
 ## [0.1.13] - 2018-11-28
 ### Changed
 - Removed `livenessProbe` and `readinessProbe` from Jupyter container
+
 
 ## [0.1.12] - 2018-11-19
 ### Changed
 - Modified `livenessProbe` and `readinessProbe` to type `exec` for Jupyter container
 
+
 ## [0.1.11] - 2018-11-14
 ### Changed
 - Adjusted `livenessProbe` and `readinessProbe` to bigger values for Jupyter container
+
 
 ## [0.1.10] - 2018-10-19
 ### Changed

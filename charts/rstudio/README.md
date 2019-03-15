@@ -1,12 +1,12 @@
 # RStudio Helm Chart
 
 
-## Installing the Chart
+## Install/upgrade the Chart
 
-To install an rstudio instance for the user specified in the username variable (Github username):
+To install/upgrade an rstudio instance for the user specified in the username variable (Github username):
 
 ```bash
-$ helm install charts/rstudio -f chart-env-config/ENV/rstudio.yml --set username=USERNAME --namespace user-USERNAME --name=USERNAME-rstudio
+$ helm upgrade --dry-run --debug --install USERNAME-rstudio --namespace user-USERNAME --set username=USERNAME charts/rstudio -f chart-env-config/ENV/rstudio.yml
 ```
 
 The instance will be available in <https://USERNAME-rstudio.tools.ENV.mojanalytics.xyz>.
@@ -14,13 +14,7 @@ The instance will be available in <https://USERNAME-rstudio.tools.ENV.mojanalyti
 **NOTE**: Change the environment config file to deploy in a different environment
           (the URL will change accordingly)
 
-
-## Upgrading the Chart
-
-To upgrade a user rstudio chart:
-```bash
-$ helm upgrade USERNAME-rstudio charts/rstudio -f chart-env-config/ENV/rstudio.yml --set username=USERNAME
-```
+**NOTE**: Remove the `--dry-run` option to install/upgrade for real.
 
 
 ## Configuration

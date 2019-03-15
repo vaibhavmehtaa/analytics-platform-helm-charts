@@ -5,6 +5,7 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
+    host: "{{ template "host" .}}"
 spec:
   sessionAffinity: ClientIP
   selector:

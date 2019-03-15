@@ -5,6 +5,7 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
+    host: "{{ template "host" .}}"
     "mojanalytics.xyz/idleable": "true"
 spec:
   replicas: 1
@@ -17,6 +18,7 @@ spec:
     metadata:
       labels:
         app: "{{ .Chart.Name }}"
+        host: "{{ template "host" .}}"
       annotations:
         iam.amazonaws.com/role: {{ .Values.aws.iamRole }}
     spec:
@@ -136,8 +138,6 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: secure_cookie_key
-            - name: TOOLS_DOMAIN
-              value: {{ .Values.toolsDomain }}
           readinessProbe:
             httpGet:
               path: /

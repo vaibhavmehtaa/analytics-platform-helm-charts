@@ -6,10 +6,17 @@ metadata:
   labels:
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     app: {{ .Chart.Name }}
+    host: {{ template "host" . }}
 spec:
   template:
     metadata:
       name: {{ template "fullname" . }}-job
+      labels:
+        chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+        host: {{ template "host" . }}
+        # NOTE: DO NOT add `app` label here as it's used by the service
+        #       to direct traffic to the jupyter pod and we don't want the
+        #       Job's pod to receive that traffic.
     spec:
       serviceAccountName: {{ .Values.Username }}-jupyter
       restartPolicy: Never
