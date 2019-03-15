@@ -138,8 +138,6 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: secure_cookie_key
-            - name: TOOLS_DOMAIN
-              value: {{ .Values.toolsDomain }}
           readinessProbe:
             httpGet:
               path: /
