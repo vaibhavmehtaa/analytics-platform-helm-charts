@@ -1,0 +1,8 @@
+priority_classes:
+  - name: system
+    priority_value: 1000000000
+    description: "Reserved for high priority system pods/daemonsets"
+# - name: default-priority
+#   global: true
+#   priority_value: 50000
+#   description: "Not low or high priority"
