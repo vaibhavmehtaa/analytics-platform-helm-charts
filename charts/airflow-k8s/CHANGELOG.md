@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.2.1] - 2019-03-20
+### Changed
+- Set git-sync repo to a kube secret as it now contains access token for github
+
+
 ## [0.2.0] - 2019-02-25
 ### Changed
 - Upgraded `redis` chart dependency `3.6.4` => `6.1.3`
