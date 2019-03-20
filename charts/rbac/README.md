@@ -34,13 +34,13 @@ helm upgrade --dry-run --debug --install --namespace default rbac-chart charts/r
 
 Configured Resources
 --------------
-| Name/Team       | Type            | github org              | Description               |
-| --------------- | --------------- | ----------              | -----------               |
-| App-Support     | `Group`         | moj-analytical-services | Shiny application support |
-| Cluster-Admins  | `Group`         | moj-analytical-services | Kubernetes Cluster Admins |
-| Airflow_support | `Group`         | moj-analytical-services | Airflow job support       |
-| generic-support | `Group`         | moj-analytical-services | Read-only access to non-sensitive resources in all namespaces |
-| kubelet-api     | `User`          | ""                      | Binding for builtin account|
+| Name/Team       | Type            | github org              | Scope                | Description                     |
+| --------------- | --------------- | ----------              | -----                |  -----------                    |
+| App-Support     | `Group`         | moj-analytical-services | Namespace: apps-prod |  Shiny application support. Read, edit resources except `configmaps` and `secrets`. Delete and exec `pods` |
+| Cluster-Admins  | `Group`         | moj-analytical-services | Cluster Wide         |  Kubernetes Cluster Admins      |
+| Airflow-support | `Group`         | moj-analytical-services | Namespace: airflow   |  Airflow job support. Read, edit resources except `configmaps` and `secrets`. Delete and exec `pods` |
+| generic-support | `Group`         | moj-analytical-services | Cluster Wide         |  Read-only access to non-sensitive resources in all namespaces |
+| kubelet-api     | `User`          | ""                      | Cluster Wide         |  Binding for builtin `kubelet-api` account. Auth between kubelet and API server |
 
 
 #### Example
