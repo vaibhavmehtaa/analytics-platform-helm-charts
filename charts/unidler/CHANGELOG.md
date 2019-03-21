@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v3.2.2] - 2019-03-21
+### Changed
+Bumped unidler to version `v0.2.3`.
+
+**Less errors reaching the user and UX tweaks**
+
+- Removed #/6 "progress" messages as confusing (for some users)
+- Better handling of "nonexistent key" error when patching Service to avoid
+  showing "Failed to redirect back your app" when we can safely recover.
+- when unidling an app which has annotation with unidled number of replicas
+  of `0`, assume this is a mistake and set number of replicas to `1`.
+
+
 ## [v3.2.1] - 2019-03-14
 ### Changed
 Bumped unidler to version `v0.2.1`.
