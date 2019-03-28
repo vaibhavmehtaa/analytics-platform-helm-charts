@@ -45,7 +45,7 @@ github:
 
 githubOrgResource:
   image: quay.io/mojanalytics/github-org-resource
-  tag: v0.5.6
+  tag: v0.5.7
 
 ipRanges:
   wifi102pf: ""
