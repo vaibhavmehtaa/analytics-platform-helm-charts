@@ -66,6 +66,10 @@ spec:
               value: {{ .Values.Username }}
             - name: COOKIE_MAXAGE
               value: {{ .Values.authProxy.cookie_maxage | quote }}
+            - name: TUNNEL_ENABLED
+              value: {{ .Values.authProxy.tunnel.enabled | quote }}
+            - name: TUNNEL_PORT_RANGE
+              value: {{ .Values.authProxy.tunnel.port_range | quote }}
           readinessProbe:
             httpGet:
               path: /healthz
