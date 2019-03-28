@@ -1,7 +1,10 @@
 # Airflow Helm Chart
 
-Run Airflow on Kubernetes, tasks are executed as new pods.
+Run Airflow on Kubernetes.
 
+It looks for DAGs in the airflow-dags repository. Tasks are executed as new k8s pods if you use KubernetesPodOperator.
+
+(gitSync is used to get the airflow-dags repository, polling it regularly.)
 
 ## Install/Upgrade the Chart
 
@@ -37,7 +40,7 @@ Airflow will be available at <https://airflow.tools.ENV.mojanalytics.xyz>.
 | `airflow.volumes.logs.nfsServer` | Host of the NFS server where logs will be stored. | `""` |
 | `airflow.volumes.logs.path` | Path on the NFS server where DAGs will be stored. | `"/logs"` |
 | `gitSync.interval`| Number of seconds between DAGs syncing from Git repository | `180` (3 minutes) |
-| `gitSync.repository`| Git repository with the DAGs. This needs to be public | `"https://github.com/ministryofjustice/analytics-platform-airflow-example-dags"` |
+| `gitSync.repository`| Git repository with the DAGs. If it is not a public repo, specify creds: `https://username:password@github.com/username/repository.git` | `"https://github.com/ministryofjustice/analytics-platform-airflow-example-dags"` |
 | `gitSync.branch`| Branch to use when syncing the Git repository with the DAGs | `master` |
 | `postgres.host`     | (required)      | `""`        |
 | `postgres.port`     |                 | `5432`      |
