@@ -10,7 +10,7 @@ service:
 
 authProxy:
   image: quay.io/mojanalytics/auth-proxy
-  tag: v0.1.6
+  tag: v2.0.1
   imagePullPolicy: IfNotPresent
   containerPort: 3000
   resources:
@@ -22,7 +22,11 @@ authProxy:
       memory: 64Mi
   auth0_domain: ""
   auth0_client_id: ""
+  auth0_client_secret: "" # put dummy value here to stop helm lint complaining
   cookie_maxage: 36000 #10 hours
+  tunnel:
+    enabled: "true"
+    port_range: "8050,4040-4050"
 
 jupyter:
   image: quay.io/mojanalytics/datascience-notebook
