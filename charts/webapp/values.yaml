@@ -27,7 +27,7 @@ AWS:
 Fluentd:
   Image:
     Repository: gcr.io/google-containers/fluentd-elasticsearch
-    Tag: v2.0.4
+    Tag: v2.4.0
     PullPolicy: "IfNotPresent"
 Elasticsearch:
   Scheme: "http"

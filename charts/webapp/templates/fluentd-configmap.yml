@@ -60,7 +60,6 @@ data:
     <filter web_app.**>
       @type record_transformer
       enable_ruby true
-      types time_nano:integer
       <record>
         app_name "#{ENV['FLUENT_SOURCE_TAG']}"
       </record>
@@ -77,7 +76,9 @@ data:
        @type elasticsearch
        @log_level info
        type_name time
+       target_type_key time
        include_tag_key true
+       log_es_400_reason true
        scheme "#{ENV['FLUENT_ELASTICSEARCH_SCHEME']}"
        host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
        port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
