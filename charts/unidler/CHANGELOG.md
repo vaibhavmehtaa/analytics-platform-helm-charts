@@ -5,6 +5,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v4.0.0] - 2019-03-27
+### Changed
+Bumped unidler to version `v1.0.0`.
+
+**NOTE**: This is a breaking change as the unidler now uses the `host` labels
+to retrieve the resources to change. But these labels need to be there.
+So not exactly retro-compatible.
+
+- use `host` labels to find Ingress, Deployment, etc...
+- use `mojanalytics.xyz/replicas-when-unidled` annotation instead of old
+  `mojanalytics.xyz/idled-at` which was trying to do too many things at once
+
+SEE:
+- [unidler changes](https://github.com/ministryofjustice/analytics-platform-go-unidler/pull/9)
+- [migration to add labels](https://github.com/ministryofjustice/analytics-platform-ops/pull/266)
+
+
 ## [v3.2.2] - 2019-03-21
 ### Changed
 Bumped unidler to version `v0.2.3`.
