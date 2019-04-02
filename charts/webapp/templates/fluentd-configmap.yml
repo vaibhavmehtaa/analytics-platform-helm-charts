@@ -79,6 +79,7 @@ data:
        target_type_key time
        include_tag_key true
        log_es_400_reason true
+       ssl_version TLSv1_2
        scheme "#{ENV['FLUENT_ELASTICSEARCH_SCHEME']}"
        host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
        port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"

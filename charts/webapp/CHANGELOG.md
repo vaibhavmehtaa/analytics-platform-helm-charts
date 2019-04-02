@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.3.24] - 2019-04-02
+### FluentD Upgrade cipher version
+- Add `ssl_version TLSv1_2` to output configuration
+
 ## [1.3.23] - 2019-03-28
 ### FluentD Upgrade
 - Set `target_type_key` to `true` in output configuration 
