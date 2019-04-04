@@ -1,5 +1,5 @@
 # Docker image version
-image: quay.io/mojanalytics/idler:v0.5.2
+image: quay.io/mojanalytics/idler:v1.0.0
 
 # Schedule when to run
 #   min    hour   day    month (Sun-Sat)
@@ -12,9 +12,9 @@ schedule: "0 22 * * *"
 # See https://kubernetes.io/docs/user-guide/cron-jobs/#concurrency_policy
 concurrencyPolicy: Forbid
 
-labelSelector: 'app=rstudio'
+labelSelector: 'mojanalytics.xyz/idleable=true'
 
-logLevel: 'INFO'
+logLevel: 'DEBUG'
 
 # percentage of a CPU in the last minute which marks an active instance
 # (which should not be idled)

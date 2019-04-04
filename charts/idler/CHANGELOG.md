@@ -4,22 +4,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [2.0.0] - 2019-03-29
+### Changed
+- Use `idler` to `v1.0.0`:
+  - adds `mojanalytics.xyz/replicas-when-unidled` annotation with number of
+    replicas desired at the time of udling. This is used by `unidler`
+  - `mojanalytics.xyz/idled-at` only contains time when app was idled,
+    nothing else
+  - renamed env var `RSTUDIO_ACTIVITY_CPU_THRESHOLD` =>
+    `CPU_ACTIVITY_THRESHOLD`
+  - internal refactorings
+  - `labelSelector` defaults to `mojanalytics.xyz/idleable=true` now
+    (in `idler`)
+  - See PR: ministryofjustice/analytics-platform-idler#68
+- added `app=$RELEASE_NAME` to job's pods so that we can see logs and
+  investigate things much more easily
+- `labelSelector` defaults to `mojanalytics.xyz/idleable=true` now (in helm
+  chart)
+- `logLevel` defaults to `DEBUG`. We want to see what's going on unless
+  we explicit silence it for whatever reason.
+
+
 ## [1.2.4] - 2019-02-18
 ### Changed
 Bump to 0.5.2 to get bugfix for targetport
 
+
 ## [1.2.3] - 2019-02-18
 ### Changed
 Bump image version to 0.5.1 to pick up bugfix for incorrect service update
+
 
 ## [1.2.2] - 2019-02-14
 ### Changed
 Corrected verb for read services
 Remove unused permissions for ingresses
 
+
 ## [1.2.1] - 2019-02-05
 ### Changed
 Added permission to read and patch services
+
 
 ## [1.2.0] - 2019-01-29
 ### Changed
@@ -27,15 +53,18 @@ Idling was achieved by disabling the app ingress and adding the app hostname to 
 If multiple users unidled at the same time, there could be a race condition when removing the hostnames from the unidler ingress.
 This change does away with editing ingresses altogether and edits only the app service. By changing the service to what is essentially a CNAME forwarding to the unidler, requests to the app host are handled by the unidler.
 
+
 ## [1.1.0] - 2018-10-10
 ### Changed
 - Add support for idling Jupyter-lab
+
 
 ## [1.0.1] - 2018-10-09
 ### Changed
 - Using a new version of idler (`v0.3.1`) with more support for cpu metrics in
   microcorescores:
   https://github.com/ministryofjustice/analytics-platform-idler/pull/20
+
 
 ## [1.0.0] - 2018-10-03
 ### Changed

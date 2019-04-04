@@ -12,6 +12,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app: {{ .Release.Name }}
         spec:
           serviceAccountName: {{ .Release.Name }}
           containers:
@@ -22,6 +25,6 @@ spec:
               value: '{{ .Values.logLevel }}'
             - name: LABEL_SELECTOR
               value: '{{ .Values.labelSelector }}'
-            - name: RSTUDIO_ACTIVITY_CPU_THRESHOLD
+            - name: CPU_ACTIVITY_THRESHOLD
               value: '{{ .Values.cpuActivityThreshold }}'
           restartPolicy: Never
