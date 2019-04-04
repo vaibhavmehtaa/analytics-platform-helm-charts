@@ -4,10 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [0.3.0] - 2019-04-04
+### Changed
+- Added `"mojanalytics.xyz/idleable": "true"` label to pods. This will
+  make the "don't idle if CPU usage is above X%" logic work again.
+
+
 ## [0.2.1] - 2019-03-28
 ### Changed
 - Update version of auth-proxy to one that supports tunneling.
 - Allow people to tunnel dash apps.
+
 
 ## [0.2.0] - 2019-03-15
 ### Changed
