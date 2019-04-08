@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-webserver
+  namespace: {{ .Release.Namespace }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: {{ .Release.Name }}
+    component: webserver
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yml") . | sha256sum }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      component: webserver
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        component: webserver
+        airflow-redis-client: "false"
+    spec:
+      serviceAccountName: {{ .Release.Name }}
+      containers:
+        - name: {{ .Chart.Name }}-auth-proxy
+          image: {{ .Values.authProxy.image }}:{{ .Values.authProxy.tag }}
+          imagePullPolicy: {{ .Values.authProxy.imagePullPolicy }}
+          ports:
+            - name: proxy
+              containerPort: {{ .Values.authProxy.containerPort }}
+          env:
+            - name: TARGET_URL
+              value: http://localhost:{{ .Values.airflow.image.port }}
+            - name: AUTH0_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth0_domain
+            - name: AUTH0_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth0_client_id
+            - name: AUTH0_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth0_callback_url
+            - name: AUTH0_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: auth0_client_secret
+            - name: COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}
+                  key: cookie_secret
+            - name: NICKNAME_RE
+              value: {{ .Values.Username }}
+            - name: COOKIE_MAXAGE
+              value: {{ .Values.authProxy.cookie_maxage | quote }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: proxy
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: proxy
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          resources:
+{{ toYaml .Values.authProxy.resources | indent 12 }}
+        - name: webserver
+          image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
+          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
+          command:
+            - "airflow"
+          args:
+            - "webserver"
+          ports:
+            - name: http
+              containerPort: {{ .Values.airflow.image.port }}
+          env:
+            {{ include "env" . | indent 12 }}
+          volumeMounts:
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/airflow.cfg
+              subPath: airflow.cfg
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/webserver_config.py
+              subPath: webserver_config.py
+            - name: home
+              mountPath: "/home/{{ .Values.Username }}"
+      volumes:
+        - name: {{ .Release.Name }}-config
+          configMap:
+            name: {{ .Release.Name }}
+        - name: home
+          persistentVolumeClaim:
+            claimName: nfs-home
