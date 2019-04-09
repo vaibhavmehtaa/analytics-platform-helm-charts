@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [1.8.0] - 2019-03-15
+
+### Changed
+- Added `"mojanalytics.xyz/idleable": "true"` label to pods. This will
+  make the "don't idle if CPU usage is above X%" logic work again.
+
+
 ## [1.7.0] - 2019-03-15
 
 ### Changed
@@ -12,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - simplified installation/upgrade instructions in README
 - added `host` template to remove duplication
 - removed unused `name` template
+
 
 ## [1.6.0] - 2019-02-14
 
@@ -22,12 +31,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - has a rstudio conda environment
 - maintains support for projects still using packrat
 
+
 ## [1.5.8] - 2018-10-17
 
 ### Changed
 - Version of rstudio image (3.4.2-6), it now points at the cran proxy, has boto3
   installed by default and is able to build udunits2 r package
 - Change pull policy for rstudio container to be 'IfNotPresent' instead of 'Always'
+
 
 ## [1.5.7] - 2018-10-17
 

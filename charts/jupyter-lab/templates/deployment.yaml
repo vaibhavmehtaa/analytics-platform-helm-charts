@@ -23,6 +23,7 @@ spec:
       labels:
         app: {{ .Chart.Name }}
         host: {{ template "host" . }}
+        "mojanalytics.xyz/idleable": "true"
       annotations:
         iam.amazonaws.com/role: {{ .Values.aws.iamRole }}
     spec:
