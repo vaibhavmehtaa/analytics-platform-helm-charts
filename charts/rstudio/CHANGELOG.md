@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [1.9.0] - 2019-03-10
+
+### Changed
+- Version of RStudio image with conda (r3.5.1-py3.7-conda-1)
+
+  New image able to recover from bad conda install better
+
 ## [1.8.0] - 2019-03-15
 
 ### Changed
