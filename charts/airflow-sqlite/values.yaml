@@ -21,15 +21,13 @@ airflow:
       smtp_mail_from: airflow@example.com
     webserver:
       enable_proxy_fix: "True"
-  admin:
-    username: ""
-    password: ""
-    email: ""
+service:
+  port: 80
 authProxy:
-  image: quay.io/mojanalytics/auth-proxy
-  tag: v2.0.1
-  imagePullPolicy: IfNotPresent
-  containerPort: 3000
+  image: "quay.io/mojanalytics/auth-proxy"
+  tag: "v2.0.1"
+  imagePullPolicy: "IfNotPresent"
+  containerPort: "3000"
   resources:
     limits:
       cpu: 100m
@@ -40,7 +38,7 @@ authProxy:
   auth0_domain: ""
   auth0_client_id: ""
   auth0_client_secret: "" # put dummy value here to stop helm lint complaining
-  cookie_maxage: 36000 #10 hours
+  cookie_maxage: 36000
 aws:
   iamRole: ""
   defaultRegion: "eu-west-1"
