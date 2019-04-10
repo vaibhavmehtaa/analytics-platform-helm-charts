@@ -30,7 +30,7 @@ rstudio:
   port: "8787"
   image:
     repository: quay.io/mojanalytics/rstudio
-    tag: "r3.5.1-py3.7-conda"
+    tag: "r3.5.1-py3.7-conda-1"
     pullPolicy: "IfNotPresent"
     # init option allows you to run an init container that does the setup of the conda environment
     # this is quite slow and if it was run as part of the main container then it would cause problems.
