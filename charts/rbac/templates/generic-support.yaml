@@ -16,9 +16,10 @@ rules:
       - "services"
       - "deployments"
       - "pods"
-      # - "pods/log"
+      - "pods/log"
       - "cronjobs"
       - "jobs"
+      - "namespaces"
     verbs: ["get", "list", "watch"]
 
 ---
