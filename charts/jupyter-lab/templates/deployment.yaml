@@ -64,7 +64,7 @@ spec:
                   name: {{ template "fullname" . }}
                   key: cookie_secret
             - name: NICKNAME_RE
-              value: {{ .Values.Username }}
+              value: "^{{ .Values.Username }}$"
             - name: COOKIE_MAXAGE
               value: {{ .Values.authProxy.cookie_maxage | quote }}
             - name: TUNNEL_ENABLED
