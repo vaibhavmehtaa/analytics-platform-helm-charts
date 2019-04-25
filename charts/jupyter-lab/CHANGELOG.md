@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.3.1] - 2019-04-25
+### Changed
+- Set auth-proxy name regex to exact match of username
+
+
 ## [0.3.0] - 2019-04-04
 ### Changed
 - Added `"mojanalytics.xyz/idleable": "true"` label to pods. This will
