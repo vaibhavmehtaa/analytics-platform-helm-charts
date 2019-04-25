@@ -4,4 +4,4 @@ metadata:
   name: user-{{ .Values.Username }}
   annotations:
     iam.amazonaws.com/allowed-roles: |
-      ["{{ .Values.Env }}_.*"]
+      ["{{ .Values.Env }}_user_{{ .Values.Username }}"]
