@@ -4,20 +4,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [1.3.25] - 2019-04-26
+### Changed
+- `auth-proxy` container don't run as `root` (bumped
+  image tag `v0.1.9` => `v2.1.0`)
+
+
 ## [1.3.24] - 2019-04-02
 ### FluentD Upgrade cipher version
 - Add `ssl_version TLSv1_2` to output configuration
 
+
 ## [1.3.23] - 2019-03-28
 ### FluentD Upgrade
-- Set `target_type_key` to `true` in output configuration 
+- Set `target_type_key` to `true` in output configuration
 - Set `log_es_400_reason` to `true` in output configuration
 - Removed record transformer `types` key because it's not needed
 - Changed FluentD image tag from `v2.0.4` to `v2.4.0`
 
+
 ## [1.3.22] - 2019-03-14
 ### FluentD Resources
-- Increased cpu shares for fluentd. Requests and limits from 200m to 500m and 500m to 1 core respectively 
+- Increased cpu shares for fluentd. Requests and limits from 200m to 500m and 500m to 1 core respectively
+
 
 ## [1.3.21] - 2019-03-08
 ### FluentD Resources
