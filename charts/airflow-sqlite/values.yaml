@@ -25,7 +25,7 @@ service:
   port: 80
 authProxy:
   image: "quay.io/mojanalytics/auth-proxy"
-  tag: "v2.0.1"
+  tag: "v2.1.0"
   imagePullPolicy: "IfNotPresent"
   containerPort: "3000"
   resources:
