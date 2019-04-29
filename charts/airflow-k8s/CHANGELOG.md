@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.3.0] - 2019-04-29
+### Changed
+Bumped Airflow to version `1.10.3`.
+
+See:
+- Dockerfile changes: https://github.com/ministryofjustice/analytics-platform-airflow-docker-image/pull/5
+- Airflow Changelog: https://github.com/apache/airflow/blob/master/CHANGELOG.txt
+
+
 ## [0.2.1] - 2019-03-20
 ### Changed
 - Set git-sync repo to a kube secret as it now contains access token for github
