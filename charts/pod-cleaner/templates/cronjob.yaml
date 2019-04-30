@@ -1,0 +1,51 @@
+apiVersion: batch/v2alpha1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    type: cron
+spec:
+  schedule: "{{ .Values.schedule }}"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: {{ .Release.Name }}
+            chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        spec:
+          serviceAccountName: {{ .Release.Name }}
+          containers:
+          - name: succeeded-pods-cleaner
+            image: "{{ .Values.image }}"
+            command:
+            - "scripts/pod_cleaner.sh"
+            env:
+            - name: POD_CLEANER_PHASE
+              value: Succeeded
+            - name: POD_CLEANER_DAYS
+              value: '{{ .Values.deleteSucceededAfter }}'
+            volumeMounts:
+              - name: {{ .Release.Name }}
+                mountPath: "/scripts"
+          - name: failed-pods-cleaner
+            image: "{{ .Values.image }}"
+            command:
+            - "scripts/pod_cleaner.sh"
+            env:
+            - name: POD_CLEANER_PHASE
+              value: Failed
+            - name: POD_CLEANER_DAYS
+              value: '{{ .Values.deleteFailedAfter }}'
+            volumeMounts:
+              - name: {{ .Release.Name }}
+                mountPath: "/scripts"
+          restartPolicy: Never
+          volumes:
+          - name: {{ .Release.Name }}
+            configMap:
+              name: {{ .Release.Name }}
+              defaultMode: 500

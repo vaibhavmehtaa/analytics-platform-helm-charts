@@ -1,0 +1,3 @@
+All done, cron job is scheduled for "{{ .Values.schedule }}":
+- successful pods will be deleted after {{ .Values.deleteSucceededAfter }} days
+- failed pods will be deleted after {{ .Values.deleteFailedAfter }} days
