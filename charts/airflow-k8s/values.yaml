@@ -45,9 +45,9 @@ gitSync:
   repository: "https://github.com/ministryofjustice/analytics-platform-airflow-example-dags"
   branch: "master"
   image:
-    repository: "appertly/git-sync"
-    tag: "2.0.4"
-    pullPolicy: "Always"
+    repository: "quay.io/mojanalytics/git-sync"
+    tag: "0.0.1"
+    pullPolicy: "IfNotPresent"
 postgres:
   host: ""
   port: "5432"
