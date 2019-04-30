@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.3.1] - 2019-04-30
+### Changed
+- Set git-sync image to an image in quay
+
+See
+- Image: quay.io/mojanalytics/git-sync:0.0.1
+
+
 ## [0.3.0] - 2019-04-29
 ### Changed
 Bumped Airflow to version `1.10.3`.
