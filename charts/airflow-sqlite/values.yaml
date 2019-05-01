@@ -10,7 +10,7 @@ airflow:
     port: "8080"
   config:
     core:
-      parallelism: 1
+      parallelism: "1"
     smtp:
       smtp_host: localhost
       smtp_starttls: true

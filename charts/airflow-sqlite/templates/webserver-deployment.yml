@@ -5,24 +5,52 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-    app: {{ .Release.Name }}
-    component: webserver
+    app: {{ .Chart.Name }}
+    host: {{ template "host" . }}
+    component: all
   annotations:
     checksum/config: {{ include (print $.Template.BasePath "/configmap.yml") . | sha256sum }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
-      component: webserver
+      app: {{ .Chart.Name }}
+      component: all
   replicas: 1
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
-        component: webserver
+        app: {{ .Chart.Name }}
+        component: all
         airflow-redis-client: "false"
     spec:
       serviceAccountName: {{ .Release.Name }}
+      initContainers:
+        - name: "init"
+          image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
+          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
+          volumeMounts:
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/airflow.cfg
+              subPath: airflow.cfg
+            - name: home
+              mountPath: "/home/{{ .Values.Username }}"
+          env:
+            {{ include "env" . | indent 10 }}
+          command:
+            - "bash"
+          args:
+            - "-cx"
+            - >
+              ls -al /home &&
+              cd /home/{{ .Values.Username }} &&
+              mkdir -p airflow &&
+              cd /home/{{ .Values.Username }}/airflow &&
+              mkdir -p dags &&
+              mkdir -p db &&
+              mkdir -p logs &&
+              chmod -R 777 /home/{{ .Values.Username }}/airflow &&
+              cd `python -c "import site; print(site.getsitepackages()[0])"` &&
+              airflow initdb && airflow upgradedb
       containers:
         - name: {{ .Chart.Name }}-auth-proxy
           image: {{ .Values.authProxy.image }}:{{ .Values.authProxy.tag }}
@@ -95,6 +123,21 @@ spec:
             - name: {{ .Release.Name }}-config
               mountPath: /root/airflow/webserver_config.py
               subPath: webserver_config.py
+            - name: home
+              mountPath: "/home/{{ .Values.Username }}"
+        - name: scheduler
+          image: {{ .Values.airflow.image.repository }}:{{ .Values.airflow.image.tag }}
+          imagePullPolicy: {{ .Values.airflow.image.pullPolicy }}
+          command:
+            - "airflow"
+          args:
+            - "scheduler"
+          env:
+            {{ include "env" . | indent 12 }}
+          volumeMounts:
+            - name: {{ .Release.Name }}-config
+              mountPath: /root/airflow/airflow.cfg
+              subPath: airflow.cfg
             - name: home
               mountPath: "/home/{{ .Values.Username }}"
       volumes:
