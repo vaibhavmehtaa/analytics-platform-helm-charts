@@ -30,7 +30,7 @@ to delete old pods.
 | `schedule` | When to run the job that delete the old pods | `"0 5 * * *"` - every day at 5am, see https://kubernetes.io/docs/user-guide/cron-jobs/#schedule |
 
 
-## Caviats
+## Caveats
 Pods which are failing but that have `RestartPolicy=Always` will not be
 deleted because from kubernetes perspective these are still in `Running`
 phase.
