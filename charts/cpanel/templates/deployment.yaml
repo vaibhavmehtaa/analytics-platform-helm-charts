@@ -144,6 +144,31 @@ spec:
                 secretKeyRef:
                   name: "{{ template "fullname" . }}"
                   key: JUPYTER_LAB_AUTH_CLIENT_SECRET
+            - name: AIRFLOW_AUTH_CLIENT_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: AIRFLOW_AUTH_CLIENT_DOMAIN
+            - name: AIRFLOW_AUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: AIRFLOW_AUTH_CLIENT_ID
+            - name: AIRFLOW_AUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: AIRFLOW_AUTH_CLIENT_SECRET
+            - name: AIRFLOW_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: AIRFLOW_SECRET_KEY
+            - name: AIRFLOW_FERNET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ template "fullname" . }}"
+                  key: AIRFLOW_FERNET_KEY
           readinessProbe:
             httpGet:
               path: /auth/login
