@@ -10,15 +10,7 @@ airflow:
     port: "8080"
   config:
     core:
-      parallelism: 1
-    smtp:
-      smtp_host: localhost
-      smtp_starttls: true
-      smtp_ssl: false
-      smtp_user: airflow
-      smtp_password: airflow
-      smtp_port: 25
-      smtp_mail_from: airflow@example.com
+      parallelism: "1"
     webserver:
       enable_proxy_fix: "True"
 service:

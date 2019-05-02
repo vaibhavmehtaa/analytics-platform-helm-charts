@@ -20,5 +20,5 @@ Host
 e.g. username-airflow.example.com
 */}}
 {{- define "host" -}}
-{{- (printf "%s-airflow.%s" .Values.Username .Values.toolsDomain) | lower -}}
+{{- (printf "%s-%s.%s" .Values.Username .Chart.Name .Values.toolsDomain) | lower -}}
 {{- end -}}
