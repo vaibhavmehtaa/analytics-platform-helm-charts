@@ -1,4 +1,4 @@
 name: pod-cleaner
-description: Delete old completed pods
-version: 0.0.1
-appVersion: 0.0.1
+description: Delete old succeeded/failed/pending pods
+version: 0.1.0
+appVersion: 0.1.0

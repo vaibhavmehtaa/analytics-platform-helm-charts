@@ -1,5 +1,6 @@
 # Delete pods after...
 deleteFailedAfter: 10 # days
+deletePendingAfter: 10 # days
 deleteSucceededAfter: 3 # days
 
 # Docker image
