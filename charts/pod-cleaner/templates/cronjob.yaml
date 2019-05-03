@@ -19,18 +19,6 @@ spec:
         spec:
           serviceAccountName: {{ .Release.Name }}
           containers:
-          - name: succeeded-pods-cleaner
-            image: "{{ .Values.image }}"
-            command:
-            - "scripts/pod_cleaner.sh"
-            env:
-            - name: POD_CLEANER_PHASE
-              value: Succeeded
-            - name: POD_CLEANER_DAYS
-              value: '{{ .Values.deleteSucceededAfter }}'
-            volumeMounts:
-              - name: {{ .Release.Name }}
-                mountPath: "/scripts"
           - name: failed-pods-cleaner
             image: "{{ .Values.image }}"
             command:
@@ -40,6 +28,30 @@ spec:
               value: Failed
             - name: POD_CLEANER_DAYS
               value: '{{ .Values.deleteFailedAfter }}'
+            volumeMounts:
+              - name: {{ .Release.Name }}
+                mountPath: "/scripts"
+          - name: pending-pods-cleaner
+            image: "{{ .Values.image }}"
+            command:
+            - "scripts/pod_cleaner.sh"
+            env:
+            - name: POD_CLEANER_PHASE
+              value: Pending
+            - name: POD_CLEANER_DAYS
+              value: '{{ .Values.deletePendingAfter }}'
+            volumeMounts:
+              - name: {{ .Release.Name }}
+                mountPath: "/scripts"
+          - name: succeeded-pods-cleaner
+            image: "{{ .Values.image }}"
+            command:
+            - "scripts/pod_cleaner.sh"
+            env:
+            - name: POD_CLEANER_PHASE
+              value: Succeeded
+            - name: POD_CLEANER_DAYS
+              value: '{{ .Values.deleteSucceededAfter }}'
             volumeMounts:
               - name: {{ .Release.Name }}
                 mountPath: "/scripts"
