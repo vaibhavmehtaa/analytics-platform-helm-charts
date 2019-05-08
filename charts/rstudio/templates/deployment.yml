@@ -53,67 +53,49 @@ spec:
             - name: proxy
               containerPort: {{ .Values.authProxy.express.port }}
           env:
-            - name: USER
-              value: {{ .Values.username }}
-            - name: APP_PROTOCOL
-              value: {{ .Values.authProxy.appProtocol }}
-            - name: APP_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: app_host
-            - name: AUTH0_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: client_secret
-            - name: AUTH0_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: client_id
+            - name: TARGET_URL
+              value: http://localhost:{{ .Values.rstudio.port }}
             - name: AUTH0_DOMAIN
               valueFrom:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: domain
+            - name: AUTH0_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: client_id
             - name: AUTH0_CALLBACK_URL
               valueFrom:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: callback_url
+            - name: AUTH0_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: client_secret
             - name: COOKIE_SECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: cookie_secret
-            - name: SECURE_COOKIE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "fullname" . }}
-                  key: secure_cookie_key
+            - name: NICKNAME_RE
+              value: "^{{ .Values.username }}$"
             - name: COOKIE_MAXAGE
               value: "{{ .Values.authProxy.cookieMaxAge }}"
-            - name: PROXY_TARGET_HOST
-              value: localhost
-            - name: PROXY_TARGET_PORT
-              value: "{{ .Values.rstudio.port }}"
-            - name: EXPRESS_HOST
-              value: {{ .Values.authProxy.express.host }}
-            - name: EXPRESS_PORT
-              value: "{{ .Values.authProxy.express.port }}"
           readinessProbe:
             httpGet:
               path: /healthz
               port: proxy
-            initialDelaySeconds: 5
-            periodSeconds: 2
+            initialDelaySeconds: 15
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /healthz
               port: proxy
-            initialDelaySeconds: 10
-            periodSeconds: 2
+            initialDelaySeconds: 20
+            periodSeconds: 10
           resources:
 {{ toYaml .Values.authProxy.resources | indent 12 }}
 
