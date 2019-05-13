@@ -25,9 +25,10 @@ AuthProxy:
 AWS:
   IAMRole: ""
 Fluentd:
+  # https://github.com/kubernetes/kubernetes/blob/master/cluster/addons/fluentd-elasticsearch/fluentd-es-image/
   Image:
-    Repository: gcr.io/google-containers/fluentd-elasticsearch
-    Tag: v2.4.0
+    Repository: gcr.io/fluentd-elasticsearch/fluentd
+    Tag: v2.5.0
     PullPolicy: "IfNotPresent"
 Elasticsearch:
   Scheme: "http"
