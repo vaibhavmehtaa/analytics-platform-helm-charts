@@ -80,8 +80,15 @@ spec:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: cookie_secret
-            - name: NICKNAME_RE
-              value: "^{{ .Values.username }}$"
+            - name: USER
+              value: "{{ .Values.username }}"
+            - name: RSTUDIO_ADD_SECURE_COOKIE
+              value: "true"
+            - name: RSTUDIO_SECURE_COOKIE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: secure_cookie_key
             - name: COOKIE_MAXAGE
               value: "{{ .Values.authProxy.cookieMaxAge }}"
           readinessProbe:
