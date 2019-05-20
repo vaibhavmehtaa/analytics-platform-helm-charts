@@ -6,6 +6,8 @@
 set -e
 
 DRY_RUN=true
+LGRAY='\033[0;37m'
+NC='\033[0m'
 
 while true; do
 	read -p "Is this a DRY RUN? i.e. NO-OP [y/N]: " dry_run
@@ -16,16 +18,16 @@ while true; do
     esac
 done
 
-APP=rstudio
-IMAGE=rstudio
-TAG=v1.3.2
-POD_CONTAINER=r-studio-server
-NAMESPACES=$(kubectl get ns | grep user- | grep -v user-init-platform | cut -f1 -d' ')
+APP="${APP:-rstudio}"
+IMAGE="${IMAGE:-rstudio}"
+TAG="${TAG:-v1.3.2}"
+POD_CONTAINER="${POD_CONTAINER:-r-studio-server}"
+NAMESPACES="${NAMESPACES:-$(kubectl get ns | grep user- | grep -v user-init-platform | cut -f1 -d' ')}"
 
 
 
 for ns in $NAMESPACES; do
-
+	echo -e "${LGRAY}namespace: $ns\tlabelSelector: -l app=$APP\tcontainer: $POD_CONTAINER\timage: $IMAGE:$TAG${NC}"
 	kubectl set image deployments -l app=$APP $POD_CONTAINER=quay.io/mojanalytics/$IMAGE:$TAG \
 	--namespace $ns \
 	--dry-run=$DRY_RUN
