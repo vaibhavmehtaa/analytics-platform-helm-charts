@@ -4,14 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2019-05-21
+### Changed
+Bumped `auth-proxy` to version [`v4.0.1`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v4.0.1).
+
+This version of the proxy reads the `X-Forwarded-For` header
+but fixes the problem for websockets not able to read the headers.
+
+
 ## [1.4.0] - 2019-05-15
 ### Changed
 - `auth-proxy` to version [`v3.1.0`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v3.1.0)
 
+
 ## [1.3.26] - 2019-05-13
 ### FluentD update repository
-- Changed image repo from `gcr.io/google-containers/fluentd-elasticsearch` to `gcr.io/fluentd-elasticsearch/fluentd` 
-- Changed __fluentd__ image tag from `v2.4.0` to `v2.5.0` 
+- Changed image repo from `gcr.io/google-containers/fluentd-elasticsearch` to `gcr.io/fluentd-elasticsearch/fluentd`
+- Changed __fluentd__ image tag from `v2.4.0` to `v2.5.0`
 
 ## [1.3.25] - 2019-04-26
 ### Changed
