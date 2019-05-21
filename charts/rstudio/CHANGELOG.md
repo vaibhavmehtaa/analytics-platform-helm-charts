@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.0] - 2019-05-20
+### Changed
+Using `auth-proxy` [`v4.0.0`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v4.0.0)
+instead of the special `rstudio-auth-proxy`.
+
+The logic to add the RStudio secure cookie is now in the `auth-proxy`
+so we don't need to maintain two separate auth proxies.
+
+
 ## [1.10.0] - 2019-05-15
 ### Changed
 Use `rstudio-auth-proxy` [`v2.0.0`](https://github.com/ministryofjustice/analytics-platform-rstudio-auth-proxy/releases/tag/v2.0.0).

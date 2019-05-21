@@ -6,7 +6,7 @@
 To install/upgrade an rstudio instance for the user specified in the username variable (Github username):
 
 ```bash
-$ helm upgrade --dry-run --debug --install USERNAME-rstudio --namespace user-USERNAME --set username=USERNAME charts/rstudio -f chart-env-config/ENV/rstudio.yml
+$ helm upgrade --dry-run --debug --install USERNAME-rstudio --namespace user-USERNAME --set username=USERNAME --set aws.iamRole=ENV_user_USERNAME charts/rstudio -f chart-env-config/ENV/rstudio.yml
 ```
 
 The instance will be available in <https://USERNAME-rstudio.tools.ENV.mojanalytics.xyz>.
