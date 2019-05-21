@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.1] - 2019-05-21
+### Changed
+Bumped `auth-proxy` to version [`v4.0.1`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v4.0.1).
+
+This version of the proxy reads the `X-Forwarded-For` header
+but fixes the problem for websockets not able to read the headers.
+
+
 ## [2.0.0] - 2019-05-20
 ### Changed
 Using `auth-proxy` [`v4.0.0`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v4.0.0)

@@ -16,7 +16,7 @@ authProxy:
     port: 3000
   image:
     repository: quay.io/mojanalytics/auth-proxy
-    tag: "v4.0.0"
+    tag: "v4.0.1"
     pullPolicy: "IfNotPresent"
   resources:
     limits:
