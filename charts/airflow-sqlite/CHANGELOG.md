@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.2.1] - 2019-05-22
+### Changed
+Bumped `auth-proxy` to version [`v4.0.1`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v4.0.1).
+
+This version removes support for `NICKNAME_RE` and replaces it with
+a simple equality check with the `USER` environment variable.
+
+
 ## [0.2.0] - 2019-01-01
 ### Changed
 Set all containers to run in a single pod so it can be managed from the control panel.
