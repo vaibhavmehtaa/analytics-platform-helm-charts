@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [2.0.0] - 2019-05-29
+### Changed
+Replaced fluentd with [fluent-bit].
+
+fluent-bit is much lighter than fluentd which means the
+logging sidecar container doesn't require much CPU/memory anymore.
+
+Just for comparison the memory limit was 1000Mi while now it's at 50Mi.
+Even that is conservatively "high" as it's not clear at this stage
+how much resources fluent-bit will use in real-life scenarios.
+
+We bumped the major version of the helm chart as the fluent-bit
+resources values are now under `FluentBit.Resources` while previously they
+were at the top level.
+
+[fluent-bit]: https://docs.fluentbit.io/manual/v/1.1/
+
+
 ## [1.4.1] - 2019-05-21
 ### Changed
 Bumped `auth-proxy` to version [`v4.0.1`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v4.0.1).

@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: {{ template "fullname" . }}
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+    host: {{ template "hostname" . }}
+  name: "{{ template "fullname" . }}-fluent-bit"
+data:
+  source_tag: "{{ template "fullname" . }}"
+  logstash_prefix: "logstash-apps-{{ .Values.EnvName }}"
+  custom_parsers.conf: |
+      [PARSER]
+          Name           nginx-access-log
+          Format         regex
+          Regex          ^(?<remote>[^ ]*) (?<host>[^ ]*) (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^\"]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")? "(?<x_forwarded_for>[^ ]+)?"
+          Time_Key       time
+          Time_Format    %d/%b/%Y:%H:%M:%S %z
+
+      [PARSER]
+          Name           nginx-error-1st-line
+          Format         regex
+          Regex          ^\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2} \[\w+\] (?<pid>\d+).(?<tid>\d+):
+
+      [PARSER]
+          Name           nginx-error-nth-line
+          Format         regex
+          Regex          ^(?<time>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[(?<log_level>\w+)\] (?<pid>\d+).(?<tid>\d+): (?<message>.*)
+
+  add_time_nano.lua: |
+    function add_time_nano(tag, timestamp, record)
+        -- Record modified, so 'code' return value (first parameter) is 1
+        new_record = record
+        new_record["time_nano"] = timestamp * 1000000000
+        return 1, timestamp, new_record
+    end
+
+  fluent-bit.conf: |
+      [SERVICE]
+          Log_Level       {{ .Values.FluentBit.LogLevel }}
+          Parsers_File    custom_parsers.conf
+
+      # shiny-server application logs
+      [INPUT]
+          Tag     web_app
+          Name    tail
+          Path    /var/log/shiny-server/*.log
+          DB      /var/db/shiny-server.state.db
+          Key     message
+
+      # NGINX's access logs
+      [INPUT]
+          Tag       web_app.nginx.access
+          Name      tail
+          Path      /var/log/nginx/access.log
+          Parser    nginx-access-log
+          DB        /var/db/nginx-access-log.state.db
+
+      # NGINX's error logs
+      [INPUT]
+          Tag                 web_app.nginx.error
+          Name                tail
+          Path                /var/log/nginx/error.log
+          DB                  /var/db/nginx-error-log.state.db
+          Multiline           On
+          Parser_Firstline    nginx-error-1st-line
+          Parser_1            nginx-error-nth-line
+
+      # Ignore k8s healthcheck requests
+      [FILTER]
+          Match      web_app.nginx.access
+          Name       grep
+          Exclude    agent ^kube-probe\/.*$
+
+      [FILTER]
+          Match    *
+          Name     record_modifier
+          Record   app_name ${FLUENT_SOURCE_TAG}
+          Record   hostname ${HOSTNAME}
+
+      [FILTER]
+          Match    *
+          Name     lua
+          Script   add_time_nano.lua
+          Call     add_time_nano
+
+      [OUTPUT]
+          Match              *
+          Name               es
+          Type               time
+          tls                On
+          Host               ${FLUENT_ELASTICSEARCH_HOST}
+          Port               ${FLUENT_ELASTICSEARCH_PORT}
+          HTTP_User          ${FLUENT_ELASTICSEARCH_USERNAME}
+          HTTP_Passwd        ${FLUENT_ELASTICSEARCH_PASSWORD}
+          Logstash_Format    True
+          Logstash_Prefix    ${FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX}
+          Buffer_Size        2M
+          Include_Tag_Key    True
+          Tag_Key            tag
