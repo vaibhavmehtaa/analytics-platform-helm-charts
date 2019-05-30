@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: {{ template "fullname" . }}
+        host: {{ template "hostname" . }}
       annotations:
         checksum/secrets: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
         iam.amazonaws.com/role: {{ .Values.AWS.IAMRole }}
@@ -105,9 +106,9 @@ spec:
             - name: varlogshinyserver
               mountPath: /var/log/shiny-server
 
-        - name: fluentd
-          image: "{{ .Values.Fluentd.Image.Repository }}:{{ .Values.Fluentd.Image.Tag }}"
-          imagePullPolicy: {{ .Values.Fluentd.Image.PullPolicy }}
+        - name: fluent-bit
+          image: "{{ .Values.FluentBit.Image.Repository }}:{{ .Values.FluentBit.Image.Tag }}"
+          imagePullPolicy: {{ .Values.FluentBit.Image.PullPolicy }}
           env:
             - name:  FLUENT_ELASTICSEARCH_SCHEME
               valueFrom:
@@ -137,19 +138,14 @@ spec:
             - name:  FLUENT_SOURCE_TAG
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}-fluentd
+                  name: {{ template "fullname" . }}-fluent-bit
                   key: source_tag
             - name:  FLUENT_ELASTICSEARCH_LOGSTASH_PREFIX
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}-fluentd
+                  name: {{ template "fullname" . }}-fluent-bit
                   key: logstash_prefix
-            - name: FLUENTD_ARGS
-              value: "-c /etc/fluent/fluent.conf --no-supervisor"
           volumeMounts:
-            - name: fluentd-config
-              mountPath: /etc/fluent/fluent.conf
-              subPath: fluent.conf
             - name: varlognginx
               mountPath: /var/log/nginx
             - name: varlogshinyserver
@@ -157,19 +153,32 @@ spec:
             - name: libsystemddir
               mountPath: /host/lib
               readOnly: true
+            - name: fluent-bit-files
+              mountPath: /fluent-bit/etc/fluent-bit.conf
+              subPath: fluent-bit.conf
+            - name: fluent-bit-files
+              mountPath: /fluent-bit/etc/custom_parsers.conf
+              subPath: custom_parsers.conf
+            - name: fluent-bit-files
+              mountPath: /fluent-bit/etc/add_time_nano.lua
+              subPath: add_time_nano.lua
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+{{ toYaml .Values.FluentBit.Resources | indent 12 }}
       volumes:
         - name: varlognginx
           emptyDir: {}
         - name: varlogshinyserver
           emptyDir: {}
-        - name: fluentd-config
+        - name: fluent-bit-files
           configMap:
-            name: {{ template "fullname" . }}-fluentd
+            name: {{ template "fullname" . }}-fluent-bit
             items:
-            - key: fluent.conf
-              path: fluent.conf
+            - key: fluent-bit.conf
+              path: fluent-bit.conf
+            - key: custom_parsers.conf
+              path: custom_parsers.conf
+            - key: add_time_nano.lua
+              path: add_time_nano.lua
         - name: libsystemddir
           hostPath:
             path: /usr/lib64
