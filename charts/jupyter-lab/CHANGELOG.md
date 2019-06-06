@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.4.2] - 2019-06-05
+### Changed
+Bumped `quay.io/mojanalytics/datascience-notebook` to version [`v0.6.7`](https://github.com/ministryofjustice/analytics-platform-jupyter-notebook/releases/tag/v0.6.7).
+
+This version adds flake8 and python black to show pep8 errors and add a file formatter.
+
+
 ## [0.4.1] - 2019-05-22
 ### Changed
 Bumped `auth-proxy` to version [`v4.0.1`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v4.0.1).
