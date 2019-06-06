@@ -1,0 +1,26 @@
+# Default values for network-policies.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+ingressController:
+  namespace: "default"
+  podsMatchLabels:
+    app: nginx-ingress
+    component: controller
+
+webapps:
+  namespace: "apps-prod"
+  ports:
+    - protocol: TCP
+      port: 3000
+
+# Once calico is upgraded to `v3.1.3`+ in all clusters
+# Remove this option and the `if` statement in the
+# `network-policies.yaml` template.
+#
+# Calico `v3.1.3` supports NetworkPolicies with both
+# `namespaceSelector` and `podSelector`.
+# SEE: https://github.com/projectcalico/libcalico-go/pull/872
+TEMPORARYnetworkPoliciesWithNamespaceAndPodSelectorsSupported: false
+
+tillerServiceAccountName: "tiller" # Called ´helm´ in `dev`
