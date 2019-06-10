@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: network-policies-tests
+  namespace: {{ .Values.webapps.namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: network-policies-tests
+  namespace: {{ .Values.webapps.namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  name: network-policies-tests
+  kind: Role
+subjects:
+  - apiGroup: ""
+    name: network-policies-tests
+    kind: ServiceAccount
+    namespace: {{ .Values.webapps.namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: network-policies-tests
+  namespace: {{ .Values.webapps.namespace }}
+rules:
+  - apiGroups: ["extensions"]
+    resources: ["ingresses"]
+    verbs: ["list"]
+---

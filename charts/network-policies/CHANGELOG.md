@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [0.2.0] - 2019-06-10
+### Changes
+Added Helm tests so that we can verify the network policies
+are working as expected.
+
+
 ## [0.1.0] - 2019-06-07
 ### Initial
 Initial release with Network Policies to restrict

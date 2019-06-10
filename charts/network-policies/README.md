@@ -36,3 +36,26 @@ Listing only the required params here. See `/chart-env-config/` for more details
 **NOTE**: The `ingressController.podsMatchLabels` value is currently
 not used until we upgrade Calico `v3.1.3` which supports the
 [combined use of `namespaceSelector` and `podSelector`](https://github.com/projectcalico/libcalico-go/pull/872).
+
+
+## Tests
+This helm chart comes with some test to verify that the
+network policies are only allowing traffic from the Ingress
+controller's pods:
+
+```sh
+$ helm test network-policies
+
+RUNNING: network-policies-test-traffic-from-pods-in-ns-blocked
+PASSED: network-policies-test-traffic-from-pods-in-ns-blocked
+RUNNING: network-policies-test-traffic-from-ingress-allowed
+PASSED: network-policies-test-traffic-from-ingress-allowed
+```
+
+Caviat: Helm cleanup mechanism is not quite working
+which means you'll have to delete previous run's pods or
+helm test will complain ("pod already exists"):
+
+```
+$ kubectl delete pod -lapp.kubernetes.io/name=network-policies
+```
