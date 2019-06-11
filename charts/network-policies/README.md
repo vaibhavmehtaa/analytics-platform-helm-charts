@@ -40,22 +40,14 @@ not used until we upgrade Calico `v3.1.3` which supports the
 
 ## Tests
 This helm chart comes with some test to verify that the
-network policies are only allowing traffic from the Ingress
-controller's pods:
+network policies are only allowing external traffic from the
+Ingress controller's pods:
 
 ```sh
-$ helm test network-policies
+$ helm test network-policies --cleanup
 
 RUNNING: network-policies-test-traffic-from-pods-in-ns-blocked
 PASSED: network-policies-test-traffic-from-pods-in-ns-blocked
 RUNNING: network-policies-test-traffic-from-ingress-allowed
 PASSED: network-policies-test-traffic-from-ingress-allowed
-```
-
-Caviat: Helm cleanup mechanism is not quite working
-which means you'll have to delete previous run's pods or
-helm test will complain ("pod already exists"):
-
-```
-$ kubectl delete pod -lapp.kubernetes.io/name=network-policies
 ```
