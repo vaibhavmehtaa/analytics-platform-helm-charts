@@ -17,16 +17,14 @@ metadata:
 spec:
   podSelector: {}
   policyTypes:
-  - Ingress
+    - Ingress
   ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          name: {{ .Values.ingressController.namespace }}
-{{- if .Values.TEMPORARYnetworkPoliciesWithNamespaceAndPodSelectorsSupported }}
-      podSelector:
-        matchLabels:
-{{ toYaml .Values.ingressController.podsMatchLabels | indent 10 -}}
-{{- end }}
-    ports:
-{{ toYaml .Values.webapps.ports | indent 6 }}
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: {{ .Values.ingressController.namespace }}
+          podSelector:
+            matchLabels:
+{{ toYaml .Values.ingressController.podsMatchLabels | indent 14 }}
+      ports:
+{{ toYaml .Values.webapps.ports | indent 8 }}
