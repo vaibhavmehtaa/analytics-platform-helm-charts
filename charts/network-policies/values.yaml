@@ -1,0 +1,17 @@
+# Default values for network-policies.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+ingressController:
+  namespace: "default"
+  podsMatchLabels:
+    app: nginx-ingress
+    component: controller
+
+webapps:
+  namespace: "apps-prod"
+  ports:
+    - protocol: TCP
+      port: 3000
+
+tillerServiceAccountName: "tiller" # Called ´helm´ in `dev`

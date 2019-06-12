@@ -1,0 +1,36 @@
+# This job adds the "name=${NAMESPACE}" label to the
+# namespace where the Ingress controller' pods run.
+#
+# This is required in order for the `NetworkPolicy`
+# to allow traffic from this namespace (as it select
+# namespaces using a label selector)
+#
+# This `Job` runs in the `kube-system` namespace using
+# the `helm` service account (in that namespace).
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: label-ingress-controller-ns
+  namespace: kube-system
+  labels:
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+spec:
+  template:
+    spec:
+      restartPolicy: "Never"
+      serviceAccountName: {{ .Values.tillerServiceAccountName }}
+      containers:
+      - name: label-ingress-controller-ns
+        image: gcr.io/google_containers/hyperkube:v1.11.7
+        imagePullPolicy: "IfNotPresent"
+        command:
+        - kubectl
+        - label
+        - --overwrite
+        - ns
+        - {{ .Values.ingressController.namespace }}
+        - name={{ .Values.ingressController.namespace }}

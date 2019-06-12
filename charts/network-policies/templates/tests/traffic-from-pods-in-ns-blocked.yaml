@@ -1,0 +1,25 @@
+# Gets a Service host (the first one, it shouldn't matter)
+# and makes a request to it. This should not work as we
+# block internal traffic between pods.
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: {{ .Values.webapps.namespace }}
+  name: "{{ include "network-policies.fullname" . }}-test-traffic-from-pods-in-ns-blocked"
+  labels:
+    app.kubernetes.io/name: {{ include "network-policies.name" . }}
+    helm.sh/chart: {{ include "network-policies.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  annotations:
+    helm.sh/hook: test-failure
+    helm.sh/hook-delete-policy: before-hook-creation
+spec:
+  restartPolicy: Never
+  containers:
+    - name: test-traffic-from-pods-in-ns-blocked
+      image: busybox
+      command:
+        - 'sh'
+        - '-c'
+        - 'wget --timeout=5 $(env | grep _SERVICE_HOST | grep -v KUBERNETES_SERVICE_HOST | cut -d"=" -f2)'

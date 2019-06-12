@@ -1,0 +1,26 @@
+# Gets an Ingress host (the first one, it shouldn't matter)
+# and makes a request to it. This should work as we allow
+# external traffic through the Ingress Controller's pods
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: {{ .Values.webapps.namespace }}
+  name: "{{ include "network-policies.fullname" . }}-test-traffic-from-ingress-allowed"
+  labels:
+    app.kubernetes.io/name: {{ include "network-policies.name" . }}
+    helm.sh/chart: {{ include "network-policies.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  annotations:
+    helm.sh/hook: test-success
+    helm.sh/hook-delete-policy: before-hook-creation
+spec:
+  restartPolicy: Never
+  serviceAccount: network-policies-tests
+  containers:
+    - name: test-traffic-from-ingress-allowed
+      image: linkyard/kubectl:1.14.2
+      command:
+        - 'sh'
+        - '-c'
+        - 'curl --connect-timeout 5 https://$(kubectl -n {{ .Values.webapps.namespace }} get ingress -o=json | jq -r .items[0].spec.rules[0].host)'

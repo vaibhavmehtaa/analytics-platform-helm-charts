@@ -1,0 +1,1 @@
+`NetworkPolicy` resources created.
