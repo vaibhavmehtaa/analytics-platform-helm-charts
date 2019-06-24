@@ -5,6 +5,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.1] - 2019-06-24
+### Fixed
+- Fixed idling problems caused by some k8s resouces in an inconsistent state.
+  This is achieved by patching them using strategic merge instead of JSONPatch.
+- Also made the idling process more robust by catching all exceptions, logging
+  them and continuing instead of interrupting the idling of the subsequent
+  tools.
+  NOTE: The process will still return a non-zero status code so we know idling
+  of some of the tools didn't work.
+
+
+Idler PR: https://github.com/ministryofjustice/analytics-platform-idler/pull/101
+Part of ticket: https://trello.com/c/vr4LPcde/241-investigate-fix-idling-unidling-problems-caused-by-k8s-cluster-upgrade-new-version-of-k8s
+
+
 ## [2.0.0] - 2019-03-29
 ### Changed
 - Use `idler` to `v1.0.0`:
