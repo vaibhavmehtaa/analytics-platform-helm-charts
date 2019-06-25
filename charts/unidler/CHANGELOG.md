@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v4.0.1] - 2019-03-27
+### Fixed
+Use new version of the unidler which uses strategic merge patch instead of
+JSONPatch.
+
+Strategic merge is more declarative and more robust. When deleting
+a key which is not there it would consider that part of the patch as already
+applied instead of raising an error as in the case of JSONpatch.
+
+- [unidler PR](https://github.com/ministryofjustice/analytics-platform-go-unidler/pull/10)
+- Part of ticket: https://trello.com/c/vr4LPcde/241-investigate-fix-idling-unidling-problems-caused-by-k8s-cluster-upgrade-new-version-of-k8s
+
+
 ## [v4.0.0] - 2019-03-27
 ### Changed
 Bumped unidler to version `v1.0.0`.
