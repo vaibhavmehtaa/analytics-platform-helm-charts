@@ -2,4 +2,4 @@ apiVersion: v1
 description: unidler proxy
 name: unidler
 version: "v4.0.1"
-appVersion: "v1.0.1"
+appVersion: "v1.0.2"
