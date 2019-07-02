@@ -60,4 +60,4 @@ spec:
           - name: {{ .Release.Name }}
             configMap:
               name: {{ .Release.Name }}
-              defaultMode: 500
+              defaultMode: 0555 # a+rx
