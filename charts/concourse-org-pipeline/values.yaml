@@ -19,6 +19,8 @@ aws:
   lookupSecretAccessKey: ""
   rolePutterAccessKeyId: ""
   rolePutterSecretAccessKey: ""
+  parameterAccessKeyId: ""
+  parameterSecretAccessKey: ""
 
 concourse:
   # externalURL is the same value as for the concourse helm chart
