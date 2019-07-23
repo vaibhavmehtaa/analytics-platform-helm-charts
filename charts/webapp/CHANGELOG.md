@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.1.0] - 2019-07-23
+### Changed
+Bumped `auth-proxy` to version [`v5.0.0`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v5.0.0).
+
 ## [2.0.0] - 2019-05-29
 ### Changed
 Replaced fluentd with [fluent-bit].
