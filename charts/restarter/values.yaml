@@ -1,0 +1,12 @@
+# Docker image
+image:
+  name: quay.io/mojanalytics/restarter
+  tag: v0.0.1
+  pullPolicy: IfNotPresent
+
+replicaCount: 3
+
+service:
+  externalPort: 80
+  internalPort: 8080
+  type: ClusterIP
