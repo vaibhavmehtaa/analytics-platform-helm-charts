@@ -18,4 +18,14 @@ data:
     \/id_rsa$
     \/\.bash_history$
     \/core$
+    \/\.conda\/
+    \/miniconda3-r\/
+    \/\.local\/
+    \/Git_Repos\/
+    \/SAT+Shapes\/
+    \/py-safety\/
+    \/\.virtualenvs\/
+    \/comparisons\/
+    \/Python\/
+    \/node_modules\/
   s3_backup_bucket_name: "{{ .Values.AWS.S3.BucketName }}"
