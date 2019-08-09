@@ -11,5 +11,5 @@ data:
   {{ $key }}: {{ $value | quote }}
   {{ end -}}
   ALLOWED_HOSTS: "*"
-  BUCKET_REGION: "{{ .Values.aws.defaultRegion }}"
+  AWS_DEFAULT_REGION: "{{ .Values.aws.defaultRegion }}"
   DJANGO_SETTINGS_MODULE: "{{ .Values.django.settingsModule }}"
