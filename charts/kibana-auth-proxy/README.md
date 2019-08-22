@@ -10,7 +10,7 @@ Authentication layer in front of kibana.
 To install the chart:
 
 ```bash
-helm upgrade --dry-run --install cluster-logviewer mojanalytics/kibana-auth-proxy \
+helm upgrade --dry-run --debug --install cluster-logviewer mojanalytics/kibana-auth-proxy \
   --namespace kube-system \
   -f chart-env-config/ENV/kibana-auth-proxy.yml
 ```

@@ -1,16 +1,18 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     app: {{ template "fullname" . }}
+    host: {{ .Values.ingress.host }}
 spec:
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
         app: {{ template "fullname" . }}
+        host: {{ .Values.ingress.host }}
       annotations:
         checksum/config: {{ include (print $.Chart.Name "/templates/secrets.yaml") . | sha256sum }}
     spec:
@@ -55,11 +57,13 @@ spec:
               secretKeyRef:
                 name: {{ template "fullname" . }}
                 key: cookie_secret
-          - name: KIBANA_URL
+          - name: TARGET_URL
             valueFrom:
               secretKeyRef:
                 name: {{ template "fullname" . }}
                 key: kibana_url
+          - name: KIBANA_ADD_BASIC_AUTH
+            value: "true"
           - name: KIBANA_ADMIN_USERNAME
             valueFrom:
               secretKeyRef:

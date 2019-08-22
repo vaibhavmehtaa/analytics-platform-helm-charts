@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
-  repository: quay.io/mojanalytics/kibana-auth-proxy
-  tag: "v1.1.3"
+  repository: quay.io/mojanalytics/auth-proxy
+  tag: "v5.2.1"
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
