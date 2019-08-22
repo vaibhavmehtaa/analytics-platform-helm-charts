@@ -5,9 +5,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.1.0] - 2019-08-22
+### Changed
+- Replaced `kibana-auth-proxy` with `auth-proxy` - the latest
+version has the logic that used to be part of kibana-auth-proxy.
+This means we now have only one auth-proxy to maintain insteadto of
+several ones.
+
+- Added `host` label to deployment/pod.
+
+
 ## [2.0.1] - 2019-07-04
 ### Changed
 Patched security vulnerabilities in dependencies
+
 
 ## [2.0.0] - 2018-09-27
 ### Changed
