@@ -8,7 +8,7 @@ dashboard:
 
 authProxy:
   image: quay.io/mojanalytics/auth-proxy
-  tag: v0.1.6
+  tag: v5.2.1
   imagePullPolicy: IfNotPresent
   containerPort: 3000
   resources:

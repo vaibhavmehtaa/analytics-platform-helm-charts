@@ -26,6 +26,8 @@ spec:
         env:
           - name: TARGET_URL
             value: http://localhost:{{ .Values.dashboard.port }}
+          - name: USER
+            value: ""
           - name: AUTH0_DOMAIN
             valueFrom:
               secretKeyRef:
