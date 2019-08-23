@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.1.1] - 2019-08-23
+### Changed
+Bumped auth-proxy to version v5.2.1.
+This version removes the non-standard `prompt=none`.
+Also note that v5.2.0 introduced support for logic to log into kibana.
+
+This shouldn't be a breaking change.
+
+https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v5.2.1
+
+
 ## [2.1.0] - 2019-07-08
 ### Changed
 Using newer docker image with RStudio 1.2.
