@@ -37,6 +37,8 @@ spec:
           env:
             - name: TARGET_URL
               value: http://{{ $.Release.Name }}-{{ .name }}.{{ $.Release.Namespace }}.svc.cluster.local
+            - name: USER
+              value: ""
             - name: AUTH0_DOMAIN
               valueFrom:
                 secretKeyRef:
