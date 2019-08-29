@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: "{{ .Chart.Name }}"
+  name: "{{ .Release.Name }}"
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
@@ -14,13 +14,13 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: "{{ .Chart.Name }}"
+          serviceName: "{{ .Release.Name }}-reverse-proxy"
           servicePort: 80
   - host: {{ template "old_host" . }}
     http:
       paths:
       - backend:
-          serviceName: "{{ .Chart.Name }}"
+          serviceName: "{{ .Release.Name }}-reverse-proxy"
           servicePort: 80
   tls:
   - hosts:

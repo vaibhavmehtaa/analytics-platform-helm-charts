@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "{{ .Chart.Name }}-migration"
+  name: "{{ .Release.Name }}-migration"
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
@@ -26,6 +26,6 @@ spec:
               python3 manage.py migrate
           envFrom:
             - secretRef:
-                name: "{{ .Chart.Name }}-db-env"
+                name: "{{ .Release.Name }}-db-env"
       restartPolicy: OnFailure
   backoffLimit: 5

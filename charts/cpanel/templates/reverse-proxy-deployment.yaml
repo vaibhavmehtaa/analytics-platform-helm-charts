@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}-reverse-proxy"
+  labels:
+    app: "{{ .Chart.Name }}-reverse-proxy"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    host: {{ template "host" . }}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "{{ .Chart.Name }}-reverse-proxy"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Chart.Name }}-reverse-proxy"
+    spec:
+      serviceAccountName: "{{ .Release.Name }}"
+
+      initContainers:
+      - name: init-nginx
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+        volumeMounts:
+        - mountPath: /nginxconf
+          name: nginxconf
+        - mountPath: /staticfiles
+          name: staticfiles
+        command:
+        - sh
+        - -c
+        - |
+          cp -R /home/controlpanel/static /staticfiles && \
+          cp /home/controlpanel/docker/nginx.conf /nginxconf/default.conf
+      containers:
+        - name: reverse-proxy
+          image: "{{ .Values.reverseProxy.image.repository}}:{{ .Values.reverseProxy.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: {{ .Values.reverseProxy.port }}
+          volumeMounts:
+            - name: nginxconf
+              mountPath: /etc/nginx/conf.d
+            - name: staticfiles
+              mountPath: /usr/share/nginx/html

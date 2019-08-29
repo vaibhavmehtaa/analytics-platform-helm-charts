@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Release.Name }}-reverse-proxy-configmap"
+data:
+  nginx.conf: |-
+    {{ tpl (.Files.Get "nginx.conf") . }}
