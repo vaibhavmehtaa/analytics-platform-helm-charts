@@ -42,6 +42,7 @@ secretEnv:
   RSTUDIO_AUTH_CLIENT_SECRET: ""
   SENTRY_DSN: ""
   TOOLS_DOMAIN: ""
+  SECRET_KEY: ""
 
 aws:
   defaultRegion: "eu-west-1"
