@@ -1,10 +1,8 @@
-env: ""
-
 replicaCount: 1
 
 image:
   repository: k8s.gcr.io/cluster-autoscaler
-  tag: v1.3.5
+  tag: v1.12.3
   pullPolicy: IfNotPresent
 
 autoscalingGroups:
@@ -21,7 +19,7 @@ aws_region: ""
 resources:
   limits:
     cpu: 500m
-    memory: 300Mi
+    memory: 500Mi
   requests:
     cpu: 200m
     memory: 300Mi

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: cluster-autoscaler
   annotations:
-    iam.amazonaws.com/role: "{{ .Values.env }}-cluster-autoscaler"
+    iam.amazonaws.com/role: "cluster-autoscaler"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
