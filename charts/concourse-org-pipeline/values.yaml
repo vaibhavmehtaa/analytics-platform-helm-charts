@@ -53,6 +53,8 @@ ipRanges:
   wifi102pf: ""
   dom1: ""
   quantum: ""
+  mojDigitalWifiAndVpn: ""
+  alanTuringInstitute: ""
 
 kubernetes:
   apiUrl: ""
