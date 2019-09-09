@@ -13,6 +13,13 @@ Old Control Panel API hostname
 {{- end -}}
 
 {{/*
+Old Control Panel Frontend hostname
+*/}}
+{{- define "old_cpfrontend_host" -}}
+"cpanel{{- if .Values.branch -}}-{{ .Values.branch }}{{- end -}}.{{ .Values.servicesDomain }}"
+{{- end -}}
+
+{{/*
 Postgres release
 */}}
 {{- define "postgresRelease" -}}
