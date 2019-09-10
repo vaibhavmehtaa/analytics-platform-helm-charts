@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Allow __system:serviceaccount:concourse-main:default__ to have read-only access
 to deployments (get, list, watch) so that concourse can report rollout status
 
+## [0.4.0] - 2019-09-10
+### Added
+- Added __user-read__ `ClusterRole` with intent to be used primarily by the [__init-user__](../init-user) helm chart
+and/or any other entity that can make use of it. i.e. `ServiceAccount` binding.
+- __user-read__ `ClusterRole` scoped to read `ingresses`, `services`, `deployments`, `pods` and `configmaps`
+
 ## [0.3.0] - 2019-04-16
 ### Added
 - Allow __generic-support__ users to list namespaces. This is to make their

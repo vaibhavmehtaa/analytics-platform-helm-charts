@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Values.teams.userRead.name }}
+  labels:
+    chart: {{ template "rbac.chart" . }}
+  annotations:
+    moj-analytical-services/teams: {{ .Values.teams.userRead.name }}
+    description: {{ .Values.teams.userRead.description }}
+rules:
+ - apiGroups: [""]
+   resources: ["pods"]
+   verbs: ["get", "list", "watch"]
+ - apiGroups: ["extensions", "apps"]
+   resources: ["deployments"]
+   verbs: ["get", "list", "watch"]
+ - apiGroups: ["", "extensions", "networking.k8s.io"]
+   resources: ["services", "ingresses", "configmaps"]
+   verbs: ["get", "list", "watch"]

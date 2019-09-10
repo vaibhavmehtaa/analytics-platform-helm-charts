@@ -22,3 +22,6 @@ teams:
     concourseNamespace: concourse-main
     serviceAccountName: default
     description: "Read-only access to deployment status for concourse"
+  userRead:
+    name: user-read
+    description: "Read, list, watch etc... on ingresses, services, deployments, pods and configmaps"

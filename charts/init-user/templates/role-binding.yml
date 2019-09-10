@@ -27,3 +27,19 @@ subjects:
   - apiGroup: rbac.authorization.k8s.io
     kind: Group
     name: user-support
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: user-read
+  namespace: user-{{ .Values.Username }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: user-read
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: user-read
