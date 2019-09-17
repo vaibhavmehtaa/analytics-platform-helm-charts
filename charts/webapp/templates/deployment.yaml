@@ -92,7 +92,7 @@ spec:
             timeoutSeconds: 60
           livenessProbe:
             httpGet:
-              path: /?healthz
+              path: {{ .Values.WebApp.HealthCheck }}
               port: webapp
             initialDelaySeconds: 180
             periodSeconds: 10
