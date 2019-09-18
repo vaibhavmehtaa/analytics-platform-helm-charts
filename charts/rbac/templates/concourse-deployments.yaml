@@ -1,0 +1,39 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: concourse-deployments
+  labels:
+    chart: {{ template "rbac.chart" . }}
+  namespace: {{ .Values.teams.concourseDeploymentStatus.appsNamespace }}
+  annotations:
+    description: {{ .Values.teams.concourseDeploymentStatus.description | quote }}
+rules:
+  - apiGroups:
+      - "extensions"
+      - "apps"
+    resources:
+      - deployments
+    verbs:
+      - get
+      - watch
+      - list
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: concourse-deployments-binding
+  namespace: {{ .Values.teams.concourseDeploymentStatus.appsNamespace }}
+  labels:
+    chart: {{ template "rbac.chart" . }}
+  annotations:
+    description: {{ .Values.teams.concourseDeploymentStatus.description | quote }}
+roleRef:
+  kind: ClusterRole
+  name: concourse-deployments
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: {{ .Values.teams.concourseDeploymentStatus.serviceAccountName }}
+    namespace: {{ .Values.teams.concourseDeploymentStatus.concourseNamespace }}

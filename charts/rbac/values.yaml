@@ -16,3 +16,9 @@ teams:
   kubeletAPI:
     name: kubelet-api
     description: "Assigns the builtin kubelet-api-admin Clusterrole to the kubelet-api user"
+  concourseDeploymentStatus:
+    name: concourse-deployment
+    appsNamespace: apps-prod
+    concourseNamespace: concourse-main
+    serviceAccountName: default
+    description: "Read-only access to deployment status for concourse"
