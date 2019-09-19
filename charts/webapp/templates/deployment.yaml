@@ -85,7 +85,7 @@ spec:
               containerPort: {{ .Values.WebApp.Port }}
           readinessProbe:
             httpGet:
-              path: /?healthz
+              path: {{ .Values.WebApp.HealthCheck }}
               port: webapp
             initialDelaySeconds: 5
             periodSeconds: 5
