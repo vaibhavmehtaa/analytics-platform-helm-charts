@@ -50,6 +50,28 @@ fluentdconffiles:
   system.input.conf: |-
 
     <source>
+      @id auth.log
+      @type tail
+      path /var/log/auth.log
+      pos_file /var/log/auth.log.pos
+      <parse>
+        @type syslog
+      </parse>
+      tag authlog
+    </source>
+
+    <source>
+      @id syslog.log
+      @type tail
+      path /var/log/syslog
+      pos_file /var/log/syslog.pos
+      <parse>
+        @type syslog
+      </parse>
+      tag syslog
+    </source>
+
+    <source>
       @id docker.log
       @type tail
       format /^time="(?<time>[^)]*)" level=(?<severity>[^ ]*) msg="(?<message>[^"]*)"( err="(?<error>[^"]*)")?( statusCode=($<status_code>\d+))?/
@@ -61,9 +83,11 @@ fluentdconffiles:
     <source>
       @id etcd.log
       @type tail
-      # Not parsing this, because it doesn't have anything particularly useful to
-      # parse out of it (like severities).
-      format none
+      format multiline
+      multiline_flush_interval 5s
+      format_firstline /^\w\d{4}/
+      format1 /^(?<severity>\w)(?<time>\d{4} [^\s]*)\s+(?<pid>\d+)\s+(?<source>[^ \]]+)\] (?<message>.*)/
+      time_format %m%d %H:%M:%S.%N
       path /var/log/etcd.log
       pos_file /var/log/etcd.log.pos
       tag etcd
