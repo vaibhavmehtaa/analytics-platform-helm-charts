@@ -1,5 +1,6 @@
 servicesDomain: ""
 branch: "master"
+appsNamespace: "apps-prod"
 
 image:
   repository: quay.io/mojanalytics/control-panel
