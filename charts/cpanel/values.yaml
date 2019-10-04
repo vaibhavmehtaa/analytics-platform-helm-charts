@@ -10,7 +10,6 @@ image:
 env:
   DEBUG: "False"
   ELASTICSEARCH_PORT: ""
-  ENABLE_K8S_RBAC: "False"
   ENV: ""
   K8S_WORKER_ROLE_NAME: ""
   LOGS_BUCKET_NAME: ""

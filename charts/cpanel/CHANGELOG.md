@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.3.1] - 2019-10-04
+### Removed
+- Removed legacy `ENABLE_K8S_RBAC` flag. This is always `True` both in `dev`
+  and `alpha` - no reason to keep it around
+
+
 ## [2.3.0] - 2019-09-30
 ### Changed
 - Allow CP to read ingresses in apps namespace
