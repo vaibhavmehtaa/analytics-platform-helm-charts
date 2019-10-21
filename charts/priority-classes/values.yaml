@@ -2,6 +2,15 @@ priority_classes:
   - name: system
     priority_value: 1000000000
     description: "Reserved for high priority system pods/daemonsets"
+  - name: rstudio
+    priority_value: 10000000
+    description: "10 million"
+  - name: jupyter-lab
+    priority_value: 10000000
+    description: "10 million"
+  - name: webapp-default
+    priority_value: 2000000
+    description: "2 million"
 # - name: default-priority
 #   global: true
 #   priority_value: 50000

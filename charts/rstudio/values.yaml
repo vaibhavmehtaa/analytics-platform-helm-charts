@@ -43,4 +43,4 @@ rstudio:
       memory: 20Gi
     requests:
       cpu: 200m
-      memory: 5Gi
+      memory: 8Gi
