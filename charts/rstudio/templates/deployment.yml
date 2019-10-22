@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
@@ -23,6 +23,7 @@ spec:
       annotations:
         iam.amazonaws.com/role: {{ .Values.aws.iamRole }}
     spec:
+      priorityClassName: {{ .Chart.Name }}
       serviceAccountName: {{ .Values.username }}-rstudio
       {{ if and .Values.rstudio.image.init }}
       initContainers:

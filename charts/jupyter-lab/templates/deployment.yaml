@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
@@ -27,6 +27,7 @@ spec:
       annotations:
         iam.amazonaws.com/role: {{ .Values.aws.iamRole }}
     spec:
+      priorityClassName: {{ .Chart.Name }}
       serviceAccountName: {{ .Values.Username }}-jupyter
       containers:
         - name: {{ .Chart.Name }}-auth-proxy
