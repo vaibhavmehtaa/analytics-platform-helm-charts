@@ -151,3 +151,6 @@ spec:
         - name: home
           persistentVolumeClaim:
             claimName: nfs-home
+  selector:
+    matchLabels:
+      app: "{{ .Chart.Name }}"
