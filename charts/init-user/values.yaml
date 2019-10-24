@@ -4,3 +4,16 @@ Email: ""
 Fullname: ""
 Env: ""
 OidcDomain: ""
+
+ingressController:
+  namespace: "default"
+  podsMatchLabels:
+    app: nginx-ingress
+    component: controller
+
+userApps:
+  ports:
+    - protocol: TCP
+      port: 3000
+    - protocol: TCP
+      port: 8080
