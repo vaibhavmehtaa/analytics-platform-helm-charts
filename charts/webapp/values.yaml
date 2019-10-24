@@ -45,3 +45,4 @@ Elasticsearch:
   Port: "9200"
   Username: ""
   Password: ""
+secretEnv: {}

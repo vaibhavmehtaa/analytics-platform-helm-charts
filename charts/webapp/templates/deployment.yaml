@@ -84,6 +84,9 @@ spec:
         - name: webapp
           image: "{{ .Values.WebApp.Image.Repository }}:{{ .Values.WebApp.Image.Tag | replace ":" "" }}"
           imagePullPolicy: {{ .Values.WebApp.Image.PullPolicy }}
+          envFrom:
+            - secretRef:
+                name: "{{ template "fullname" . }}-env-secrets"
           ports:
             - name: webapp
               containerPort: {{ .Values.WebApp.Port }}
