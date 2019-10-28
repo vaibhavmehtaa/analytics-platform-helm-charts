@@ -5,7 +5,7 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
-    host: {{ template "host" . }}
+    host: {{ include "host" . | trunc 63 }}
 spec:
   replicas: 3
   selector:
@@ -16,6 +16,7 @@ spec:
       labels:
         app: "{{ .Chart.Name }}"
         {{ .Release.Name }}-redis-client: "true"
+        host: {{ include "host" . | trunc 63 }}
       annotations:
         iam.amazonaws.com/role: "{{ .Values.aws.iamRole }}"
     spec:

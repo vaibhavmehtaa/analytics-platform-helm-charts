@@ -2,7 +2,7 @@
 Control Panel hostname
 */}}
 {{- define "host" -}}
-"controlpanel.{{ .Values.servicesDomain }}"
+{{- printf "controlpanel.%s" .Values.servicesDomain -}}
 {{- end -}}
 
 {{/*

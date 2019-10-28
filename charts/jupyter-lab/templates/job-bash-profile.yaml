@@ -6,14 +6,14 @@ metadata:
   labels:
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     app: {{ .Chart.Name }}
-    host: {{ template "host" . }}
+    host: {{ include "host" . | trunc 63 }}
 spec:
   template:
     metadata:
       name: {{ template "fullname" . }}-job
       labels:
         chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-        host: {{ template "host" . }}
+        host: {{ include "host" . | trunc 63 }}
         # NOTE: DO NOT add `app` label here as it's used by the service
         #       to direct traffic to the jupyter pod and we don't want the
         #       Job's pod to receive that traffic.

@@ -6,7 +6,7 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
-    host: {{ template "host" . }}
+    host: {{ include "host" . | trunc 63 }}
 rules:
   - apiGroups: ["extensions"]
     verbs: ["get", "list"]
@@ -22,7 +22,7 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
-    host: {{ template "host" . }}
+    host: {{ include "host" . | trunc 63 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role

@@ -4,15 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [2.1.4] - 2019-10-25
+### Changed
+- Truncate `host` label to make sure it's less than 63
+  characters once we move to new domain.
+- Added labels to `ServiceAccount` for consistency
+
+
 ## [2.1.3] - 2019-10-23
 ### Added
 Added `spec.selector.matchLabels` to deployment spec
+
 
 ## [2.1.2] - 2019-10-21
 ### Added
 Added `priorityClassName` to pod spec
 Updated `Deployment` APIGroup
-Increased requested memory from `5GI` to `8GI` 
+Increased requested memory from `5GI` to `8GI`
+
 
 ## [2.1.1] - 2019-08-23
 ### Changed

@@ -1,1 +1,1 @@
-Your webapp will be available shortly at {{ .Values.WebApp.Name }}.{{ .Values.WebApp.BaseHost }}
+Your webapp will be available shortly at https://{{ template "hostname" . }}
