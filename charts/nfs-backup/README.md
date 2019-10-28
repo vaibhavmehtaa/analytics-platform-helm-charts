@@ -8,7 +8,7 @@ This will install a CronJob object to periodically back up user NFS home directo
 To install:
 
 ```bash
-$ helm upgrade nfs-backup charts/nfs-backup -f chart-env-config/ENV/nfs-backup.yml --install
+$ helm upgrade nfs-backup mojanalytics/nfs-backup -f chart-env-config/ENV/nfs-backup.yaml --install
 ```
 
 The job's status can be viewed with `kubectl get cronjobs`
