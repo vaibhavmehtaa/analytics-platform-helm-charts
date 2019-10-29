@@ -5,6 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v4.0.2] - 2019-10-29
+### Changed
+Works with `host` labels truncated at 63 chars (k8s limit).
+
+This is to be sure the unidler searches for the same label value when
+unidling things in the new clusters (whose hosts are very long).
+
+**NOTE** It shouldn't make any difference on existing clusters as these
+labels don't exceed this limit. On new clusters should work as before.
+
+- [unidler PR](https://github.com/ministryofjustice/analytics-platform-go-unidler/pull/12)
+- Part of ticket: https://trello.com/c/kVT0QFqe
+
+
 ## [v4.0.1] - 2019-03-27
 ### Fixed
 Use new version of the unidler which uses strategic merge patch instead of
