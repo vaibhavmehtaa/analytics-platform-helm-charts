@@ -5,7 +5,8 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
-    host: "{{ include "host" . | trunc 63 }}"
+    host: {{ template "unidle_key" . }}
+    unidle-key: {{ template "unidle_key" . }}
 spec:
   sessionAffinity: ClientIP
   selector:

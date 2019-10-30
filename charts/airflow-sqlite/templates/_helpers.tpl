@@ -22,3 +22,23 @@ e.g. username-airflow.example.com
 {{- define "host" -}}
 {{- (printf "%s-%s.%s" .Values.Username .Chart.Name .Values.toolsDomain) | lower -}}
 {{- end -}}
+
+{{/*
+unidle-key: used by unidler to find airflow-sqlite resources
+
+will be the host if <= 63 characters (no change in old `alpha`
+cluster) or the part before the first dot (".") otherwise
+(to avoid problems with new, long, domain)
+
+examples:
+host="alice-airflow-sqlite.example.com" => returns "alice-airflow-sqlite.example.com"
+host="alice-airflow-sqlite.verylongdomain[...]example.com" => returns "alice-airflow-sqlite"
+*/}}
+{{- define "unidle_key" -}}
+    {{- $label := include "host" . -}}
+    {{- if gt (len $label) 63 -}}
+        {{- $parts := split "." $label -}}
+        {{- $label = $parts._0 -}}
+    {{- end -}}
+    {{- $label | quote -}}
+{{- end -}}

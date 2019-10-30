@@ -5,7 +5,8 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
-    host: "{{ include "host" . | trunc 63 }}"
+    host: {{ template "unidle_key" . }}
+    unidler-key: {{ template "unidle_key" . }}
     "mojanalytics.xyz/idleable": "true"
 spec:
   replicas: 1
@@ -18,7 +19,6 @@ spec:
     metadata:
       labels:
         app: "{{ .Chart.Name }}"
-        host: "{{ include "host" . | trunc 63 }}"
         "mojanalytics.xyz/idleable": "true"
       annotations:
         iam.amazonaws.com/role: {{ .Values.aws.iamRole }}

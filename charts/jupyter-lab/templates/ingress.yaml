@@ -6,7 +6,8 @@ metadata:
   labels:
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     app: {{ .Chart.Name }}
-    host: {{ include "host" . | trunc 63 }}
+    host: {{ include "unidle_key" . }}
+    unidle-key: {{ include "unidle_key" . }}
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
