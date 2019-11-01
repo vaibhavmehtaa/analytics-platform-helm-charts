@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2019-10-21
+### Changed
+- Updated clusterrole api-group for replicasets
+- Upgraded cluster autoscaler to lockstep with k8s version in __OLD__ environment from `1.3.5` to `1.12.8`
+
 ## [0.1.3] - 2019-03-13
 ### Changed
 - Increased CPU requests and limits from 100m to 200m and 500m respectively  
