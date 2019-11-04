@@ -17,14 +17,14 @@ spec:
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - name: user-homes-root
-            mountPath: "/tmp/home"
+            mountPath: "/tmp/homes"
         command:
           - "bash"
         args:
           - "-cx"
           - >
-              cd /tmp &&
-              mkdir -p users/home
+              cd /tmp/homes &&
+              mkdir -p users/homes
       restartPolicy: Never
       volumes:
       - name: user-homes-root
