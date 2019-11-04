@@ -5,7 +5,6 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
-    host: {{ include "host" . | trunc 63 }}
 rules:
   - apiGroups: [""]
     verbs: ["list"]

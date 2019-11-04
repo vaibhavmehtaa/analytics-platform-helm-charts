@@ -6,7 +6,6 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: "{{ .Chart.Name }}"
-    host: {{ include "host" . | trunc 63 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   name: "{{ .Chart.Name }}"

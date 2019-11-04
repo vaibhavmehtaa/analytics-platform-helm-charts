@@ -6,7 +6,8 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: {{ .Chart.Name }}
-    host: {{ include "host" . | trunc 63 }}
+    host: {{ include "unidle_key" . }}
+    unidle-key: {{ include "unidle_key" . }}
     component: all
   annotations:
     checksum/config: {{ include (print $.Template.BasePath "/configmap.yml") . | sha256sum }}
@@ -22,7 +23,6 @@ spec:
         app: {{ .Chart.Name }}
         component: all
         airflow-redis-client: "false"
-        host: {{ include "host" . | trunc 63 }}
     spec:
       serviceAccountName: {{ .Release.Name }}
       initContainers:

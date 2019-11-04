@@ -7,7 +7,8 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: {{ .Release.Name }}
     component: "webserver"
-    host: {{ include "host" . | trunc 63 }}
+    host: {{ include "unidle_key" . }}
+    unidle-key: {{ include "unidle_key" . }}
 spec:
   sessionAffinity: ClientIP
   selector:
