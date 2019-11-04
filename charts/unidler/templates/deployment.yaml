@@ -17,6 +17,9 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: UNIDLE_KEY_LABEL
+          value: "{{ .Values.unidleKeyLabel }}"
         ports:
         - name: http
           containerPort: {{ .Values.service.internalPort }}

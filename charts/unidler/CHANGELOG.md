@@ -5,6 +5,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v4.0.3] - 2019-11-04
+### Changed
+- uses [unidler v1.0.4](https://github.com/ministryofjustice/analytics-platform-go-unidler/releases/tag/v1.0.4)
+- this version calculate "unidle key" slightly differently
+  to avoid problems with new long domain: it only uses
+  the part of the host before the first dot (".") when
+  the host is longer than 63 character
+- its behaviour doesn't change for old clusters/domain
+  as hosts are shorter then 63 chars (to not break
+  compatibility)
+- it also has `UNIDLE_KEY_LABEL` (defaults to `host`)
+  which can be used in new clusters to look for resources
+  by using the `unidle-key` label (instead of the old
+  `host` label which we'll remove once `alpha` cluster
+  is retired)
+
+- [unidler PR](https://github.com/ministryofjustice/analytics-platform-go-unidler/pull/14)
+- Part of ticket: https://trello.com/c/kVT0QFqe
+
+
 ## [v4.0.2] - 2019-10-29
 ### Changed
 Works with `host` labels truncated at 63 chars (k8s limit).
