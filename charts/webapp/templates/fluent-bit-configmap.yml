@@ -6,7 +6,6 @@ metadata:
     app: {{ template "fullname" . }}
     heritage: "{{ .Release.Service }}"
     release: "{{ .Release.Name }}"
-    host: {{ include "hostname" . | trunc 63 }}
   name: "{{ template "fullname" . }}-fluent-bit"
 data:
   source_tag: "{{ template "fullname" . }}"
