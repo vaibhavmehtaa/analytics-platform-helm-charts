@@ -16,4 +16,4 @@ spec:
     - ReadWriteMany
   nfs:
     server: {{ .Values.NFSHostname }}
-    path: "/users/homes/{{ .Values.Username }}"
+    path: "/users/home/{{ .Values.Username }}"

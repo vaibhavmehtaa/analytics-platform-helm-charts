@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2019-11-05 
+## SerjNAS NFS Path - Breaking Change
+- Changed `PersistentVolume` NFS path from `/users/homes/{{ .Values.Username }}` to `"/users/home/{{ .Values.Username }}"`
+
 ## [0.1.6] - 2019-09-10
 ## User Read Rolebinding
 - Add a `RoleBinding` in user namespaces for __user-read__ `ClusterRole` and team.
