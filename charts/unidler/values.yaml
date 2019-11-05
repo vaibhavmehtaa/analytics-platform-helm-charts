@@ -8,13 +8,7 @@ unidleKeyLabel: "host"
 
 replicaCount: 3
 
-ingress:
-  addTlsBlock: true
-  className: "nginx"
-
 service:
   externalPort: 80
   internalPort: 8080
   type: ClusterIP
-
-servicesDomain: ""

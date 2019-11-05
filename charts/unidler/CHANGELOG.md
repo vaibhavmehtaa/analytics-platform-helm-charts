@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v4.0.4] - 2019-11-05
+### Removed
+Removed `Ingress` resource. This is not needed as the unidler is only
+accessed from within the cluster when a user tool is idled and its
+`Service`'s `ExternalName` points to `unidler.default.svc.cluster.local`
+(internally resolved).
+
+**NOTE**: This also means we can remove few values as they're not used
+anymore: `ingress.*` and `servicesDomain` value is no more needed.
+
+**NOTE**: This shouldn't break anything.
+
+
 ## [v4.0.3] - 2019-11-04
 ### Changed
 - uses [unidler v1.0.4](https://github.com/ministryofjustice/analytics-platform-go-unidler/releases/tag/v1.0.4)
@@ -119,13 +132,16 @@ Other improvements:
 ### Changed
 Audit clusterrole rules, remove unused verbs
 
+
 ## [v3.1.2] - 2019-01-31
 ### Changed
 Fix api group name for core api group - should be ""
 
+
 ## [v3.1.1] - 2019-01-31
 ### Changed
 Grant unidler permission to list and patch services
+
 
 ## [v3.1.0] - 2019-01-29
 ### Changed
