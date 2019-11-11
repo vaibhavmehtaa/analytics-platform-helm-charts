@@ -5,9 +5,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.4.1] - 2019-11-07
+### Changed
+- **Deprecated** `secretEnv.AWS_ACCOUNT_ID`. Remove once `alpha` CP start to
+  use version of CP which doesn't use `AWS_ACCOUNT_ID` anymore
+- added `secretEnv.AWS_COMPUTE_ACCOUNT_ID` and `secretEnv.AWS_DATA_ACCOUNT_ID`
+  so that we can distinguish the two (instead of having a single `AWS_ACCOUNT_ID`)
+
+
 ## [2.4.0] - 2019-11-11
 ### Changed
 - Added Slack environment variables.
+
 
 ## [2.3.3] - 2019-11-04
 ### Changed

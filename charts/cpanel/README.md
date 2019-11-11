@@ -52,7 +52,9 @@ In Auth0 you need to install Extension 'Auth0 Authorization':
 | `postgresql.postgresHost` | The hostname of the database (this will be ignored if `tags.branch` is `true`). Get it from terraform platform output `control_panel_api_db_host` | |
 | `postgresql.postgresPassword` | The password to connect to the database with. Get it from the environment's terraform.tfvars | |
 | `postgresql.postgresUser` | The username to connect to the database with | |
-| `secretEnv.AWS_ACCOUNT_ID` | AWS account ID e.g. `123456789012`. Find this with e.g. `aws sts get-caller-identity --query Account --output text` | |
+| `secretEnv.AWS_ACCOUNT_ID` | AWS account ID e.g. `123456789012`. Find this with e.g. `aws sts get-caller-identity --query Account --output text` (**DEPRECATED**) | `""` |
+| `secretEnv.AWS_COMPUTE_ACCOUNT_ID` | AWS account ID where apps and tools run. | `""` |
+| `secretEnv.AWS_DATA_ACCOUNT_ID` | AWS account ID where data sits. | `""` |
 | `secretEnv.ELASTICSEARCH_HOST` | Elasticsearch hostname | `""` |
 | `secretEnv.ELASTICSEARCH_PASSWORD` | Elasticsearch password | `""` |
 | `secretEnv.ELASTICSEARCH_USERNAME` | Elasticsearch username | `""` |
