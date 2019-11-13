@@ -5,7 +5,7 @@ image: quay.io/mojanalytics/idler:v1.0.1
 #   min    hour   day    month (Sun-Sat)
 # "(0-59) (0-23) (1-31) (1-12) (0-6)"
 # See https://kubernetes.io/docs/user-guide/cron-jobs/#schedule
-schedule: "0 22 * * *"
+schedule: "0 22 * * 2"
 
 # Concurrency Policy
 # Allow|Forbid|Replace
