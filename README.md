@@ -26,9 +26,36 @@ helm install charts/$chart_name -f ...
 
 To run a minimal version of AP, these are the essential charts to deploy:
 * `init-platform`
-* `nginx-ingress`
+* `nginx-ingress` (with release name `cluster-ingress`)
 * `kube2iam` (official `stable/kube2iam` helm chart)
 * `rbac`
 * `cpanel`
-* `cpfrontend`
 * `aws-login`
+
+# Full set-up
+All of the above plus:
+- [airflow](./charts/airflow-k8s)
+- `cert-manager` (official `charts.jetstack.io/cert-manager` helm chart)
+- [cert-manager-resources](./charts/cert-manager-resources)
+- [cluster-autoscaler](./charts/cluster-autoscaler)
+- `cluster-logging` (official `stable/fluentd` chart)
+- [cluster-log-viewer](./charts/kibana-auth-proxy)
+- `concourse` (official `stable/concourse`)
+- [concourse-admin-team](./charts/concourse-admin-team)
+- [idler](./charts/idler)
+- [images-prepuller](./charts/images-prepuller)
+- [kubernetes-dashboard](./charts/kubernetes-dashboard)
+- `kuberos` (official `stable/kuberos`)
+- [logstash-auth0](./charts/logstash)
+- `metrics-server` (official `stable/metrics-server`)
+- [network-policies](./charts/network-policies)
+- [nfs-backup](./charts/nfs-backup)
+- [org-pipeline-moj-analytical-services](./charts/concourse-org-pipeline)
+- [pod-cleaner](./charts/pod-cleaner)
+- [priority-classes](./charts/priority-classes)
+- `prometheus-operator` (official `stable/prometheus-operator`)
+- [promethues-resources](./charts/prometheus-resources)
+- [restarter](./charts/restarter)
+- [unidler](./charts/unidler)
+- [webhook-dispatcher](./charts/webhook-dispatcher)
+- [websocket-status](./charts/websocket-status)
