@@ -2,25 +2,27 @@
 
 This repository contains source YAML for Helm Charts, which define the Kubernetes software packages, that make up the Analytical Platform (AP). After the [AP infrastructure is set-up](https://github.com/ministryofjustice/analytics-platform-ops/blob/master/README.md) you can install the AP software using these charts.
 
-# Charts installation
+# Charts installation/upgrade
 
 The latest master versions of these charts are kept up-to-date in the MOJ AP Helm repository:
-http://moj-analytics-helm-repo.s3-website-eu-west-1.amazonaws.com/
+http://moj-analytics-helm-repo.s3-website-eu-west-1.amazonaws.com/ - this helm repository is automatically [updated by this Concourse pipeline](https://concourse.services.alpha.mojanalytics.xyz/teams/admin/pipelines/update-helm-repo) ([pipeline code](https://github.com/ministryofjustice/analytics-platform-concourse-pipelines#update-helm-repoyaml))
 
-You can install these charts from the Helm repository by adding the repo to your helm client, eg:
+You can install/upgrade these charts from the Helm repository by adding the repo to your helm client, eg:
 
 ```sh
 helm repo add mojanalytics http://moj-analytics-helm-repo.s3-website-eu-west-1.amazonaws.com/
 helm repo update
 # and then
-helm install mojanalytics/$chart_name -f ...
+helm upgrade --install $release_name mojanalytics/$chart_name -f ...
 ```
 
 OR for development you can clone this repo and specify the path to your local copy of the chart:
 
 ```sh
-helm install charts/$chart_name -f ...
+helm upgrade --install $release_name charts/$chart_name -f ...
 ```
+
+**Pro tip**: You can preview the installation/upgrade changes by passing the `--dry-run --debug` flags to the `helm` command and remove them once you're happy with the output.
 
 # A minimal set-up
 
