@@ -1,6 +1,6 @@
 # Unidler Helm Chart
 
-The unidler is responsible for unidling the RStudio instances (currently).
+The [unidler](https://github.com/ministryofjustice/analytics-platform-go-unidler) is responsible for unidling the RStudio instances (currently).
 
 ## Installing the chart
 
