@@ -39,8 +39,8 @@ rstudio:
     init: true
   resources:
     limits:
-      cpu: 1.5
-      memory: 20Gi
+      cpu: 200m
+      memory: 12Gi
     requests:
       cpu: 200m
-      memory: 8Gi
+      memory: 12Gi
