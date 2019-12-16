@@ -35,10 +35,10 @@ jupyter:
   containerPort: 8888
   resources:
     limits:
-      cpu: 1.5
+      cpu: 200m
       memory: 12Gi
     requests:
       cpu: 200m
-      memory: 1Gi
+      memory: 12Gi
 
 cookie_secret: ""
