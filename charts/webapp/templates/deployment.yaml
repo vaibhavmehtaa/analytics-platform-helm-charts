@@ -6,6 +6,7 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     repo: "{{ .Values.WebApp.GithubRepo }}"
     app: {{ template "fullname" . }}
+    host: {{ include "hostname" . | trunc 63 }}
 spec:
   selector:
     matchLabels:
@@ -15,6 +16,7 @@ spec:
     metadata:
       labels:
         app: {{ template "fullname" . }}
+        host: {{ include "hostname" . | trunc 63 }}
       annotations:
         checksum/secrets: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
         iam.amazonaws.com/role: {{ .Values.AWS.IAMRole }}

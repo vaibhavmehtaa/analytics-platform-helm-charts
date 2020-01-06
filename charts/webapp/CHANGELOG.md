@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.3.7] - 2020-01-06
+### Changed
+Reverted removal of `host` label.
+
+It's not only used by the [*restarter* service](https://github.com/ministryofjustice/analytics-platform-restarter) but
+it's also causing some webapp deployments to fail because
+of a new constraint on labels in `apps/v1` which means
+they can't change
+
+SEE: [kubernetes issue on GitHub](https://github.com/kubernetes/kubernetes/issues/26202)
+
 
 ## [2.3.6] - 2019-11-20
 ### Changed
