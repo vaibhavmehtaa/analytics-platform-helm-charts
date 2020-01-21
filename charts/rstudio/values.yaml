@@ -23,8 +23,8 @@ authProxy:
       cpu: 100m
       memory: 128Mi
     requests:
-      cpu: 25m
-      memory: 64Mi
+      cpu: 100m
+      memory: 128Mi
 rstudio:
   secureCookieKey: ""
   port: "8787"
@@ -40,7 +40,7 @@ rstudio:
   resources:
     limits:
       cpu: 1.5
-      memory: 20Gi
+      memory: 12Gi
     requests:
-      cpu: 200m
-      memory: 8Gi
+      cpu: 1.5
+      memory: 12Gi
