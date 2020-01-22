@@ -18,8 +18,8 @@ authProxy:
       cpu: 100m
       memory: 128Mi
     requests:
-      cpu: 25m
-      memory: 64Mi
+      cpu: 100m
+      memory: 128Mi
   auth0_domain: ""
   auth0_client_id: ""
   auth0_client_secret: "" # put dummy value here to stop helm lint complaining
@@ -38,7 +38,7 @@ jupyter:
       cpu: 1.5
       memory: 12Gi
     requests:
-      cpu: 200m
-      memory: 1Gi
+      cpu: 1.5
+      memory: 12Gi
 
 cookie_secret: ""
