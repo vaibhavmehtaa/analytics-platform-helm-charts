@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.1.1] - 2020-01-31
+### Changed
+Bumped auth-proxy from `v5.2.1` to `v5.2.4`.
+
+This version updates some of the dependencies, [including
+`handlebars` `4.7.2`](https://github.com/ministryofjustice/analytics-platform-auth-proxy/pull/214)
+which fixes a security vulnerability.
+
+See:
+- https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v5.2.4
+- https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v5.2.3
+
+
 ## [2.1.0] - 2019-08-22
 ### Changed
 - Replaced `kibana-auth-proxy` with `auth-proxy` - the latest
