@@ -34,12 +34,13 @@ fi
 (
 IFS='
 '
-NBS=`git diff-index -z --cached $against --name-only | grep '.ipynb$' | uniq`
+NBS=`git diff --cached $against --name-only | grep '.ipynb$' | sort | uniq`
 
 for NB in $NBS ; do
     echo "Removing outputs from $NB"
     nbstripout "$NB"
     echo "nbstripout has run"
+
     git add "$NB"
 done
 )
