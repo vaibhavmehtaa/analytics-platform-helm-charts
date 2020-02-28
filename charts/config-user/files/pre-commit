@@ -44,5 +44,3 @@ for NB in $NBS ; do
     git add "$NB"
 done
 )
-
-exec git diff-index --check --cached $against --
