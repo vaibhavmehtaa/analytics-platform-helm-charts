@@ -1,0 +1,35 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    type: cron
+spec:
+  schedule: "{{ .Values.schedule }}"
+  concurrencyPolicy: {{ .Values.concurrencyPolicy }}
+  failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            iam.amazonaws.com/role: {{ .Values.iamRole }}
+          labels:
+            app: {{ .Release.Name }}
+        spec:
+          serviceAccountName: {{ .Release.Name }}
+          containers:
+            - name: {{ .Release.Name }}
+              image: "{{ .Values.image }}"
+              args:
+                - "archive"
+              env:
+                - name: ENV
+                  value: "{{ .Values.env }}"
+                - name: ARCHIVE_BUCKET
+                  value: "{{ .Values.archiveBucket }}"
+                - name: AWS_DEFAULT_REGION
+                  value: "{{ .Values.awsDefaultRegion }}"
+          restartPolicy: Never
