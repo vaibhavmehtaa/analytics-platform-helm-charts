@@ -56,5 +56,7 @@ git config -f $GIT_CONFIG user.email $EMAIL
 git config -f $GIT_CONFIG user.name "${FULLNAME}"
 git config -f $GIT_CONFIG core.excludesfile $GIT_IGNORE
 git config -f $GIT_CONFIG init.templatedir $GIT_TEMPLATES
-git config --global init.templatedir '~/.git-templates'
 chown 1001:staff $GIT_CONFIG
+
+# need to sudo with 1001 user and set git templates config
+sudo -u '#1001' git config --global init.templatedir '~/.git-templates'
