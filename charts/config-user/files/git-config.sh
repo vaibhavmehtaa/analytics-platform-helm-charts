@@ -58,5 +58,12 @@ git config -f $GIT_CONFIG core.excludesfile $GIT_IGNORE
 git config -f $GIT_CONFIG init.templatedir $GIT_TEMPLATES
 chown 1001:staff $GIT_CONFIG
 
-# need to sudo with jovyan user and set git templates config
-sudo -u jovyan git config --global init.templatedir '~/.git-templates'
+# sudo with jupyter user and set global template dir
+if [ "grep jovyan /etc/passwd" ]; then
+  sudo -u jovyan git config --global init.templatedir '~/.git-templates'
+fi 
+
+# sudo with git user for rstudio and set global template dir
+if [ "grep $USERNAME /etc/passwd" ]; then
+  sudo -u "$USERNAME" git config --global init.templatedir '~/.git-templates'
+fi
