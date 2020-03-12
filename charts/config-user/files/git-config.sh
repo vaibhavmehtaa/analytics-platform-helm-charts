@@ -58,5 +58,5 @@ git config -f $GIT_CONFIG core.excludesfile $GIT_IGNORE
 git config -f $GIT_CONFIG init.templatedir $GIT_TEMPLATES
 chown 1001:staff $GIT_CONFIG
 
-# need to sudo with 1001 user and set git templates config
-sudo -u '#1001' git config --global init.templatedir '~/.git-templates'
+# need to sudo with jovyan user and set git templates config
+sudo -u jovyan git config --global init.templatedir '~/.git-templates'
