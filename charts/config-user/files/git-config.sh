@@ -56,16 +56,6 @@ git config -f $GIT_CONFIG user.email $EMAIL
 git config -f $GIT_CONFIG user.name "${FULLNAME}"
 git config -f $GIT_CONFIG core.excludesfile $GIT_IGNORE
 git config -f $GIT_CONFIG init.templatedir $GIT_TEMPLATES
+
 chown 1001:staff $GIT_CONFIG
-
-# set jupyter (jovyan) user or git user
-if grep -q jovyan /etc/passwd; then
-  USER="jovyan"
-elif grep -q "$USERNAME" /etc/passwd; then
-  USER=$USERNAME
-fi
-
-# set global templates either with the jupyter or git user
-if [ $USER ]; then
-  sudo -u $USER git config --global init.templatedir '~/.git-templates'
-fi
+chown 1001:staff $GIT_TEMPLATES
