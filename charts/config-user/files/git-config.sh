@@ -55,7 +55,7 @@ GIT_CONFIG=$USER_HOME/.gitconfig
 git config -f $GIT_CONFIG user.email $EMAIL
 git config -f $GIT_CONFIG user.name "${FULLNAME}"
 git config -f $GIT_CONFIG core.excludesfile $GIT_IGNORE
-git config -f $GIT_CONFIG init.templatedir ~/.git-templates
+git config -f $GIT_CONFIG init.templatedir '~/.git-templates'
 
 chown 1001:staff $GIT_CONFIG
-chown 1001:staff ~/.git-templates
+chown 1001:staff $GIT_TEMPLATES
