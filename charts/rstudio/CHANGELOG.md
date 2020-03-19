@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [2.2.2] - 2020-03-19
 ### Changed
-Changed tag to latest
+Changed tag to 1.2.1335-r3.5.1-python3.7.1-conda-4
 Bumped version
 
 ## [2.2.1] - 2020-01-31
