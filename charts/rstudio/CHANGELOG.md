@@ -9,10 +9,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Changed tag to latest
 Bumped version
 
-See:
-- https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v5.2.4
-- https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v5.2.3
-
 ## [2.2.1] - 2020-01-31
 ### Changed
 Bumped auth-proxy from `v5.2.1` to `v5.2.4`.
