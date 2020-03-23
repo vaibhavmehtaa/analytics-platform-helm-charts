@@ -38,7 +38,7 @@ NBS=`git diff --cached $against --name-only | grep '.ipynb$' | sort | uniq`
 
 for NB in $NBS ; do
     echo "Removing outputs from $NB"
-    nbstripout "$NB"
+    ~/.local/bin/nbstripout "$NB"
     echo "nbstripout has run"
 
     git add "$NB"
