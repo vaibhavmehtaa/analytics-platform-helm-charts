@@ -1,3 +1,7 @@
+## [0.2.9] - 2020-03-23
+### Changed
+- Add -R to $GIT_TEMPLATES to set hooks as executables
+
 ## [0.2.8] - 2020-03-18
 ### Changed
 - Add full path to nbstripout (~/.local/bin/nbstripout)

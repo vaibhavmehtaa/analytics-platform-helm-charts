@@ -58,4 +58,4 @@ git config -f $GIT_CONFIG core.excludesfile $GIT_IGNORE
 git config -f $GIT_CONFIG init.templatedir '~/.git-templates'
 
 chown 1001:staff $GIT_CONFIG
-chown 1001:staff $GIT_TEMPLATES
+chown -R 1001:staff $GIT_TEMPLATES
