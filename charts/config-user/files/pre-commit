@@ -21,7 +21,6 @@ if [ "$HAS_ERROR" != "" ]; then
     exit 1
 fi
 
-
 # add nbstripout to strip output from IPython notebooks 
 if git rev-parse --verify HEAD >/dev/null 2>&1; then
    against=HEAD
@@ -38,7 +37,7 @@ NBS=`git diff --cached $against --name-only | grep '.ipynb$' | sort | uniq`
 
 for NB in $NBS ; do
     echo "Removing outputs from $NB"
-    nbstripout "$NB"
+    ~/.local/bin/nbstripout "$NB"
     echo "nbstripout has run"
 
     git add "$NB"
