@@ -30,7 +30,9 @@ authProxy:
 
 jupyter:
   image: quay.io/mojanalytics/datascience-notebook
-  tag: v0.6.7
+  # image: quay.io/mojanalytics/all-spark
+  tag: v0.6.9
+  # tag: add-nbstripout
   imagePullPolicy: IfNotPresent
   containerPort: 8888
   resources:

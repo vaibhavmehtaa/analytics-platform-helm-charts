@@ -30,6 +30,9 @@ else
    against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
 fi
 
+# set path for nbstripout in rstudio and jupyter
+export PATH=/opt/conda/bin:~/.local/bin:$PATH
+
 # Find notebooks to be committed
 (
 IFS='
@@ -38,7 +41,7 @@ NBS=`git diff --cached $against --name-only | grep '.ipynb$' | sort | uniq`
 
 for NB in $NBS ; do
     echo "Removing outputs from $NB"
-    ~/.local/bin/nbstripout "$NB"
+    nbstripout "$NB"
     echo "nbstripout has run"
 
     git add "$NB"
