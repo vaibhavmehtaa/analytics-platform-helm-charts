@@ -1,3 +1,7 @@
+## [0.2.10] - 2020-03-31
+### Changed
+- Export PATH for rstudio and jupyter for dev and alpha environments 
+
 ## [0.2.9] - 2020-03-23
 ### Changed
 - Add -R to $GIT_TEMPLATES to set hooks as executables
