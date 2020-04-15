@@ -9,9 +9,8 @@ components.
 
 To install the chart:
 ```bash
-helm install mojanalytics/concourse-admin-team \
-  --name concourse-admin-team \
-  --values /path/to/chart/configs/concourse-admin-team.yaml
+helm upgrade --install concourse-admin-team mojanalytics/concourse-admin-team \
+  --values ../../analytics-platform-config/chart-env-config/dev/concourse-admin-team.yaml
 ```
 
 
