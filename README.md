@@ -2,7 +2,7 @@
 
 This repository contains source YAML for Helm Charts, which define the Kubernetes software packages, that make up the Analytical Platform (AP). After the [AP infrastructure is set-up](https://github.com/ministryofjustice/analytics-platform-ops/blob/master/README.md) you can install the AP software using these charts.
 
-# Charts installation/upgrade
+## Charts installation/upgrade
 
 The latest master versions of these charts are kept up-to-date in the MOJ AP Helm repository:
 http://moj-analytics-helm-repo.s3-website-eu-west-1.amazonaws.com/ - this helm repository is automatically [updated by this Concourse pipeline](https://concourse.services.alpha.mojanalytics.xyz/teams/admin/pipelines/update-helm-repo) ([pipeline code](https://github.com/ministryofjustice/analytics-platform-concourse-pipelines#update-helm-repoyaml))
@@ -24,9 +24,10 @@ helm upgrade --install $release_name charts/$chart_name -f ...
 
 **Pro tip**: You can preview the installation/upgrade changes by passing the `--dry-run --debug` flags to the `helm` command and remove them once you're happy with the output.
 
-# A minimal set-up
+## A minimal set-up
 
 To run a minimal version of AP, these are the essential charts to deploy:
+
 * `init-platform`
 * `nginx-ingress` (with release name `cluster-ingress`)
 * `kube2iam` (official `stable/kube2iam` helm chart)
@@ -34,30 +35,32 @@ To run a minimal version of AP, these are the essential charts to deploy:
 * `cpanel`
 * `aws-login`
 
-# Full set-up
+## Full set-up
+
 All of the above plus:
-- [airflow](./charts/airflow-k8s)
-- `cert-manager` (official `charts.jetstack.io/cert-manager` helm chart)
-- [cert-manager-resources](./charts/cert-manager-resources)
-- [cluster-autoscaler](./charts/cluster-autoscaler)
-- `cluster-logging` (official `stable/fluentd` chart)
-- [cluster-log-viewer](./charts/kibana-auth-proxy)
-- `concourse` (official `stable/concourse`)
-- [concourse-admin-team](./charts/concourse-admin-team)
-- [idler](./charts/idler)
-- [images-prepuller](./charts/images-prepuller)
-- [kubernetes-dashboard](./charts/kubernetes-dashboard)
-- `kuberos` (official `stable/kuberos`)
-- [logstash-auth0](./charts/logstash)
-- `metrics-server` (official `stable/metrics-server`)
-- [network-policies](./charts/network-policies)
-- [nfs-backup](./charts/nfs-backup)
-- [org-pipeline-moj-analytical-services](./charts/concourse-org-pipeline)
-- [pod-cleaner](./charts/pod-cleaner)
-- [priority-classes](./charts/priority-classes)
-- `prometheus-operator` (official `stable/prometheus-operator`)
-- [promethues-resources](./charts/prometheus-resources)
-- [restarter](./charts/restarter)
-- [unidler](./charts/unidler)
-- [webhook-dispatcher](./charts/webhook-dispatcher)
-- [websocket-status](./charts/websocket-status)
+
+* [airflow](./charts/airflow-k8s)
+* `cert-manager` (official `charts.jetstack.io/cert-manager` helm chart)
+* [cert-manager-resources](./charts/cert-manager-resources)
+* [cluster-autoscaler](./charts/cluster-autoscaler)
+* `cluster-logging` (official `stable/fluentd` chart)
+* [cluster-log-viewer](./charts/kibana-auth-proxy)
+* `concourse` (official `stable/concourse`)
+* [concourse-admin-team](./charts/concourse-admin-team)
+* [idler](./charts/idler)
+* [images-prepuller](./charts/images-prepuller)
+* [kubernetes-dashboard](./charts/kubernetes-dashboard)
+* `kuberos` (official `stable/kuberos`)
+* [logstash-auth0](./charts/logstash)
+* `metrics-server` (official `stable/metrics-server`)
+* [network-policies](./charts/network-policies)
+* [nfs-backup](./charts/nfs-backup)
+* [org-pipeline-moj-analytical-services](./charts/concourse-org-pipeline)
+* [pod-cleaner](./charts/pod-cleaner)
+* [priority-classes](./charts/priority-classes)
+* `prometheus-operator` (official `stable/prometheus-operator`)
+* [promethues-resources](./charts/prometheus-resources)
+* [restarter](./charts/restarter)
+* [unidler](./charts/unidler)
+* [webhook-dispatcher](./charts/webhook-dispatcher)
+* [websocket-status](./charts/websocket-status)
