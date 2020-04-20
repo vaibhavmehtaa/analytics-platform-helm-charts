@@ -10,9 +10,8 @@ pipelines for repositories which contain Analytical Platform webapps.
 To install the chart:
 
 ```bash
-helm install mojanalytics/concourse-org-pipeline \
-  --name org-pipeline-$ORG_NAME \
-  --values /path/to/chart/configs/concourse-org-pipeline.yaml
+helm upgrade --install org-pipeline-moj-analytical-services mojanalytics/concourse-org-pipeline \
+  --values ../../analytics-platform-config/chart-env-config/dev/concourse-org-pipeline.yaml
 ```
 
 ## Configuration
