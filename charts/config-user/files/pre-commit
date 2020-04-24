@@ -22,7 +22,7 @@ if [ "$HAS_ERROR" != "" ]; then
 fi
 
 
-if [[ "$ENABLE_NBSTRIPOUT" == "true" ]]; then
+if [[ "$ENABLE_NBSTRIPOUT" != "false" ]]; then
     
     # add nbstripout to strip output from IPython notebooks 
     if git rev-parse --verify HEAD >/dev/null 2>&1; then
@@ -49,9 +49,5 @@ if [[ "$ENABLE_NBSTRIPOUT" == "true" ]]; then
         git add "$NB"
     done
     )
-
-else 
-
-    ENABLE_NBSTRIPOUT="false"
 
 fi
