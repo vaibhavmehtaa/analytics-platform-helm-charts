@@ -32,7 +32,7 @@ jupyter:
   image: quay.io/mojanalytics/datascience-notebook
   # image: quay.io/mojanalytics/all-spark
   tag: v0.6.9
-  # tag: add-nbstripout
+  # tag: spark_24_qgrid
   imagePullPolicy: IfNotPresent
   containerPort: 8888
   resources:
