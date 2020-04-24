@@ -1,3 +1,7 @@
+## [0.2.11] - 2020-04-24
+### Changed
+- Add if/else statement to enable disable nbstripout hook
+
 ## [0.2.10] - 2020-03-31
 ### Changed
 - Export PATH for rstudio and jupyter for dev and alpha environments 
