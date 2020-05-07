@@ -9,6 +9,12 @@ To install/upgrade an rstudio instance for the user specified in the username va
 $ helm upgrade --dry-run --debug --install USERNAME-rstudio --namespace user-USERNAME --set username=USERNAME --set aws.iamRole=ENV_user_USERNAME charts/rstudio -f chart-env-config/ENV/rstudio.yml
 ```
 
+or if you want to upgrade/downgrade the helm chart to a certain version you can do the following:
+
+```bash
+$ helm upgrade --dry-run  --debug --install USERNAME-rstudio mojanalytics/rstudio --namespace user-USERNAME --set username=USERNAME --set aws.iamRole=ENV_user_USERNAME --version CHART_VERSION -f chart-env-config/ENV/rstudio.yml
+```
+
 The instance will be available in <https://USERNAME-rstudio.tools.ENV.mojanalytics.xyz>.
 
 **NOTE**: Change the environment config file to deploy in a different environment
