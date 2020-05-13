@@ -1,27 +1,28 @@
 # RStudio Helm Chart
 
-
 ## Install/upgrade the Chart
 
 To install/upgrade an rstudio instance for the user specified in the username variable (Github username):
 
 ```bash
-$ helm upgrade --dry-run --debug --install USERNAME-rstudio --namespace user-USERNAME --set username=USERNAME --set aws.iamRole=ENV_user_USERNAME charts/rstudio -f chart-env-config/ENV/rstudio.yml
+helm upgrade --dry-run --debug --install USERNAME-rstudio --namespace user-USERNAME --set username=USERNAME --set aws.iamRole=ENV_user_USERNAME charts/rstudio -f chart-env-config/ENV/rstudio.yml
 ```
 
-or if you want to upgrade/downgrade the helm chart to a version from the helm repository you can do the following:
+The instance will be available at <https://USERNAME-rstudio.tools.ENV.mojanalytics.xyz>.
+
+### Notes
+
+Change the environment config file to deploy in a different environment (the URL will change accordingly)
+
+Remove the `--dry-run` option to install/upgrade for real.
+
+If you want a particular version, add parameter: ``--version CHART_VERSION`` e.g. ``--version 2.2.5``.
+
+NB helm is [not good at doing upgrades](https://github.com/ministryofjustice/analytics-platform/wiki/R-Studio-start-up-failure#fix-with-helm) - if you run into trouble, it's usually easiest to delete+purge the chart and install again:
 
 ```bash
-$ helm upgrade --dry-run  --debug --install USERNAME-rstudio mojanalytics/rstudio --namespace user-USERNAME --set username=USERNAME --set aws.iamRole=ENV_user_USERNAME --version CHART_VERSION -f chart-env-config/ENV/rstudio.yml
+helm delete --purge rstudio-USERNAME
 ```
-
-The instance will be available in <https://USERNAME-rstudio.tools.ENV.mojanalytics.xyz>.
-
-**NOTE**: Change the environment config file to deploy in a different environment
-          (the URL will change accordingly)
-
-**NOTE**: Remove the `--dry-run` option to install/upgrade for real.
-
 
 ## Configuration
 
