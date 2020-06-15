@@ -5,7 +5,7 @@ ingressClass: nginx
 authProxy:
   name: auth-proxy
   image: quay.io/mojanalytics/auth-proxy
-  tag: v5.2.4
+  tag: v5.2.6
   imagePullPolicy: IfNotPresent
   containerPort: 3000
   resources:

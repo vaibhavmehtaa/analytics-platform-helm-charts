@@ -4,11 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [2.2.6] - 2020-06-15
+### Changed
+Bumped auth-proxy from `v5.2.5` to `v5.2.6`.
+
+This is a maintenance release which upgrades some of its dependencies.
+Few of these new dependencies also fix some potential security
+vulnerabilities.
+
+See Release Notes for more: https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v5.2.6
+
+
 ## [2.2.5] - 2020-05-06
 ### Changed
 Install nbstripout with conda instead of pip
 Changed tag to 1.2.1335-r3.5.1-python3.7.1-conda-10
 Bumped version
+
 
 ## [2.2.4] - 2020-03-23
 ### Changed
@@ -16,15 +29,18 @@ Reverting old code
 Changed tag to 1.2.1335-r3.5.1-python3.7.1-conda-6
 Bumped version
 
+
 ## [2.2.3] - 2020-03-20
 ### Changed
 Changed tag to 1.2.1335-r3.5.1-python3.7.1-conda-5
 Bumped version
 
+
 ## [2.2.2] - 2020-03-19
 ### Changed
 Changed tag to 1.2.1335-r3.5.1-python3.7.1-conda-4
 Bumped version
+
 
 ## [2.2.1] - 2020-01-31
 ### Changed

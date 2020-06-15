@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## [2.1.2] - 2020-06-15
+### Changed
+Bumped auth-proxy from `v5.2.5` to `v5.2.6`.
+
+This is a maintenance release which upgrades some of its dependencies.
+Few of these new dependencies also fix some potential security
+vulnerabilities.
+
+See Release Notes for more: https://github.com/ministryofjustice/analytics-platform-auth-proxy/releases/tag/v5.2.6
+
+
 ## [2.1.1] - 2020-01-31
 ### Changed
 Bumped auth-proxy from `v5.2.1` to `v5.2.4`.
