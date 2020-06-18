@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: quay.io/mojanalytics/auth-proxy
-  tag: "v5.2.4"
+  tag: "v5.2.6"
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
